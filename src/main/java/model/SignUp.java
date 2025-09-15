@@ -1,4 +1,4 @@
-import java.util.Scanner;
+package model;
 
 public class SignUp {
     private String username;
