@@ -9,6 +9,7 @@ import java.net.URL;
 public class Apptest extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
+        //
         URL fxmlLocation = getClass().getResource("/LoginView.fxml");
         System.out.println("FXML Route Found: " + fxmlLocation);
 

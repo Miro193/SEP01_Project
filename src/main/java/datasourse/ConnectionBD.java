@@ -12,10 +12,13 @@ public class ConnectionBD {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
             return DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (ClassNotFoundException | SQLException e) {
-            e.printStackTrace();
-            return null;
+        } catch (ClassNotFoundException e) {
+            System.out.println("Error: MariaDB driver not found.");
+        } catch (SQLException e) {
+            System.out.println("Error: Could not connect to the database. " + e.getMessage());
+
         }
+        return null;
     }
 
 

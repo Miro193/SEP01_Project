@@ -1,20 +1,13 @@
 package dataControler;
-import datasourse.User;
-import datasourse.ConnectionBD;
-import javafx.event.ActionEvent;
+
+import dao.StudentDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-
+import javafx.fxml.FXMLLoader;
 
 public class LoginController {
     @FXML private TextField usernameField;
@@ -22,53 +15,39 @@ public class LoginController {
     @FXML private Label messageLabel;
 
     @FXML
-    private void handleLoginButton(ActionEvent event) {
-        messageLabel.setText("");
-        int id = Integer.parseInt(idField.getText());
-        String username = usernameField.getText();
-        try (Connection connection = ConnectionBD.GetConnection()) {
-            String sql = "SELECT * FROM student WHERE id = ? AND username = ?";
-            PreparedStatement stmt = connection.prepareStatement(sql);
-            stmt.setInt(1, id);
-            stmt.setString(2, username);
-            ResultSet rs = stmt.executeQuery();
+    private void handleLoginButton() {
+        try {
+            int id = Integer.parseInt(idField.getText());
+            String username = usernameField.getText();
 
-            if (rs.next()) {
-                User user = new User(rs.getInt("id"), rs.getString("username"));
-                System.out.println("Logged in user: " + user.getName());
-                boolean openWindow = false; // Cambia a true cuando quieras activarlo
+            StudentDAO dao = new StudentDAO();
+            boolean goodlogin = dao.validateLogin(id, username);
 
-
-                if (openWindow) {
-                    try {
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MainView.fxml"));
-                        Parent root = loader.load();
-                        Stage stage = new Stage();
-                        stage.setScene(new Scene(root));
-                        stage.setTitle("Bienvenido");
-                        stage.show();
-
-                        ((Stage) ((Node) event.getSource()).getScene().getWindow()).close();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
+            if (goodlogin) {
+                messageLabel.setText("Login correct.");
+                NewWindows();
             } else {
-                messageLabel.setText("Incorrect ID or user.");
+                messageLabel.setText("Dates incorrect.");
             }
 
         } catch (Exception e) {
-            e.printStackTrace();
-            messageLabel.setText("Error connecting to the database.");
+            messageLabel.setText("Error.");
         }
-
-
-
     }
+        //open new windows
+    private void NewWindows() {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/MainView.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.setTitle("welcome");
+            stage.show();
 
+            Stage currentStage = (Stage) usernameField.getScene().getWindow();
+            currentStage.close();
 
-
+        } catch (Exception e) {
+            messageLabel.setText("the window cannot be opened.");
+        }
     }
-
-
+}

@@ -8,7 +8,7 @@ public class MainController {
     @FXML
     private Label welcomeLabel;
     public void initialize() {
-        welcomeLabel.setText("¡Hola, Michael!");
+        welcomeLabel.setText("Moi!");
         }
     }
 
