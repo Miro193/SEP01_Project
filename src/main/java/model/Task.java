@@ -4,71 +4,64 @@ import java.time.LocalDateTime;
 
 public class Task {
     private int id;
+    private int userId;
     private String title;
     private String description;
-    private Status status;
     private LocalDateTime dueDate;
+    private String status;
 
-    public Task() {
-    }
 
-    public Task(String title, String description, Status status, LocalDateTime dueDate) {
+    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status) {
+        this.id = id;
+        this.userId = userId;
         this.title = title;
         this.description = description;
-        this.status = status;
         this.dueDate = dueDate;
+        this.status = status;
     }
 
-    // --- Getters and setters ---
+
+    public Task() {}
+
+
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getUserId() {
+        return userId;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
     public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 
-    @Override
-    public String toString() {
-        return "Task {" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", status=" + status +
-                ", dueDate=" + dueDate +
-                '}';
+    public void setStatus(String status) {
+        this.status = status;
     }
 }
-
