@@ -106,7 +106,7 @@ public class TaskDao {
         }
     }
 
-    // ✅ Helper method: convert ResultSet → Task
+
     private Task mapResultSetToTask(ResultSet rs) throws SQLException {
         Task task = new Task();
         task.setId(rs.getInt("id"));
@@ -118,7 +118,7 @@ public class TaskDao {
 
         Date dueDate = rs.getDate("due_date");
         if (dueDate != null) {
-            task.setDueDate(dueDate.toLocalDate());
+            task.setDueDate(dueDate);
         }
 
         return task;
