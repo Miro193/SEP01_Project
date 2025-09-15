@@ -52,7 +52,7 @@ public class Task {
         this.status = status;
     }
 
-    public LocalDateTime getDueDate() {
+    public String getDueDate() {
         return dueDate;
     }
 
