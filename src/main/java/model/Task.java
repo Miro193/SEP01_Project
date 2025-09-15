@@ -1,17 +1,17 @@
 package model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Task {
     private int id;
     private int userId;
     private String title;
     private String description;
-    private LocalDate dueDate;
+    private LocalDateTime dueDate;
     private String status;
 
 
-    public Task(int id, int userId, String title, String description, LocalDate dueDate, String status) {
+    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status) {
         this.id = id;
         this.userId = userId;
         this.title = title;
@@ -40,7 +40,7 @@ public class Task {
         return description;
     }
 
-    public LocalDate getDueDate() {
+    public LocalDateTime getDueDate() {
         return dueDate;
     }
 
@@ -57,7 +57,7 @@ public class Task {
         this.description = description;
     }
 
-    public void setDueDate(LocalDate dueDate) {
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 
