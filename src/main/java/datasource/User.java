@@ -1,4 +1,4 @@
-package datasourse;
+package datasource;
 public class User {
     private int id;
     private String username;
