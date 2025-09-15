@@ -3,6 +3,8 @@ import dao.TaskDao;
 import model.Task;
 import model.TaskList;
 import model.Status;
+import java.time.LocalDateTime;
+
 public class TaskController {
     private final TaskList taskList;
 
@@ -10,7 +12,7 @@ public class TaskController {
         this.taskList = taskList;
     }
 
-    public void addNewTask(String title, String description, Status status, String dueDate) {
+    public void addNewTask(String title, String description, Status status, LocalDateTime dueDate) {
         Task task = new Task(title, description, status, dueDate);
         taskList.addTask(task);
 

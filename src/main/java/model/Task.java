@@ -1,25 +1,18 @@
 package model;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name= "task")
+import java.time.LocalDateTime;
+
 public class Task {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private int id;
-    @Column
     private String title;
-    @Column
     private String description;
-    @Column
     private Status status;
-    @Column
-    private String dueDate;
+    private LocalDateTime dueDate;
 
-    public Task(){}
+    public Task() {
+    }
 
-    public Task(String title, String description, Status status, String dueDate) {
-
+    public Task(String title, String description, Status status, LocalDateTime dueDate) {
         this.title = title;
         this.description = description;
         this.status = status;
@@ -31,50 +24,51 @@ public class Task {
         return id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public String getDueDate() {
-        return dueDate;
-    }
-
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Status getStatus() {
+        return status;
     }
 
     public void setStatus(Status status) {
         this.status = status;
     }
 
-    public void setDueDate(String dueDate) {
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
         this.dueDate = dueDate;
     }
 
     @Override
     public String toString() {
-        return "Task: " +
+        return "Task {" +
                 "id=" + id +
                 ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
                 ", status=" + status +
-                ", dueDate=" + dueDate;
+                ", dueDate=" + dueDate +
+                '}';
     }
-
-
 }
+

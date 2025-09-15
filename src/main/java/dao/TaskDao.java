@@ -1,43 +1,126 @@
 package dao;
-import jakarta.persistence.EntityManager;
+
+import datasource.ConnectionDB;
 import model.Task;
+import model.Status;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TaskDao {
+
+    // INSERT (persist)
     public void persist(Task task) {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        em.getTransaction().begin();
-        em.persist(task);
-        em.getTransaction().commit();
+        String sql = "INSERT INTO tasks (title, description, status, due_date) VALUES (?, ?, ?, ?)";
+        try (Connection conn = ConnectionDB.obtenerConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            stmt.setString(1, task.getTitle());
+            stmt.setString(2, task.getDescription());
+            stmt.setString(3, task.getStatus().name());
+            stmt.setDate(4, Date.valueOf(task.getDueDate()));
+
+            stmt.executeUpdate();
+
+            // Get generated ID
+            try (ResultSet rs = stmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    task.setId(rs.getInt(1));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
+
+    // SELECT by ID
     public Task find(int id) {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        Task task = em.find(Task.class, id);
+        String sql = "SELECT * FROM tasks WHERE id = ?";
+        try (Connection conn = ConnectionDB.obtenerConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return mapResultSetToTask(rs);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    // SELECT all
+    public List<Task> findAll() {
+        List<Task> tasks = new ArrayList<>();
+        String sql = "SELECT * FROM tasks";
+
+        try (Connection conn = ConnectionDB.obtenerConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                tasks.add(mapResultSetToTask(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return tasks;
+    }
+
+    // UPDATE
+    public void update(Task task) {
+        String sql = "UPDATE tasks SET title = ?, description = ?, status = ?, due_date = ? WHERE id = ?";
+        try (Connection conn = ConnectionDB.obtenerConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, task.getTitle());
+            stmt.setString(2, task.getDescription());
+            stmt.setString(3, task.getStatus().name());
+            stmt.setDate(4, Date.valueOf(task.getDueDate()));
+            stmt.setInt(5, task.getId());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // DELETE
+    public void delete(Task task) {
+        String sql = "DELETE FROM tasks WHERE id = ?";
+        try (Connection conn = ConnectionDB.obtenerConexion();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, task.getId());
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // ✅ Helper method: convert ResultSet → Task
+    private Task mapResultSetToTask(ResultSet rs) throws SQLException {
+        Task task = new Task();
+        task.setId(rs.getInt("id"));
+        task.setTitle(rs.getString("title"));
+        task.setDescription(rs.getString("description"));
+
+        String statusStr = rs.getString("status");
+        task.setStatus(Status.valueOf(statusStr));  // assumes status is stored as enum name (e.g. "PENDING")
+
+        Date dueDate = rs.getDate("due_date");
+        if (dueDate != null) {
+            task.setDueDate(dueDate.toLocalDate());
+        }
+
         return task;
     }
-    public List<Task> findAll() {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        List<Task> tasks = em.createNamedQuery("SELECT t FROM Task t", Task.class).getResultList();
-        return tasks;
-
-    }
-    public void update(Task task) {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        em.getTransaction().begin();
-        em.merge(task);
-        em.getTransaction().commit();
-
-    }
-    public void delete(Task task) {
-        EntityManager em = datasource.MariaDbJpaConnection.getInstance();
-        em.getTransaction().begin();
-        em.remove(task);
-        em.getTransaction().commit();
-
-    }
-
-
-    }
-
-
-
+}
