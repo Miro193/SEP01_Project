@@ -1,4 +1,4 @@
-package datasourse;
+package datasource;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,7 +16,7 @@ public class Login {
         System.out.print("write your username: ");
         String username = scanner.nextLine();
 
-        try (Connection conexion = ConexionBD.obtenerConexion()) {
+        try (Connection conexion = ConnectionDB.obtenerConexion()) {
             String sql = "SELECT * FROM student WHERE id = ? AND username = ?";
             PreparedStatement stmt = conexion.prepareStatement(sql);
             stmt.setInt(1, id);
