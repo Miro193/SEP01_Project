@@ -47,7 +47,9 @@ public class Task {
     public String getStatus() {
         return status;
     }
-
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setTitle(String title) {
         this.title = title;

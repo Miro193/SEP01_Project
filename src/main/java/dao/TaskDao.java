@@ -16,10 +16,13 @@ public class TaskDao {
         try (Connection conn = ConnectionDB.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, task.getTitle());
-            stmt.setString(2, task.getDescription());
-            stmt.setString(3, task.getStatus().name());
-            stmt.setDate(4, Date.valueOf(task.getDueDate()));
+            stmt.setInt(1, task.getUserId());
+            stmt.setString(2, task.getTitle());
+            stmt.setString(3, task.getDescription());
+            stmt.setString(4, task.getStatus());
+            stmt.setTimestamp(5, Timestamp.valueOf(task.getDueDate()));
+
+
 
             stmt.executeUpdate();
 
@@ -81,9 +84,10 @@ public class TaskDao {
 
             stmt.setString(1, task.getTitle());
             stmt.setString(2, task.getDescription());
-            stmt.setString(3, task.getStatus().name());
-            stmt.setDate(4, Date.valueOf(task.getDueDate()));
+            stmt.setString(3, task.getStatus());
+            stmt.setTimestamp(4, Timestamp.valueOf(task.getDueDate()));
             stmt.setInt(5, task.getId());
+
 
             stmt.executeUpdate();
 
@@ -112,15 +116,14 @@ public class TaskDao {
         task.setId(rs.getInt("id"));
         task.setTitle(rs.getString("title"));
         task.setDescription(rs.getString("description"));
+        task.setStatus(rs.getString("status"));
 
-        String statusStr = rs.getString("status");
-        task.setStatus(Status.valueOf(statusStr));  // assumes status is stored as enum name (e.g. "PENDING")
-
-        Date dueDate = rs.getDate("due_date");
-        if (dueDate != null) {
-            task.setDueDate(dueDate);
+        Timestamp ts = rs.getTimestamp("due_date");
+        if (ts != null) {
+            task.setDueDate(ts.toLocalDateTime());
         }
 
         return task;
     }
+
 }
