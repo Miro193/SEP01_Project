@@ -13,7 +13,7 @@ public class StudentDAO {
             if (conn == null) return false;
 
             PreparedStatement stmt = conn.prepareStatement(
-                    "SELECT * FROM student WHERE id = ? AND username = ?"
+                    "SELECT * FROM students WHERE id = ? AND name = ?"
             );
             stmt.setInt(1, id);
             stmt.setString(2, username);
