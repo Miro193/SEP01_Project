@@ -7,8 +7,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import model.User;
-
-public class LoginController {
+public class SignUpController {
     @FXML
     private TextField usernameField;
 
@@ -18,23 +17,26 @@ public class LoginController {
     private UserDao userDao = new UserDao();
 
     @FXML
-    private void handleLogin(ActionEvent event) {
+    private void handleSignUp(ActionEvent event) {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Username and Password cannot be empty");
+            showAlert("Error", "Please fill all fields!");
             return;
         }
 
-        User user = userDao.login(username, password);
-
-        if (user != null && user.getPassword().equals(password)) {
-            showAlert("Success", "Login successful! Welcome " + user.getUsername());
-            // TODO: navigate to TaskList.fxml or main dashboard
-        } else {
-            showAlert("Error", "Invalid username or password");
+        User existingUser = userDao.login(username, password);
+        if (existingUser != null) {
+            showAlert("Error", "Username already exists!");
+            return;
         }
+
+        User newUser = new User(username, password);
+        userDao.register(newUser);
+
+        showAlert("Success", "Account created successfully!");
+        // TODO: redirect to login page
     }
 
     private void showAlert(String title, String message) {
@@ -43,5 +45,4 @@ public class LoginController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }
