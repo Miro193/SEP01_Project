@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Scanner;
+
 public class SignUp {
     private String username;
     private String password;
@@ -36,30 +38,30 @@ public class SignUp {
         this.secondPassword = secondPassword;
     }
 
-    // Optional: method to show login details (without exposing password)
+    // Optional: method is just for testing purpose
     @Override
     public String toString() {
         return "SignUp{username='" + username + "'}";
     }
 
-//    public static void main(String[] args) {
-//        Scanner scanner = new Scanner(System.in);
-//        System.out.print("UserName please: ");
-//        String userName = scanner.nextLine();
-//
-//        System.out.print("Password please: ");
-//        String password = scanner.nextLine();
-//
-//        System.out.print("Repeat password please: ");
-//        String secondPassword = scanner.nextLine();
-//
-//        while (!secondPassword.equals(password)) {
-//
-//            System.out.println("Repassword was wrong! Write it again: ");
-//            secondPassword = scanner.nextLine();
-//
-//        }
-//
-//        System.out.println("Username is: " + userName + "\nPassword is: " + password + "\nRePassword was correct.");
-//    }
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("UserName please: ");
+        String userName = scanner.nextLine();
+
+        System.out.print("Password please: ");
+        String password = scanner.nextLine();
+
+        System.out.print("Repeat password please: ");
+        String secondPassword = scanner.nextLine();
+
+        while (!secondPassword.equals(password)) {
+
+            System.out.println("Repassword was wrong! Write it again: ");
+            secondPassword = scanner.nextLine();
+
+        }
+
+        System.out.println("Username is: " + userName + "\nPassword is: " + password + "\nRePassword was correct.");
+    }
 }
