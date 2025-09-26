@@ -1,7 +1,7 @@
 package application;
 
 public class Main {
-    static void main(String[] args) {
-
+    public static void main(String[] args) {
+        view.FirstViewView.main(args); // Miron view testi
     }
 }

@@ -6,18 +6,18 @@ import model.Status;
 import java.time.LocalDateTime;
 
 public class TaskController {
-    private final TaskList taskList;
-
-    public TaskController(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
-    public void addNewTask(String title, String description, Status status, LocalDateTime dueDate) {
-        Task task = new Task(title, description, status, dueDate);
-        taskList.addTask(task);
-
-    }
-    public void deleteTask(Task task) {
-        taskList.deleteTask(task);
-    }
+//    private final TaskList taskList;
+//
+//    public TaskController(TaskList taskList) {
+//        this.taskList = taskList;
+//    }
+//
+//    public void addNewTask(String title, String description, Status status, LocalDateTime dueDate) {
+//        Task task = new Task(title, description, status, dueDate);
+//        taskList.addTask(task);
+//
+//    }
+//    public void deleteTask(Task task) {
+//        taskList.deleteTask(task);
+//    }
 }
