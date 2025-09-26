@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 public class TaskController {
 
+    private final TaskList taskList;
+
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> descColumn;
@@ -84,5 +86,6 @@ public class TaskController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
 }
 
