@@ -23,5 +23,19 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
+    <data-source name="studyplanner@localhost [2]" uuid="ee40383b-1db9-42b9-95d3-1b14019f2a99">
+      <database-info product="MariaDB" version="11.3.0-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.3.3" dbms="MARIADB" exact-version="11.3.0" exact-driver-version="3.3">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="@" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
   </component>
 </project>

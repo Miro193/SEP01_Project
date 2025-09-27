@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="taskdb@localhost">
+<dataSource name="studyplanner@localhost [2]">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.53">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
@@ -1474,121 +1474,320 @@ currencydb|schema||appuser|localhost|UPDATE|G</Grants>
     <schema id="513" parent="1" name="performance_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
-    <schema id="514" parent="1" name="taskdb">
+    <schema id="514" parent="1" name="studyplanner">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-09-26.16:45:54</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2025-09-27.07:23:21</LastIntrospectionLocalTimestamp>
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <schema id="515" parent="1" name="trafficlight">
+    <schema id="515" parent="1" name="taskdb">
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <user id="516" parent="1" name="appuser">
+    <schema id="516" parent="1" name="trafficlight">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <user id="517" parent="1" name="appuser">
       <Host>localhost</Host>
     </user>
-    <user id="517" parent="1" name="mariadb.sys">
+    <user id="518" parent="1" name="mariadb.sys">
       <Host>localhost</Host>
     </user>
-    <user id="518" parent="1" name="root"/>
-    <user id="519" parent="1" name="root">
+    <user id="519" parent="1" name="root"/>
+    <user id="520" parent="1" name="root">
       <Host>127.0.0.1</Host>
     </user>
-    <user id="520" parent="1" name="root">
+    <user id="521" parent="1" name="root">
       <Host>::1</Host>
     </user>
-    <user id="521" parent="1" name="root">
+    <user id="522" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <user id="522" parent="1" name="root">
+    <user id="523" parent="1" name="root">
       <Host>saeids</Host>
     </user>
-    <table id="523" parent="514" name="tasks">
+    <table id="524" parent="514" name="calendarevent">
       <Engine>InnoDB</Engine>
       <CollationName>latin1_swedish_ci</CollationName>
     </table>
-    <table id="524" parent="514" name="users">
+    <table id="525" parent="514" name="signup">
       <Engine>InnoDB</Engine>
       <CollationName>latin1_swedish_ci</CollationName>
     </table>
-    <column id="525" parent="523" name="id">
-      <AutoIncrement>1</AutoIncrement>
+    <table id="526" parent="514" name="task">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="527" parent="514" name="taskhistory">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="528" parent="514" name="taskstats">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <table id="529" parent="514" name="users">
+      <Engine>InnoDB</Engine>
+      <CollationName>latin1_swedish_ci</CollationName>
+    </table>
+    <column id="530" parent="524" name="id">
+      <AutoIncrement>3</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="526" parent="523" name="user_id">
+    <column id="531" parent="524" name="user_id">
       <Position>2</Position>
       <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="527" parent="523" name="title">
-      <NotNull>1</NotNull>
+    <column id="532" parent="524" name="title">
       <Position>3</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="528" parent="523" name="description">
+    <column id="533" parent="524" name="description">
       <Position>4</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="529" parent="523" name="due_date">
+    <column id="534" parent="524" name="event_date">
       <Position>5</Position>
       <StoredType>date|0s</StoredType>
     </column>
-    <column id="530" parent="523" name="status">
-      <DefaultExpression>&apos;TODO&apos;</DefaultExpression>
+    <column id="535" parent="524" name="event_time">
       <Position>6</Position>
-      <StoredType>enum(&apos;TODO&apos;, &apos;IN_PROGRESS&apos;, &apos;DONE&apos;)|0e</StoredType>
+      <StoredType>time|0s</StoredType>
     </column>
-    <foreign-key id="531" parent="523" name="tasks_ibfk_1">
+    <foreign-key id="536" parent="524" name="calendarevent_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <index id="532" parent="523" name="PRIMARY">
+    <index id="537" parent="524" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="533" parent="523" name="user_id">
+    <index id="538" parent="524" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="534" parent="523" name="PRIMARY">
+    <key id="539" parent="524" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="535" parent="524" name="id">
-      <AutoIncrement>9</AutoIncrement>
+    <column id="540" parent="525" name="id">
+      <AutoIncrement>3</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="536" parent="524" name="username">
+    <column id="541" parent="525" name="user_id">
       <NotNull>1</NotNull>
       <Position>2</Position>
-      <StoredType>varchar(100)|0s</StoredType>
+      <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="537" parent="524" name="password_hash">
+    <column id="542" parent="525" name="sign_up_date">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StoredType>varchar(255)|0s</StoredType>
+      <StoredType>date|0s</StoredType>
     </column>
-    <index id="538" parent="524" name="PRIMARY">
+    <column id="543" parent="525" name="status">
+      <DefaultExpression>&apos;active&apos;</DefaultExpression>
+      <Position>4</Position>
+      <StoredType>varchar(20)|0s</StoredType>
+    </column>
+    <foreign-key id="544" parent="525" name="signup_ibfk_1">
+      <ColNames>user_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>users</RefTableName>
+    </foreign-key>
+    <index id="545" parent="525" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="539" parent="524" name="username">
-      <ColNames>username</ColNames>
+    <index id="546" parent="525" name="user_id">
+      <ColNames>user_id</ColNames>
       <Type>btree</Type>
-      <Unique>1</Unique>
     </index>
-    <key id="540" parent="524" name="PRIMARY">
+    <key id="547" parent="525" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <key id="541" parent="524" name="username">
-      <UnderlyingIndexName>username</UnderlyingIndexName>
+    <column id="548" parent="526" name="task_id">
+      <AutoIncrement>3</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="549" parent="526" name="user_id">
+      <Position>2</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="550" parent="526" name="title">
+      <Position>3</Position>
+      <StoredType>varchar(100)|0s</StoredType>
+    </column>
+    <column id="551" parent="526" name="description">
+      <Position>4</Position>
+      <StoredType>text|0s</StoredType>
+    </column>
+    <column id="552" parent="526" name="status">
+      <Position>5</Position>
+      <StoredType>varchar(20)|0s</StoredType>
+    </column>
+    <column id="553" parent="526" name="dueDate">
+      <Position>6</Position>
+      <StoredType>date|0s</StoredType>
+    </column>
+    <foreign-key id="554" parent="526" name="task_ibfk_1">
+      <ColNames>user_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>users</RefTableName>
+    </foreign-key>
+    <index id="555" parent="526" name="PRIMARY">
+      <ColNames>task_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="556" parent="526" name="user_id">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="557" parent="526" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="558" parent="527" name="id">
+      <AutoIncrement>3</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="559" parent="527" name="task_id">
+      <Position>2</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="560" parent="527" name="changed_by">
+      <Position>3</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="561" parent="527" name="change_type">
+      <Position>4</Position>
+      <StoredType>varchar(50)|0s</StoredType>
+    </column>
+    <column id="562" parent="527" name="change_date">
+      <Position>5</Position>
+      <StoredType>datetime|0s</StoredType>
+    </column>
+    <column id="563" parent="527" name="old_status">
+      <Position>6</Position>
+      <StoredType>varchar(20)|0s</StoredType>
+    </column>
+    <column id="564" parent="527" name="new_status">
+      <Position>7</Position>
+      <StoredType>varchar(20)|0s</StoredType>
+    </column>
+    <foreign-key id="565" parent="527" name="taskhistory_ibfk_1">
+      <ColNames>task_id</ColNames>
+      <RefColNames>task_id</RefColNames>
+      <RefTableName>task</RefTableName>
+    </foreign-key>
+    <foreign-key id="566" parent="527" name="taskhistory_ibfk_2">
+      <ColNames>changed_by</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>users</RefTableName>
+    </foreign-key>
+    <index id="567" parent="527" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="568" parent="527" name="task_id">
+      <ColNames>task_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="569" parent="527" name="changed_by">
+      <ColNames>changed_by</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="570" parent="527" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="571" parent="528" name="id">
+      <AutoIncrement>3</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="572" parent="528" name="user_id">
+      <Position>2</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="573" parent="528" name="total_tasks">
+      <Position>3</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="574" parent="528" name="completed_tasks">
+      <Position>4</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="575" parent="528" name="pending_tasks">
+      <Position>5</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="576" parent="528" name="last_updated">
+      <Position>6</Position>
+      <StoredType>date|0s</StoredType>
+    </column>
+    <foreign-key id="577" parent="528" name="taskstats_ibfk_1">
+      <ColNames>user_id</ColNames>
+      <RefColNames>id</RefColNames>
+      <RefTableName>users</RefTableName>
+    </foreign-key>
+    <index id="578" parent="528" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <index id="579" parent="528" name="user_id">
+      <ColNames>user_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="580" parent="528" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="581" parent="529" name="id">
+      <AutoIncrement>3</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="582" parent="529" name="username">
+      <Position>2</Position>
+      <StoredType>varchar(100)|0s</StoredType>
+    </column>
+    <column id="583" parent="529" name="password">
+      <Position>3</Position>
+      <StoredType>varchar(100)|0s</StoredType>
+    </column>
+    <column id="584" parent="529" name="confirmPassword">
+      <Position>4</Position>
+      <StoredType>varchar(100)|0s</StoredType>
+    </column>
+    <index id="585" parent="529" name="PRIMARY">
+      <ColNames>id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="586" parent="529" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>

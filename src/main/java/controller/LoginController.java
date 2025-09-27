@@ -25,7 +25,7 @@ public class LoginController {
     private UserDao userDao = new UserDao();
 
     @FXML
-    private void handleLogin(ActionEvent event) {
+    private void handleLogin(ActionEvent event) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
 
@@ -38,7 +38,14 @@ public class LoginController {
 
         if (user != null && user.getPassword().equals(password)) {
             showAlert("Success", "Login successful! Welcome " + user.getUsername());
-            // TODO: navigate to TaskList.fxml or main dashboard
+            Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/view/first_view.fxml"));
+            Scene firstViewScene = new Scene(firstViewRoot);
+
+
+            Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            window.setScene(firstViewScene);
+            window.show();
         } else {
             showAlert("Error", "Invalid username or password");
         }
@@ -48,7 +55,7 @@ public class LoginController {
         Parent signUpRoot = FXMLLoader.load(getClass().getResource("/view/SignUp.fxml"));
         Scene signUpScene = new Scene(signUpRoot);
 
-        // Get the stage from the event that triggered the action
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(signUpScene);
