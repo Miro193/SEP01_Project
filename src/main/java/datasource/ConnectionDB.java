@@ -17,6 +17,4 @@ public class ConnectionDB {
             return null;
         }
     }
-
-
 }

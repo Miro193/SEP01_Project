@@ -13,8 +13,6 @@ import java.time.format.DateTimeFormatter;
 
 public class TaskController {
 
-    private final TaskList taskList;
-
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> descColumn;
@@ -22,11 +20,11 @@ public class TaskController {
     @FXML private TableColumn<Task, String> statusColumn;
 
     private ObservableList<Task> taskListObservable;
-    private TaskList taskList;
+    private TaskList taskList = new TaskList(new TaskDao());
 
     @FXML
     public void initialize() {
-        taskList = new TaskList(new TaskDao()); // Wraps DAO
+        ; // Wraps DAO
         taskListObservable = FXCollections.observableArrayList(taskList.getAllTasks());
 
         titleColumn.setCellValueFactory(cellData ->

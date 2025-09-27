@@ -4,11 +4,18 @@ public class User {
     private int id;
     private String username;
     private String password;
+    private String confirmPassword;
 
-    public User( String username, String password) {
+    public User( String username, String password, String confirmPassword) {
         this.username = username;
         this.password = password;
+        this.confirmPassword = confirmPassword;
 
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
 
@@ -33,12 +40,15 @@ public class User {
         this.password = password;
     }
 
+    public String getConfirmPassword() {return confirmPassword; }
+    public void setConfirmPassword(String confirmPassword) { this.confirmPassword = confirmPassword; }
+
 
 
     @Override
     public String toString() {
         return "User{id=" + id +
-                ", username='" + username + '}';
+                ", username='" + username + "'}";
     }
 
 }

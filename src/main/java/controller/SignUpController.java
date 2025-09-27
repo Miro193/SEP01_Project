@@ -3,10 +3,18 @@ package controller;
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.User;
+
+import java.io.IOException;
+
 public class SignUpController {
     @FXML
     private TextField usernameField;
@@ -14,12 +22,17 @@ public class SignUpController {
     @FXML
     private PasswordField passwordField;
 
+    @FXML
+    private PasswordField confirmPasswordField;
+
     private UserDao userDao = new UserDao();
 
     @FXML
-    private void handleSignUp(ActionEvent event) {
+    private void handleSignUp(ActionEvent event) throws IOException {
         String username = usernameField.getText();
         String password = passwordField.getText();
+        String confirmPassword = confirmPasswordField.getText();
+
 
         if (username.isEmpty() || password.isEmpty()) {
             showAlert("Error", "Please fill all fields!");
@@ -32,11 +45,23 @@ public class SignUpController {
             return;
         }
 
-        User newUser = new User(username, password);
+        User newUser = new User(username, password, confirmPassword);
         userDao.register(newUser);
 
         showAlert("Success", "Account created successfully!");
-        // TODO: redirect to login page
+        handleLoginRedirect(event);
+    }
+
+    @FXML
+    private void handleLoginRedirect(ActionEvent event) throws IOException {
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        Scene loginScene = new Scene(loginRoot);
+
+        // Get the stage from the event that triggered the action
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        window.setScene(loginScene);
+        window.show();
     }
 
     private void showAlert(String title, String message) {

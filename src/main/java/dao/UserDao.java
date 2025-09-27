@@ -5,13 +5,13 @@ import java.sql.*;
 import model.User;
 public class UserDao {
     public void register(User user) {
-        String sql = "INSERT INTO users (username, password) VALUES (?, ?)";
+        String sql = "INSERT INTO users (username, password, confirmPassword) VALUES (?, ?, ?)";
         try (Connection conn = ConnectionDB.obtenerConexion();
              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
-
+            stmt.setString(3, user.getConfirmPassword());
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -32,13 +32,11 @@ public class UserDao {
 
             stmt.setString(1, username);
             stmt.setString(2, password);
-
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new User(
                             rs.getString("username"),
                             rs.getString("password")
-
                     );
                 }
             }
