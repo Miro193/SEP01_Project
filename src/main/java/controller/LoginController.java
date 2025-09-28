@@ -38,7 +38,7 @@ public class LoginController {
 
         if (user != null && user.getPassword().equals(password)) {
             showAlert("Success", "Login successful! Welcome " + user.getUsername());
-            Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/view/first_view.fxml"));
+            Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
 
@@ -52,7 +52,7 @@ public class LoginController {
     }
     @FXML
     private void handleSignupRedirect(ActionEvent event) throws IOException {
-        Parent signUpRoot = FXMLLoader.load(getClass().getResource("/view/SignUp.fxml"));
+        Parent signUpRoot = FXMLLoader.load(getClass().getResource("/SignUp.fxml"));
         Scene signUpScene = new Scene(signUpRoot);
 
 

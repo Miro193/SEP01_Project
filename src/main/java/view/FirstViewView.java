@@ -10,7 +10,7 @@ public class FirstViewView extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/first_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/first_view.fxml"));
         Parent root = fxmlLoader.load();
 
         stage.setScene(new Scene(root));

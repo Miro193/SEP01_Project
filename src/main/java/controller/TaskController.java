@@ -51,15 +51,15 @@ public class TaskController {
         newTask.setDueDate(LocalDateTime.now().plusDays(1));
 
         taskList.addTask(newTask);
-        taskListObservable.add(newTask);   // Update UI
+        taskListObservable.add(newTask);
     }
 
     @FXML
     private void handleDeleteTask() {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
-            taskList.deleteTask(selectedTask);     // Remove from DB and cache
-            taskListObservable.remove(selectedTask); // Update UI
+            taskList.deleteTask(selectedTask);
+            taskListObservable.remove(selectedTask);
         } else {
             showAlert("No task selected", "Please select a task to delete.");
         }
