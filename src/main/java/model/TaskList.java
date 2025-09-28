@@ -29,7 +29,7 @@ public class TaskList {
         return taskDao.find(id);
     }
     public List<Task> getAllTasks() {
-        // sync with DB if you want, or just return in-memory list
+
         return new ArrayList<>(tasks);
     }
 

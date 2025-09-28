@@ -1,64 +1,72 @@
 package controller;
-
+import dao.TaskDao;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import model.CurrentUser;
 import model.Task;
-import model.TaskList;
-import dao.TaskDao;
-
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class TaskController {
-
+    @FXML private TextField titleField;
+    @FXML private TextArea descField;
+    @FXML private DatePicker dueDatePicker;
+    @FXML private ChoiceBox<String> statusChoice;
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> descColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
 
+    private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
-    private TaskList taskList = new TaskList(new TaskDao());
 
     @FXML
     public void initialize() {
-        ; // Wraps DAO
-        taskListObservable = FXCollections.observableArrayList(taskList.getAllTasks());
+        if (taskTable != null) {
+            List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
+            taskListObservable = FXCollections.observableArrayList(tasks);
 
-        titleColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTitle()));
-        descColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getDescription()));
-        dueDateColumn.setCellValueFactory(cellData -> {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            return new javafx.beans.property.SimpleStringProperty(
-                    cellData.getValue().getDueDate().format(formatter));
-        });
-        statusColumn.setCellValueFactory(cellData ->
-                new javafx.beans.property.SimpleStringProperty(cellData.getValue().getStatus()));
+            titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
+            descColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
+            dueDateColumn.setCellValueFactory(cellData -> {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                return new SimpleStringProperty(cellData.getValue().getDueDate().format(formatter));
+            });
+            statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
 
-        taskTable.setItems(taskListObservable);
+            taskTable.setItems(taskListObservable);
+        }
+
+
+        if (statusChoice != null) {
+            statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
+            statusChoice.setValue("TODO");
+        }
     }
 
-    @FXML
-    private void handleAddTask() {
-        Task newTask = new Task();
-        newTask.setTitle("New Task");
-        newTask.setDescription("Description");
-        newTask.setStatus("Not Started");
-        newTask.setDueDate(LocalDateTime.now().plusDays(1));
 
-        taskList.addTask(newTask);
-        taskListObservable.add(newTask);
+    @FXML
+    private void handleAddTask(ActionEvent event) throws IOException {
+        navigate(event, "/AddTask.fxml");
     }
 
     @FXML
     private void handleDeleteTask() {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
-            taskList.deleteTask(selectedTask);
+            taskDao.delete(selectedTask);
             taskListObservable.remove(selectedTask);
         } else {
             showAlert("No task selected", "Please select a task to delete.");
@@ -66,15 +74,46 @@ public class TaskController {
     }
 
     @FXML
-    private void handleOpenCalendar() {
-        System.out.println("Opening Calendar View...");
-        // TODO: Load Calendar.fxml or switch scene
+    private void handleOpenCalendar(ActionEvent event) throws IOException {
+        showAlert("Not Implemented", "Calendar view is not yet implemented.");
     }
 
     @FXML
-    private void handleOpenDoneTasks() {
-        System.out.println("Opening Done Tasks View...");
-        // TODO: Load DoneTask.fxml or switch scene
+    private void handleOpenDoneTasks(ActionEvent event) throws IOException {
+        navigate(event, "/DoneTask.fxml");
+    }
+
+
+    @FXML
+    private void handleSaveTask(ActionEvent event) throws IOException {
+        if (CurrentUser.get() == null) {
+            showAlert("Error", "No user logged in. Cannot save task.");
+            return;
+        }
+
+        Task newTask = new Task();
+        newTask.setUserId(CurrentUser.get().getId());
+        newTask.setTitle(titleField.getText());
+        newTask.setDescription(descField.getText());
+        newTask.setDueDate(dueDatePicker.getValue().atStartOfDay());
+        newTask.setStatus(statusChoice.getValue());
+
+        taskDao.persist(newTask);
+        navigate(event, "/TaskList.fxml");
+    }
+
+    @FXML
+    private void handleCancel(ActionEvent event) throws IOException {
+        navigate(event, "/TaskList.fxml");
+    }
+
+
+    private void navigate(ActionEvent event, String fxmlPath) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(root);
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
     }
 
     private void showAlert(String title, String message) {
@@ -84,6 +123,4 @@ public class TaskController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }
-

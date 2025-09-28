@@ -34,16 +34,18 @@ public class UserDao {
             stmt.setString(2, password);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
-                    return new User(
+                    User user = new User(
                             rs.getString("username"),
                             rs.getString("password")
                     );
+                    user.setId(rs.getInt("id"));
+                    return user;
                 }
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null; // login fail
+        return null;
     }
 }

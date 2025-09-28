@@ -1,5 +1,4 @@
 package controller;
-
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -54,10 +53,10 @@ public class SignUpController {
 
     @FXML
     private void handleLoginRedirect(ActionEvent event) throws IOException {
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("/Login.fxml"));
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
         Scene loginScene = new Scene(loginRoot);
 
-        // Get the stage from the event that triggered the action
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(loginScene);

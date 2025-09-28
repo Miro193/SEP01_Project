@@ -11,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.CurrentUser;
 import model.User;
 
 import java.io.IOException;
@@ -37,6 +38,7 @@ public class LoginController {
         User user = userDao.login(username, password);
 
         if (user != null && user.getPassword().equals(password)) {
+            CurrentUser.set(user);
             showAlert("Success", "Login successful! Welcome " + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
@@ -62,12 +64,10 @@ public class LoginController {
         window.show();
     }
 
-
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
         alert.setContentText(message);
         alert.showAndWait();
     }
-
 }

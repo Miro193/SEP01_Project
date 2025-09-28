@@ -51,6 +51,10 @@ public class Task {
         this.id = id;
     }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
