@@ -1,4 +1,5 @@
 package controller;
+
 import dao.TaskDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -13,16 +14,21 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
+
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class TaskController {
+
+    // Fields for AddTask.fxml
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
+
+    // Fields for TaskList.fxml
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> descColumn;
@@ -34,7 +40,8 @@ public class TaskController {
 
     @FXML
     public void initialize() {
-        if (taskTable != null) {
+        // Initialization logic for TaskList.fxml
+        if (taskTable != null && CurrentUser.get() != null) {
             List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
             taskListObservable = FXCollections.observableArrayList(tasks);
 
@@ -42,21 +49,22 @@ public class TaskController {
             descColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
             dueDateColumn.setCellValueFactory(cellData -> {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                return new SimpleStringProperty(cellData.getValue().getDueDate().format(formatter));
+                LocalDateTime dueDate = cellData.getValue().getDueDate();
+                return new SimpleStringProperty(dueDate != null ? dueDate.format(formatter) : "");
             });
             statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
 
             taskTable.setItems(taskListObservable);
         }
 
-
+        // Initialization logic for AddTask.fxml
         if (statusChoice != null) {
             statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
             statusChoice.setValue("TODO");
         }
     }
 
-
+    // Methods for TaskList.fxml
     @FXML
     private void handleAddTask(ActionEvent event) throws IOException {
         navigate(event, "/AddTask.fxml");
@@ -75,7 +83,7 @@ public class TaskController {
 
     @FXML
     private void handleOpenCalendar(ActionEvent event) throws IOException {
-        showAlert("Not Implemented", "Calendar view is not yet implemented.");
+        navigate(event, "/Calendar.fxml");
     }
 
     @FXML
@@ -83,22 +91,34 @@ public class TaskController {
         navigate(event, "/DoneTask.fxml");
     }
 
-
+    // Methods for AddTask.fxml
     @FXML
     private void handleSaveTask(ActionEvent event) throws IOException {
+        String title = titleField.getText();
+        String description = descField.getText();
+        LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
+        String status = statusChoice.getValue();
+
+        if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
+            showAlert("Validation Error", "Title, Due Date, and Status are required fields.");
+            return;
+        }
+
         if (CurrentUser.get() == null) {
-            showAlert("Error", "No user logged in. Cannot save task.");
+            showAlert("Authentication Error", "No user is logged in. Please log in to save a task.");
             return;
         }
 
         Task newTask = new Task();
         newTask.setUserId(CurrentUser.get().getId());
-        newTask.setTitle(titleField.getText());
-        newTask.setDescription(descField.getText());
-        newTask.setDueDate(dueDatePicker.getValue().atStartOfDay());
-        newTask.setStatus(statusChoice.getValue());
+        newTask.setTitle(title);
+        newTask.setDescription(description);
+        newTask.setDueDate(dueDate);
+        newTask.setStatus(status);
 
         taskDao.persist(newTask);
+
+        showAlert("Success", "Task has been saved successfully!");
         navigate(event, "/TaskList.fxml");
     }
 
@@ -107,7 +127,7 @@ public class TaskController {
         navigate(event, "/TaskList.fxml");
     }
 
-
+    // Helper methods
     private void navigate(ActionEvent event, String fxmlPath) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
         Scene scene = new Scene(root);

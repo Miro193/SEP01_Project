@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -7,7 +8,13 @@
             prefWidth="600" prefHeight="400">
 
     <top>
-        <Label text="Calendar View" style="-fx-font-size: 18px; -fx-padding: 10;"/>
+        <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
+            <children>
+                <Label text="7-Day Calendar View" style="-fx-font-size: 18px;"/>
+                <Region HBox.hgrow="ALWAYS" />
+                <Button text="Back to Task List" onAction="#handleBack"/>
+            </children>
+        </HBox>
     </top>
 
     <center>
