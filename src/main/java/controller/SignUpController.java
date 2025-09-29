@@ -53,7 +53,7 @@ public class SignUpController {
 
     @FXML
     private void handleLoginRedirect(ActionEvent event) throws IOException {
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        Parent loginRoot = FXMLLoader.load(getClass().getResource("/Login.fxml"));
         Scene loginScene = new Scene(loginRoot);
 
 
