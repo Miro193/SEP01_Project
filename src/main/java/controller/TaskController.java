@@ -31,6 +31,12 @@ public class TaskController {
 
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
+    private static Task taskToEdit;
+
+
+    public static void setTaskToEdit(Task task) {
+        taskToEdit = task;
+    }
 
     @FXML
     public void initialize() {
@@ -54,12 +60,30 @@ public class TaskController {
             statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
             statusChoice.setValue("TODO");
         }
+
+        if (taskToEdit != null) {
+            titleField.setText(taskToEdit.getTitle());
+            descField.setText(taskToEdit.getDescription());
+            dueDatePicker.setValue(taskToEdit.getDueDate().toLocalDate());
+            statusChoice.setValue(taskToEdit.getStatus());
+        }
     }
 
 
     @FXML
     private void handleAddTask(ActionEvent event) throws IOException {
         navigate(event, "/AddTask.fxml");
+    }
+
+    @FXML
+    private void handleEditTask(ActionEvent event) throws IOException {
+        Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
+        if (selectedTask != null) {
+            setTaskToEdit(selectedTask);
+            navigate(event, "/EditTask.fxml");
+        } else {
+            showAlert("No task selected", "Please select a task to edit.");
+        }
     }
 
     @FXML
@@ -90,17 +114,30 @@ public class TaskController {
             showAlert("Error", "No user logged in. Cannot save task.");
             return;
         }
+        if (taskToEdit != null) {
+            taskToEdit.setTitle(titleField.getText());
+            taskToEdit.setDescription(descField.getText());
+            taskToEdit.setDueDate(dueDatePicker.getValue().atStartOfDay());
+            taskToEdit.setStatus(statusChoice.getValue());
 
-        Task newTask = new Task();
-        newTask.setUserId(CurrentUser.get().getId());
-        newTask.setTitle(titleField.getText());
-        newTask.setDescription(descField.getText());
-        newTask.setDueDate(dueDatePicker.getValue().atStartOfDay());
-        newTask.setStatus(statusChoice.getValue());
+            taskDao.update(taskToEdit);
+            taskToEdit = null;
+        } else {
+            Task newTask = new Task();
+            newTask.setUserId(CurrentUser.get().getId());
+            newTask.setTitle(titleField.getText());
+            newTask.setDescription(descField.getText());
+            newTask.setDueDate(dueDatePicker.getValue().atStartOfDay());
+            newTask.setStatus(statusChoice.getValue());
 
-        taskDao.persist(newTask);
+            taskDao.persist(newTask);
+        }
+
         navigate(event, "/TaskList.fxml");
     }
+
+
+
 
     @FXML
     private void handleCancel(ActionEvent event) throws IOException {
