@@ -15,7 +15,6 @@
     </properties>
 
     <build>
-        <finalName>studyplanner</finalName>
         <plugins>
             <plugin>
                 <groupId>org.openjfx</groupId>
@@ -25,30 +24,6 @@
                     <mainClass>application.Main</mainClass>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.4.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <!-- what is this!!-->
-                            <mainClass>TimeCal</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
-
-            <!-- JaCoCo plugin for code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -72,7 +47,7 @@
     </build>
 
     <dependencies>
-        <!-- JavaFX dependencies -->
+
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx</artifactId>
@@ -95,7 +70,7 @@
             <version>20.0.1</version>
         </dependency>
 
-        <!-- Database and ORM -->
+
         <dependency>
             <groupId>org.mariadb.jdbc</groupId>
             <artifactId>mariadb-java-client</artifactId>
@@ -112,34 +87,17 @@
             <version>6.0.0.Final</version>
         </dependency>
 
-        <!-- Logging framework -->
+
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.4.6</version>
         </dependency>
-
-        <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.1</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- In-memory database for testing -->
-        <dependency>
-            <groupId>com.h2database</groupId>
-            <artifactId>h2</artifactId>
-            <version>2.1.214</version>
-            <scope>test</scope>
-        </dependency>
-
     </dependencies>
-
 </project>
