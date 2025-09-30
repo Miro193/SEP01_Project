@@ -5,11 +5,58 @@ pipeline {
         DOCKER_IMAGE_NAME = "your-dockerhub-saeid1993/sep01-project"
         DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
     }
+    pipeline{
+    agent any
+     environment {
+                PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+
+                // Define Docker Hub credentials ID
+                DOCKERHUB_CREDENTIALS_ID = 'docker_hub'
+                // Define Docker Hub repository name
+                DOCKERHUB_REPO = 'amirdirin/week6_livedemo_sep4'
+                // Define Docker image tag
+                DOCKER_IMAGE_TAG = 'latest'
+            }
+
+    tools{
+    maven 'MAVEN_HOME'
+    }
+
+    stages{
+         stage('checking'){
+           steps{
+           git branch:'main', url:'https://github.com/faripanah/week6_livedemo2_sep1.git'
+           }
+
+
+                   stage('Test') {
+                       steps {
+                           bat 'mvn test'
+                       }
+                   }
+                   stage('Code Coverage') {
+                       steps {
+                           bat 'mvn jacoco:report'
+                       }
+                   }
+                   stage('Publish Test Results') {
+                       steps {
+                           junit '**/target/surefire-reports/*.xml'
+                       }
+                   }
+                   stage('Publish Coverage Report') {
+                       steps {
+                           jacoco()
+                       }
+                   }
+         }
+         }
+    }
 
     stages {
         stage('Build & Test') {
             tools {
-                maven 'Maven-3.9.6'
+                maven 'MAVEN_HOME'
             }
             steps {
                 bat "mvn clean install"
