@@ -9,12 +9,7 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
 
-                git 'https://github.com/Miro193/SEP01_Project.git'
-            }
-        }
 
         stage('Build & Test') {
             steps {
@@ -33,7 +28,6 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-
                     echo "Building Docker image: ${DOCKER_IMAGE_NAME}"
                     docker.build(DOCKER_IMAGE_NAME)
                 }
