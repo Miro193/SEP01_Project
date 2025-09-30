@@ -5,7 +5,7 @@ pipeline {
         DOCKER_IMAGE_NAME = "saeid1993/sep01-project"
         DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
         DOCKER_IMAGE_TAG = 'latest'
-        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        PATH = "C:\Program Files\Docker\Docker\resources\bin;${env.PATH}"
     }
 
     tools {
