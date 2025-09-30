@@ -10,6 +10,7 @@
         <ToolBar>
             <Button text="Add Task" onAction="#handleAddTask"/>
             <Button text="Delete Task" onAction="#handleDeleteTask"/>
+            <Button text="Edit Task" onAction="#handleEditTask"/>
             <Button text="Calendar View" onAction="#handleOpenCalendar"/>
             <Button text="Done Tasks" onAction="#handleOpenDoneTasks"/>
         </ToolBar>

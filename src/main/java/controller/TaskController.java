@@ -71,6 +71,25 @@ public class TaskController {
     }
 
     @FXML
+    private void handleEditTask(ActionEvent event) throws IOException {
+        Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
+        if (selectedTask == null) {
+            showAlert("No Task Selected", "Please select a task in the table to edit.");
+            return;
+        }
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditTask.fxml"));
+        Parent root = loader.load();
+
+        EditTaskController controller = loader.getController();
+        controller.setTask(selectedTask);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
     private void handleDeleteTask() {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
