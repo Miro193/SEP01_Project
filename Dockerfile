@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /app
 
 
-COPY target/notebook-1.0-SNAPSHOT.jar .
+COPY target/studyplanner.jar .
 
 
 COPY run.sh .
