@@ -2,68 +2,48 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE_NAME = "your-dockerhub-saeid1993/sep01-project"
+        DOCKER_IMAGE_NAME = "saeid1993/sep01-project"
         DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
-    }
-    pipeline{
-    agent any
-     environment {
-                PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
-
-
-                DOCKERHUB_CREDENTIALS_ID = 'docker_hub'
-
-                DOCKERHUB_REPO = 'saeid1993/sep01-project'
-
-                DOCKER_IMAGE_TAG = 'latest'
-            }
-
-    tools{
-    maven 'MAVEN_HOME'
+        DOCKER_IMAGE_TAG = 'latest'
+        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
     }
 
-    stages{
-         stage('checking'){
-           steps{
-           git branch:'main', url:'https://github.com/Miro193/SEP01_Project.git'
-           }
-
-
-                   stage('Test') {
-                       steps {
-                           bat 'mvn test'
-                       }
-                   }
-                   stage('Code Coverage') {
-                       steps {
-                           bat 'mvn jacoco:report'
-                       }
-                   }
-                   stage('Publish Test Results') {
-                       steps {
-                           junit '**/target/surefire-reports/*.xml'
-                       }
-                   }
-                   stage('Publish Coverage Report') {
-                       steps {
-                           jacoco()
-                       }
-                   }
-         }
-         }
+    tools {
+        maven 'MAVEN_HOME'
     }
 
     stages {
-        stage('Build & Test') {
-            tools {
-                maven 'MAVEN_HOME'
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
+        }
+
+        stage('Build & Test') {
             steps {
                 bat "mvn clean install"
             }
         }
 
-        stage('JaCoCo Code Coverage Report') {
+        stage('Unit Tests') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+
+        stage('Code Coverage') {
+            steps {
+                bat 'mvn jacoco:report'
+            }
+        }
+
+        stage('Publish Test Results') {
+            steps {
+                junit '**/target/surefire-reports/*.xml'
+            }
+        }
+
+        stage('Publish Coverage Report') {
             steps {
                 jacoco execPattern: 'target/jacoco.exec'
             }
@@ -72,8 +52,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo "Building Docker image: ${DOCKER_IMAGE_NAME}"
-                    docker.build(DOCKER_IMAGE_NAME)
+                    echo "Building Docker image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
             }
         }
@@ -86,7 +66,7 @@ pipeline {
                 script {
                     echo "Pushing Docker image to Docker Hub..."
                     docker.withRegistry('https://registry.hub.docker.com', DOCKER_CREDENTIALS_ID) {
-                        docker.image(DOCKER_IMAGE_NAME).push("latest")
+                        docker.image("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}").push()
                     }
                 }
             }
