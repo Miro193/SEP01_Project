@@ -2,13 +2,15 @@ pipeline {
     agent any
 
     environment {
-
-        DOCKER_IMAGE_NAME = "your-dockerhub-username/sep01-project"
+        DOCKER_IMAGE_NAME = "your-dockerhub-saeid1993/sep01-project"
         DOCKER_CREDENTIALS_ID = "dockerhub-credentials"
     }
 
     stages {
         stage('Build & Test') {
+            tools {
+                maven 'Maven-3.9.6'
+            }
             steps {
                 bat "mvn clean install"
             }
