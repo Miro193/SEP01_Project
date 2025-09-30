@@ -1,6 +1,6 @@
 
 FROM openjdk:17-jdk-slim
-CMD ["java", "-jar", "target/studyplanner.jar"]
+
 
 
 RUN apt-get update && apt-get install -y \
