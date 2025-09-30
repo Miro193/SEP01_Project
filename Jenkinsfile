@@ -10,11 +10,11 @@ pipeline {
      environment {
                 PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
 
-                // Define Docker Hub credentials ID
+
                 DOCKERHUB_CREDENTIALS_ID = 'docker_hub'
-                // Define Docker Hub repository name
-                DOCKERHUB_REPO = 'amirdirin/week6_livedemo_sep4'
-                // Define Docker image tag
+
+                DOCKERHUB_REPO = 'saeid1993/sep01-project'
+
                 DOCKER_IMAGE_TAG = 'latest'
             }
 
@@ -25,7 +25,7 @@ pipeline {
     stages{
          stage('checking'){
            steps{
-           git branch:'main', url:'https://github.com/faripanah/week6_livedemo2_sep1.git'
+           git branch:'main', url:'https://github.com/Miro193/SEP01_Project.git'
            }
 
 
