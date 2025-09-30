@@ -9,19 +9,33 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskDao {
+    private Connection testConn;
+
+    public TaskDao() {}
+
+    public TaskDao(Connection conn) {
+        this.testConn = conn;
+    }
+
+    private Connection getConnection() throws SQLException {
+        if (testConn != null) {
+            return testConn;
+        }
+        return ConnectionDB.obtenerConexion();
+    }
+
+
     public void persist(Task task) {
         String sql = "INSERT INTO task (user_id, title, description, status, dueDate) VALUES (?, ?, ?, ?, ?)";
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+//        (Connection conn = ConnectionDB.obtenerConexion();
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, task.getUserId());
             stmt.setString(2, task.getTitle());
             stmt.setString(3, task.getDescription());
             stmt.setString(4, task.getStatus());
             stmt.setTimestamp(5, Timestamp.valueOf(task.getDueDate()));
-
             stmt.executeUpdate();
-
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -37,8 +51,7 @@ public class TaskDao {
 
     public Task find(int id) {
         String sql = "SELECT * FROM task WHERE task_id = ?";
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -58,8 +71,7 @@ public class TaskDao {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM task";
 
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql);
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
@@ -77,8 +89,7 @@ public class TaskDao {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM task WHERE user_id = ?";
 
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -97,8 +108,7 @@ public class TaskDao {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM task WHERE user_id = ? AND dueDate BETWEEN ? AND ?";
 
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
             stmt.setDate(2, Date.valueOf(startDate));
@@ -119,8 +129,7 @@ public class TaskDao {
 
     public void update(Task task) {
         String sql = "UPDATE task SET title = ?, description = ?, status = ?, dueDate = ? WHERE task_id = ?";
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setString(1, task.getTitle());
             stmt.setString(2, task.getDescription());
@@ -138,8 +147,7 @@ public class TaskDao {
 
     public void delete(Task task) {
         String sql = "DELETE FROM task WHERE task_id = ?";
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, task.getId());
             stmt.executeUpdate();
