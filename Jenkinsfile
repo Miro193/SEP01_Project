@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     environment {
         DOCKER_IMAGE_NAME = "saeid1993/sep01-project"
         DOCKER_CREDENTIALS_ID = "Docker_Hub"
