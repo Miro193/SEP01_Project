@@ -16,8 +16,13 @@ RUN mkdir -p /javafx-sdk \
 # Copy your fat JAR
 COPY target/studyplanner.jar app.jar
 
-# Set X11 display (Windows host with Xming/X11)
-ENV DISPLAY=host.docker.internal:0.0
+# Set environment variables
+ENV DISPLAY=host.docker.internal:0
+ENV DB_HOST=host.docker.internal
+
+# Expose port
+EXPOSE 3000
 
 # Run JavaFX app
 CMD ["java", "--module-path", "/javafx-sdk/lib", "--add-modules", "javafx.controls,javafx.fxml", "-jar", "app.jar"]
+
