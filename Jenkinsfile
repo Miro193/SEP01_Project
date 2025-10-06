@@ -69,8 +69,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "Building Docker image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-                    docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
+                    echo "Building Docker image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
+                    docker.build(sh "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
                 }
             }
         }
