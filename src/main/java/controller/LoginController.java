@@ -37,7 +37,7 @@ public class LoginController {
 
         User user = userDao.login(username, password);
 
-        if (user == null && user.getPassword().equals(password)) {
+        if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
             showAlert("Success", "Login successful! Welcome " + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
