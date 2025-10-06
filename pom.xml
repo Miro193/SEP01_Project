@@ -42,7 +42,7 @@
                     <archive>
                         <manifest>
                             <!-- what is this!!-->
-                            <mainClass>TimeCal</mainClass>
+                            <mainClass>application.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
