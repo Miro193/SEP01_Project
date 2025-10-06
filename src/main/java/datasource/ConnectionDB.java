@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDB {
-    private static final String URL = "jdbc:mysql://host.docker.internal:3306/StudyPlanner";
+    private static final String URL = "jdbc:mysql://192.168.0.105:3306/StudyPlanner";
     private static final String USER = "root";
     private static final String PASSWORD = "admin";
 
