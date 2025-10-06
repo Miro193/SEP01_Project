@@ -74,7 +74,7 @@ pipeline {
 
     post {
         always {
-            cleanWs()
+            junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true)
+            jacoco(execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.class', exclusionPattern: '')
         }
-    }
 }
