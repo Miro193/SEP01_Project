@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = "michabl/sep01-project"
-        DOCKER_CREDENTIALS_ID = "Docker_Hub"
+        DOCKERHUB_CREDENTIALS_ID = "Docker_Hub"
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
     }
@@ -59,7 +59,7 @@ pipeline {
 
         stage('Push Docker Image to Docker Hub') {
              steps {
-                      withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                      withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                           bat '''
                               docker login -u $DOCKER_USER -p $DOCKER_PASS
                                docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
