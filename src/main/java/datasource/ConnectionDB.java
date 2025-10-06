@@ -1,4 +1,4 @@
-package datasource;
+/*package datasource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,5 +17,38 @@ public class ConnectionDB {
             e.printStackTrace();
             return null;
         }
+    }
+}
+*/
+package datasource;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class ConnectionDB {
+    public static Connection obtenerConexion() {
+        try {
+            Class.forName("org.mariadb.jdbc.Driver");
+
+            String host = System.getenv("DB_HOST");
+            if (host == null || host.isEmpty()) {
+                host = "localhost"; // fallback
+            }
+
+            String url = "jdbc:mariadb://" + host + ":3306/StudyPlanner";
+            String user = "root";
+            String password = "admin";
+
+            System.out.println("Connecting to: " + url);
+            Connection conn = DriverManager.getConnection(url, user, password);
+            System.out.println("Connection established: " + (conn != null));
+            return conn;
+        } catch (ClassNotFoundException e) {
+            System.err.println("Driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Connection error: " + e.getMessage());
+        }
+        return null;
     }
 }
