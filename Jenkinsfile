@@ -39,6 +39,7 @@ pipeline {
                         bat 'mvn test'
                     }
                 }
+            }
         }
 
         stage('Code Coverage') {
