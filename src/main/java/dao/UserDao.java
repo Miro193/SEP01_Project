@@ -6,7 +6,9 @@ import model.User;
 public class UserDao {
     private Connection testConn;
 
-    public UserDao() {}
+    public UserDao() {
+        this.testConn = null;
+    }
 
     public UserDao(Connection conn) {
         this.testConn = conn;

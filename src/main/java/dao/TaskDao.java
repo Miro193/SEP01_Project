@@ -11,7 +11,9 @@ import java.util.List;
 public class TaskDao {
     private Connection testConn;
 
-    public TaskDao() {}
+    public TaskDao() {
+        this.testConn = null;
+    }
 
     public TaskDao(Connection conn) {
         this.testConn = conn;
