@@ -17,7 +17,7 @@ RUN mkdir -p /javafx-sdk \
 COPY target/studyplanner.jar app.jar
 
 ENV DISPLAY=host.docker.internal:0.0
-ENV DB_HOST=host.docker.internal
+#ENV DB_HOST=host.docker.internal
 # Run JavaFX app
 CMD ["java", "--module-path", "/javafx-sdk/lib", "--add-modules", "javafx.controls,javafx.fxml", "-jar", "app.jar"]
 
