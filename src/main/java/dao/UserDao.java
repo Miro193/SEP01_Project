@@ -4,10 +4,24 @@ import datasource.ConnectionDB;
 import java.sql.*;
 import model.User;
 public class UserDao {
+    private Connection testConn;
+
+    public UserDao() {}
+
+    public UserDao(Connection conn) {
+        this.testConn = conn;
+    }
+
+    private Connection getConnection() throws SQLException {
+        if (testConn != null) {
+            return testConn;
+        }
+        return ConnectionDB.obtenerConexion();
+    }
+
     public void register(User user) {
         String sql = "INSERT INTO users (username, password, confirmPassword) VALUES (?, ?, ?)";
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, user.getUsername());
             stmt.setString(2, user.getPassword());
@@ -27,8 +41,7 @@ public class UserDao {
 
     public User login(String username, String password) {
         String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
-        try (Connection conn = ConnectionDB.obtenerConexion();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, username);
             stmt.setString(2, password);
