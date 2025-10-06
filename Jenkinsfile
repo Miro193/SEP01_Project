@@ -20,19 +20,36 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat "mvn clean install"
+                script {
+                    if (isUnix()) {
+                        sh 'mvn clean install'
+                    } else {
+                        bat 'mvn clean install'
+                    }
+                }
             }
         }
 
         stage('Unit Tests') {
             steps {
-                bat 'mvn test'
-            }
+                script {
+                    if (isUnix()) {
+                        sh 'mvn test'
+                    } else {
+                        bat 'mvn test'
+                    }
+                }
         }
 
         stage('Code Coverage') {
             steps {
-                bat 'mvn jacoco:report'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn jacoco:report'
+                    } else {
+                        bat 'mvn jacoco:report'
+                    }
+                }
             }
         }
 
