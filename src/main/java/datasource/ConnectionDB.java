@@ -7,7 +7,7 @@ public class ConnectionDB {
     private static final String URL = "jdbc:mariadb://host.docker.internal:3306/StudyPlanner";
     //private static final String URL = "jdbc:mariadb://localhost:3306/studyplanner";
     private static final String USER = "root";
-    private static final String PASSWORD = "admin";
+    private static final String PASSWORD = "root";
 
     public static Connection obtenerConexion() {
         try {
