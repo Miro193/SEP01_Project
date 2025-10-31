@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  pinger:
+    image: alpine:latest
+
+    command: ["ping", "-c", "4", "target"]
+
+  target:
+    image: alpine:latest
+
+    command: ["sleep", "infinity"]
