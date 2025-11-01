@@ -1,10 +1,10 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = "mirovaltonen2/sep01-project"
-        DOCKER_CREDENTIALS_ID = "Docker_Miro_Hub"
+        DOCKER_IMAGE_NAME = 'mirovaltonen2/sep01-project'
+        DOCKER_CREDENTIALS_ID = 'Docker_Miro_Hub'
         DOCKER_IMAGE_TAG = 'latest'
-        PATH = "/usr/local/bin:${env.PATH}"
+        PATH = '/usr/local/bin:${env.PATH}'
     }
 
     tools {
@@ -70,9 +70,9 @@ pipeline {
             steps {
                 script {
                     if (isUnix()) {
-                        sh "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ."
+                        sh 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
                     } else {
-                        bat "docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} ."
+                        bat 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
                     }
                 }
             }
@@ -80,7 +80,7 @@ pipeline {
 
         stage('Push Docker Image to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: '${DOCKER_CREDENTIALS_ID}', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh """
                         echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                         docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
@@ -94,7 +94,7 @@ pipeline {
     post {
         always {
             junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true)
-            jacoco(execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.class', exclusionPattern: '')
+            jacoco(execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.class', exclusionPattern: ')
         }
     }
 }
