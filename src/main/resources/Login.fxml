@@ -10,21 +10,25 @@
 
 <AnchorPane prefHeight="250" prefWidth="400" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controller.LoginController">
     <children>
-        <Label layoutX="170" layoutY="20" style="-fx-font-size: 18px;" text="Login" />
+        <Label fx:id="labelTitle" layoutX="170" layoutY="20" style="-fx-font-size: 18px;" text="Login" />
 
-        <Label layoutX="70" layoutY="70" text="Username:" />
+        <Label fx:id="labelUsername" layoutX="70" layoutY="70" text="Username:" />
         <TextField fx:id="usernameField" layoutX="150" layoutY="65" prefWidth="180" />
 
-        <Label layoutX="70" layoutY="110" text="Password:" />
+        <Label fx:id="labelPassword" layoutX="70" layoutY="110" text="Password:" />
         <PasswordField fx:id="passwordField" layoutX="150" layoutY="105" prefWidth="180" />
 
-        <Button layoutX="150" layoutY="160" onAction="#handleLogin" text="Login" />
-        <Button layoutX="230" layoutY="160" onAction="#handleSignupRedirect" text="Sign up" />
+        <Button fx:id="btnLogin" layoutX="150" layoutY="160" onAction="#handleLogin" text="Login" />
+        <Button fx:id="btnSignup" layoutX="230" layoutY="160" onAction="#handleSignupRedirect" text="Sign up" />
       <MenuButton fx:id="btnLanguage" layoutX="151.0" layoutY="204.0" mnemonicParsing="false" text="MenuButton" >
         <items>
-          <MenuItem mnemonicParsing="false" text="Persian" onAction="#onPersianClick"/>
-          <MenuItem mnemonicParsing="false" text="Finnish" onAction="#onFinnishClick"/>
-            <MenuItem mnemonicParsing="false" text="English" onAction="#onEnlishClick"/>
+            <MenuItem text="English" onAction="#handleLanguage"/>
+            <MenuItem text="Finnish" onAction="#handleLanguage"/>
+            <MenuItem text="Persian" onAction="#handleLanguage"/>
+
+
+
+
         </items>
       </MenuButton>
 

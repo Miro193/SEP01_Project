@@ -17,6 +17,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class LoginController {
+
     @FXML
     private TextField usernameField;
 
@@ -25,12 +26,35 @@ public class LoginController {
 
     @FXML
     private MenuButton btnLanguage;
+    @FXML
+    private Label labelTitle;
+    @FXML
+    private Label labelUsername;
+    @FXML
+    private Label labelPassword;
+    @FXML
+    private Button btnLogin;
+    @FXML
+    private Button btnSignup;
+
 
     private UserDao userDao = new UserDao();
 
     @FXML
     public void initialize() {
-        handleLanguage("en", "US");
+
+        Locale defaultLocale = new Locale("en", "US");
+        ResourceBundle rb = ResourceBundle.getBundle("MessagesBundle", defaultLocale);
+        labelTitle.setText(rb.getString("login.title"));
+        labelUsername.setText(rb.getString("login.username.label"));
+        labelPassword.setText(rb.getString("login.password.label"));
+        btnLogin.setText(rb.getString("login.button"));
+        btnSignup.setText(rb.getString("signup.button"));
+        btnLanguage.setText(rb.getString("language.menu"));
+        usernameField.setPromptText(rb.getString("usernameField.prompt"));
+        passwordField.setPromptText(rb.getString("passwordField.prompt"));
+
+
     }
 
     @FXML
@@ -59,9 +83,8 @@ public class LoginController {
                 showAlert("Error", "Invalid username or password");
             }
         } catch (Exception e) {
-            // Handle database connection errors gracefully
             System.err.println("Login error: " + e.getMessage());
-            showAlert("Database Error", "Cannot connect to database. Please try again later or check if the database is running.");
+            showAlert("Database Error", "Cannot connect to database. Please try again later.");
         }
     }
 
@@ -86,22 +109,31 @@ public class LoginController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
-    public void handleLanguage(String language, String country) {
-        Locale locale = new Locale(language, country);
+    private void handleLanguage(ActionEvent event) {
+        MenuItem selectedItem = (MenuItem) event.getSource();
+        String selectedLanguage = selectedItem.getText();
+
+        Locale locale = switch (selectedLanguage) {
+            case "English" -> new Locale("en", "US");
+            case "Finnish" -> new Locale("fi", "FI");
+            case "Persian" -> new Locale("fa", "IR");
+            default -> Locale.getDefault();
+        };
+
         ResourceBundle rb = ResourceBundle.getBundle("MessagesBundle", locale);
 
-        switch (language) {
-            case "Persian" -> usernameField.setText(rb.getString("usernameField.text"));
+
+        labelTitle.setText(rb.getString("login.title"));
+        labelUsername.setText(rb.getString("login.username.label"));
+        labelPassword.setText(rb.getString("login.password.label"));
+        btnLogin.setText(rb.getString("login.button"));
+        btnSignup.setText(rb.getString("signup.button"));
+        btnLanguage.setText(rb.getString("language.menu"));
+        usernameField.setPromptText(rb.getString("usernameField.prompt"));
+        passwordField.setPromptText(rb.getString("passwordField.prompt"));
 
 
-
-        }
     }
-
-    public void onPersianClick(ActionEvent actionEvent) {handleLanguage("fa", "IR");}
-
-    public void onFinnishClick(ActionEvent actionEvent) {handleLanguage("fi", "FI");}
-
-    public void onEnlishClick(ActionEvent actionEvent) {handleLanguage("en", "US");}
 }
