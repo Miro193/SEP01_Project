@@ -10,6 +10,8 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class FirstViewController {
 
@@ -18,6 +20,14 @@ public class FirstViewController {
 
     @FXML
     private Button taskLists;
+
+    private ResourceBundle rb;
+
+    @FXML
+    public void initialize() {
+
+        handleLanguage("en", "US");
+    }
 
     @FXML
     private void handleEnterTask(ActionEvent event) throws IOException {
@@ -35,5 +45,14 @@ public class FirstViewController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(taskListsScene);
         window.show();
+    }
+    @FXML
+    private void handleLanguage(String language, String country) {
+        Locale locale = new Locale(language, country);
+        rb = ResourceBundle.getBundle("MessagesBundle", locale);
+        //set texts
+        enterTask.setText(rb.getString("btnEnterTask.text"));
+        taskLists.setText(rb.getString("btnTaskLists.text"));
+
     }
 }

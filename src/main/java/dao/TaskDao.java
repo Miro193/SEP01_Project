@@ -20,7 +20,7 @@ public class TaskDao {
     }
 
     private Connection getConnection() throws SQLException {
-        if (testConn != null) {
+        if (testConn == null) {
             return testConn;
         }
         return ConnectionDB.obtenerConexion();

@@ -7,24 +7,52 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.User;
-
 import java.io.IOException;
 
-public class SignUpController {
+import utils.LanguageManager;
+//import java.util.Locale;
+//import java.util.ResourceBundle;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
+public class SignUpController extends BaseController {
+
+    @FXML
+    private Label lblSignUp;
+    @FXML
+    private Label lblUserName;
     @FXML
     private TextField usernameField;
-
+    @FXML
+    private Label lblPassword;
     @FXML
     private PasswordField passwordField;
-
+    @FXML
+    private Label lblConfirm;
     @FXML
     private PasswordField confirmPasswordField;
+    @FXML
+    private Button btnSignUp;
+    @FXML
+    private Button btnCreateAccount;
+    @FXML
+    private Button btnBacktToLogin;
 
     private UserDao userDao = new UserDao();
+    //private ResourceBundle rb;
+
+
+    @FXML
+    public void initialize() {
+        updateLanguage();
+        languageTexts();
+
+    }
 
     @FXML
     private void handleSignUp(ActionEvent event) throws IOException {
@@ -69,4 +97,23 @@ public class SignUpController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+    @FXML
+    private void languageTexts() {
+       // Locale locale = new Locale(language, country);
+        //rb = ResourceBundle.getBundle("MessagesBundle", locale);
+
+        //set texts
+        lblSignUp.setText(rb.getString("lblSignUp.text"));
+        lblUserName.setText(rb.getString("lblUserName.text"));
+        lblPassword.setText(rb.getString("lblPassword.text"));
+        lblConfirm.setText(rb.getString("labelConfirm.text"));
+        btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
+        btnBacktToLogin.setText(rb.getString("btnBackToLogin.text"));
+
+
+
+
+    }
+
 }
