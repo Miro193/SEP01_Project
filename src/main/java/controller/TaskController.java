@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class TaskController {
+public class TaskController extends BaseController{
 
     // Fields for AddTask.fxml
     @FXML private TextField titleField;
@@ -162,4 +162,9 @@ public class TaskController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+    @FXML
+    private void languageTexts() {
+        titleField.setText(rb.getString("Language"));
+    }
+
 }

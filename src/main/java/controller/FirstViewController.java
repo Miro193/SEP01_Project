@@ -8,25 +8,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-public class FirstViewController {
+
+public class FirstViewController extends BaseController{
 
     @FXML
     private Button enterTask;
-
     @FXML
     private Button taskLists;
 
-    private ResourceBundle rb;
+    //private ResourceBundle rb;
 
     @FXML
     public void initialize() {
-
-        handleLanguage("en", "US");
+        updateLanguage(); //from BaseController
+        languageTexts();
     }
 
     @FXML
@@ -46,13 +43,13 @@ public class FirstViewController {
         window.setScene(taskListsScene);
         window.show();
     }
+
     @FXML
-    private void handleLanguage(String language, String country) {
-        Locale locale = new Locale(language, country);
-        rb = ResourceBundle.getBundle("MessagesBundle", locale);
-        //set texts
+    private void languageTexts() {
         enterTask.setText(rb.getString("btnEnterTask.text"));
         taskLists.setText(rb.getString("btnTaskLists.text"));
 
+
     }
+
 }
