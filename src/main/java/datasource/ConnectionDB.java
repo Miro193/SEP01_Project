@@ -7,7 +7,7 @@ public class ConnectionDB {
     public static Connection obtenerConexion() {
         String url = "jdbc:mariadb://host.docker.internal:3306/studyplanner";
         String user = "root";
-        String password = "admin";
+        String password = "saeidt";
 
         System.out.println("=== ATTEMPTING CONNECTION ===");
         System.out.println("URL: " + url);

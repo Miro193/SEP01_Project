@@ -8,11 +8,22 @@
 
     <top>
         <ToolBar>
-            <Button text="Add Task" onAction="#handleAddTask"/>
-            <Button text="Delete Task" onAction="#handleDeleteTask"/>
-            <Button text="Edit Task" onAction="#handleEditTask"/>
-            <Button text="Calendar View" onAction="#handleOpenCalendar"/>
-            <Button text="Done Tasks" onAction="#handleOpenDoneTasks"/>
+            <Button fx:id="btnAddTask" text="Add Task" onAction="#handleAddTask"/>
+            <Button fx:id="btnDeleteTask" text="Delete Task" onAction="#handleDeleteTask"/>
+            <Button fx:id="btnEditTask" text="Edit Task" onAction="#handleEditTask"/>
+            <Button fx:id="btnCalendarView" text="Calendar View" onAction="#handleOpenCalendar"/>
+            <Button fx:id="btnDoneTasks" text="Done Tasks" onAction="#handleOpenDoneTasks"/>
+            
+            <Pane HBox.hgrow="ALWAYS" />
+
+            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+                <items>
+                    <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
+                    <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
+                    <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
+                    <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                </items>
+            </MenuButton>
         </ToolBar>
     </top>
 

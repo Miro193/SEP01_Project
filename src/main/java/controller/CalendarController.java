@@ -10,8 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
@@ -20,6 +19,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class CalendarController {
 
@@ -28,12 +29,22 @@ public class CalendarController {
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
 
+
+    @FXML private Label headerCalendar;
+    @FXML private Button btnBack;
+    @FXML private MenuButton btnLanguage;
+    @FXML private MenuItem itemEnglish;
+    @FXML private MenuItem itemPersian;
+    @FXML private MenuItem itemFinnish;
+    @FXML private MenuItem itemChinese;
+
     private TaskDao taskDao = new TaskDao();
+    private ResourceBundle rb;
 
     @FXML
     public void initialize() {
         if (CurrentUser.get() == null) {
-            return; // Or show an error
+            return;
         }
 
         LocalDate startDate = LocalDate.now();
@@ -50,6 +61,9 @@ public class CalendarController {
         statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
 
         calendarTable.setItems(taskListObservable);
+
+
+        handleLanguage("en", "US");
     }
 
     @FXML
@@ -59,5 +73,39 @@ public class CalendarController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+    }
+
+
+
+    @FXML
+    private void handleLanguage(String language, String country) {
+        Locale locale = new Locale(language, country);
+        rb = ResourceBundle.getBundle("messages", locale);
+        headerCalendar.setText(rb.getString("calendar.header"));
+        btnBack.setText(rb.getString("calendar.back"));
+        titleColumn.setText(rb.getString("calendar.task"));
+        dueDateColumn.setText(rb.getString("calendar.dueDate"));
+        statusColumn.setText(rb.getString("calendar.status"));
+        btnLanguage.setText(rb.getString("btnLanguage.text"));
+        itemEnglish.setText(rb.getString("itemEnglish.text"));
+        itemPersian.setText(rb.getString("itemPersian.text"));
+        itemFinnish.setText(rb.getString("itemFinnish.text"));
+        itemChinese.setText(rb.getString("itemChinese.text"));
+    }
+
+    public void onEnglishClick(ActionEvent event) {
+        handleLanguage("en", "US");
+    }
+
+    public void onPersianClick(ActionEvent event) {
+        handleLanguage("fa", "IR");
+    }
+
+    public void onFinnishClick(ActionEvent event) {
+        handleLanguage("fi", "FI");
+    }
+
+    public void onChineseClick(ActionEvent event) {
+        handleLanguage("zh", "CN");
     }
 }

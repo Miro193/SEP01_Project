@@ -19,14 +19,25 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class TaskController {
+
+    // --- FXML Fields ---
 
     // Fields for AddTask.fxml
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
+    @FXML private Label headerAddTask;
+    @FXML private Label labelTitle;
+    @FXML private Label labelDescription;
+    @FXML private Label labelDueDate;
+    @FXML private Label labelStatus;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSaveTask;
 
     // Fields for TaskList.fxml
     @FXML private TableView<Task> taskTable;
@@ -34,9 +45,22 @@ public class TaskController {
     @FXML private TableColumn<Task, String> descColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
+    @FXML private Button btnAddTask;
+    @FXML private Button btnDeleteTask;
+    @FXML private Button btnEditTask;
+    @FXML private Button btnCalendarView;
+    @FXML private Button btnDoneTasks;
+
+    // Common Fields
+    @FXML private MenuButton btnLanguage;
+    @FXML private MenuItem itemEnglish;
+    @FXML private MenuItem itemPersian;
+    @FXML private MenuItem itemFinnish;
+    @FXML private MenuItem itemChinese;
 
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
+    private ResourceBundle rb;
 
     @FXML
     public void initialize() {
@@ -62,9 +86,12 @@ public class TaskController {
             statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
             statusChoice.setValue("TODO");
         }
+        // Set default language
+        handleLanguage("en", "US");
     }
 
-    // Methods for TaskList.fxml
+    // --- Navigation and Action Handlers ---
+
     @FXML
     private void handleAddTask(ActionEvent event) throws IOException {
         navigate(event, "/AddTask.fxml");
@@ -110,7 +137,6 @@ public class TaskController {
         navigate(event, "/DoneTask.fxml");
     }
 
-    // Methods for AddTask.fxml
     @FXML
     private void handleSaveTask(ActionEvent event) throws IOException {
         String title = titleField.getText();
@@ -146,7 +172,8 @@ public class TaskController {
         navigate(event, "/TaskList.fxml");
     }
 
-    // Helper methods
+    // --- Helper Methods ---
+
     private void navigate(ActionEvent event, String fxmlPath) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
         Scene scene = new Scene(root);
@@ -162,4 +189,48 @@ public class TaskController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
+
+    @FXML
+    private void handleLanguage(String language, String country) {
+        Locale locale = new Locale(language, country);
+        rb = ResourceBundle.getBundle("messages", locale);
+
+
+        if (btnAddTask != null) btnAddTask.setText(rb.getString("taskList.addTask"));
+        if (btnDeleteTask != null) btnDeleteTask.setText(rb.getString("taskList.deleteTask"));
+        if (btnEditTask != null) btnEditTask.setText(rb.getString("taskList.editTask"));
+        if (btnCalendarView != null) btnCalendarView.setText(rb.getString("taskList.calendarView"));
+        if (btnDoneTasks != null) btnDoneTasks.setText(rb.getString("taskList.doneTasks"));
+        if (titleColumn != null) titleColumn.setText(rb.getString("taskList.title"));
+        if (descColumn != null) descColumn.setText(rb.getString("taskList.description"));
+        if (dueDateColumn != null) dueDateColumn.setText(rb.getString("taskList.dueDate"));
+        if (statusColumn != null) statusColumn.setText(rb.getString("taskList.status"));
+
+
+        if (headerAddTask != null) headerAddTask.setText(rb.getString("addTask.header"));
+        if (labelTitle != null) labelTitle.setText(rb.getString("addTask.title"));
+        if (labelDescription != null) labelDescription.setText(rb.getString("addTask.description"));
+        if (labelDueDate != null) labelDueDate.setText(rb.getString("addTask.dueDate"));
+        if (labelStatus != null) labelStatus.setText(rb.getString("addTask.status"));
+        if (btnCancel != null) btnCancel.setText(rb.getString("addTask.cancel"));
+        if (btnSaveTask != null) btnSaveTask.setText(rb.getString("addTask.save"));
+
+
+        if (btnLanguage != null) btnLanguage.setText(rb.getString("btnLanguage.text"));
+        if (itemEnglish != null) itemEnglish.setText(rb.getString("itemEnglish.text"));
+        if (itemPersian != null) itemPersian.setText(rb.getString("itemPersian.text"));
+        if (itemFinnish != null) itemFinnish.setText(rb.getString("itemFinnish.text"));
+        if (itemChinese != null) itemChinese.setText(rb.getString("itemChinese.text"));
+    }
+
+    public void onEnglishClick(ActionEvent event) { handleLanguage("en", "US"); }
+
+    public void onPersianClick(ActionEvent event) { handleLanguage("fa", "IR"); }
+
+    public void onFinnishClick(ActionEvent event) { handleLanguage("fi", "FI"); }
+
+    public void onChineseClick(ActionEvent event) { handleLanguage("zh", "CN"); }
+
 }
