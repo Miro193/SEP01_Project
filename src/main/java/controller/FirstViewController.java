@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import java.io.IOException;
 
@@ -17,8 +18,10 @@ public class FirstViewController extends BaseController{
     private Button enterTask;
     @FXML
     private Button taskLists;
+    @FXML
+    private Label lblMyTasks;
 
-    //private ResourceBundle rb;
+
 
     @FXML
     public void initialize() {
@@ -46,6 +49,7 @@ public class FirstViewController extends BaseController{
 
     @FXML
     private void languageTexts() {
+        lblMyTasks.setText(rb.getString("headerMyTasks"));
         enterTask.setText(rb.getString("btnEnterTask.text"));
         taskLists.setText(rb.getString("btnTaskLists.text"));
 

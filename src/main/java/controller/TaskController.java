@@ -35,11 +35,19 @@ public class TaskController extends BaseController{
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
 
+    @FXML private Button btnAddTask;
+    @FXML private Button btnDeleteTask;
+    @FXML private Button btnEditTask;
+    @FXML private Button btnCalendarView;
+    @FXML private Button btnDoneTasks;
+
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
 
     @FXML
     public void initialize() {
+        updateLanguage();
+        languageTexts();
         // Initialization logic for TaskList.fxml
         if (taskTable != null && CurrentUser.get() != null) {
             List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
@@ -164,7 +172,17 @@ public class TaskController extends BaseController{
     }
     @FXML
     private void languageTexts() {
-        titleField.setText(rb.getString("Language"));
+        btnAddTask.setText(rb.getString("btnAddTask"));
+        btnDeleteTask.setText(rb.getString("btnDeleteTask"));
+        btnEditTask.setText(rb.getString("btnEditTask"));
+        btnCalendarView.setText(rb.getString("btnCalendarView"));
+        btnDoneTasks.setText(rb.getString("btnDoneTasks"));
+
+        titleColumn.setText(rb.getString("colTitle"));
+        descColumn.setText(rb.getString("colDescription"));
+        dueDateColumn.setText(rb.getString("colDueDate"));
+        statusColumn.setText(rb.getString("colStatus"));
+
     }
 
 }

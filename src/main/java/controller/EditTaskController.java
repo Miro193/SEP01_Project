@@ -15,15 +15,30 @@ import model.Task;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class EditTaskController {
+
+
+public class EditTaskController extends BaseController{
 
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
+    @FXML private  Label lblEditTask;
+    @FXML private  Label lblTitle;
+    @FXML private  Label lblDescription;
+    @FXML private  Label lblDueDate;
+    @FXML private  Label lblStatus;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSave;
 
     private TaskDao taskDao = new TaskDao();
     private Task selectedTask;
+
+    @FXML
+    public void initialize() {
+        updateLanguage();
+        languageTexts();
+    }
 
     public void setTask(Task task) {
         this.selectedTask = task;
@@ -31,7 +46,9 @@ public class EditTaskController {
             titleField.setText(task.getTitle());
             descField.setText(task.getDescription());
             dueDatePicker.setValue(task.getDueDate().toLocalDate());
-            statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
+            statusChoice.setItems(FXCollections.observableArrayList( rb.getString("status.TODO"),
+                    rb.getString("status.IN_PROGRESS"),
+                    rb.getString("status.DONE")));
             statusChoice.setValue(task.getStatus());
         }
     }
@@ -44,7 +61,7 @@ public class EditTaskController {
         String status = statusChoice.getValue();
 
         if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
-            showAlert("Validation Error", "Title, Due Date, and Status are required fields.");
+            showAlert(rb.getString("error.title"), rb.getString("error.validation"));
             return;
         }
 
@@ -55,7 +72,7 @@ public class EditTaskController {
 
         taskDao.update(selectedTask);
 
-        showAlert("Success", "Task has been updated successfully!");
+        showAlert(rb.getString("success.title"), rb.getString("success.updated"));
         navigateBack(event);
     }
 
@@ -78,5 +95,16 @@ public class EditTaskController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+    private void languageTexts() {
+        lblEditTask.setText(rb.getString("lblEditTask.text"));
+        lblTitle.setText(rb.getString("lblTitle.text"));
+        btnCancel.setText(rb.getString("btnCancel.text"));
+        btnSave.setText(rb.getString("btnSave.text"));
+        lblDescription.setText(rb.getString("lblDescription.text"));
+        lblDueDate.setText(rb.getString("lblDueDate.text"));
+        lblStatus.setText(rb.getString("lblStatus.text"));
+
+
     }
 }

@@ -63,20 +63,25 @@ public class SignUpController extends BaseController {
 
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Please fill all fields!");
+           // showAlert("Error", "Please fill all fields!");
+            showAlert(rb.getString("error.title"), rb.getString("error.fillAll"));
             return;
         }
 
         User existingUser = userDao.login(username, password);
         if (existingUser != null) {
-            showAlert("Error", "Username already exists!");
+            //showAlert("Error", "Username already exists!");
+            showAlert(rb.getString("error.title"), rb.getString("error.usernameExists"));
+
             return;
         }
 
         User newUser = new User(username, password, confirmPassword);
         userDao.register(newUser);
 
-        showAlert("Success", "Account created successfully!");
+        //showAlert("Success", "Account created successfully!");
+        showAlert(rb.getString("success.title"), rb.getString("success.accountCreated"));
+
         handleLoginRedirect(event);
     }
 
@@ -111,8 +116,6 @@ public class SignUpController extends BaseController {
         lblConfirm.setText(rb.getString("labelConfirm.text"));
         btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
         btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
-
-
 
 
     }
