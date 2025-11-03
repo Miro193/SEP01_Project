@@ -134,10 +134,17 @@ public class LoginController extends BaseController {
 
     }
     private void reloadScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Login.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/Login.fxml"),
+                LanguageManager.getBundle()  // Pass current ResourceBundle here
+        );
+        Parent root = loader.load();
+
+        // use the MenuButton (btnLanguage) to find the Stage
+        Stage stage = (Stage) btnLanguage.getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
     }
+
 
 }

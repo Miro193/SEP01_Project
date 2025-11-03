@@ -41,7 +41,7 @@ public class SignUpController extends BaseController {
     @FXML
     private Button btnCreateAccount;
     @FXML
-    private Button btnBacktToLogin;
+    private Button btnBackToLogin;
 
     private UserDao userDao = new UserDao();
     //private ResourceBundle rb;
@@ -49,7 +49,7 @@ public class SignUpController extends BaseController {
 
     @FXML
     public void initialize() {
-        updateLanguage();
+        updateLanguage(); //from BaseController
         languageTexts();
 
     }
@@ -109,7 +109,7 @@ public class SignUpController extends BaseController {
         lblPassword.setText(rb.getString("lblPassword.text"));
         lblConfirm.setText(rb.getString("labelConfirm.text"));
         btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
-        btnBacktToLogin.setText(rb.getString("btnBackToLogin.text"));
+        btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
 
 
 
