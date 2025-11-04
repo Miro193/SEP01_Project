@@ -5,19 +5,26 @@ import java.util.ResourceBundle;
 
 public class LanguageManager {
 
-    private static Locale currentLocale = new Locale("en", "US");
-    private static ResourceBundle bundle = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+    private static LanguageManager instance;
+    private Locale currentLocale;
 
-    public static void setLanguage(String language, String country) {
-        currentLocale = new Locale(language, country);
-        bundle = ResourceBundle.getBundle("MessagesBundle", currentLocale);
+    private LanguageManager() {
+        currentLocale = new Locale("en", "US");
     }
 
-    public static ResourceBundle getBundle() {
-        return bundle;
+    public static synchronized LanguageManager getInstance() {
+        if (instance == null) {
+            instance = new LanguageManager();
+        }
+        return instance;
     }
 
-    public static Locale getCurrentLocale() {
+    public Locale getCurrentLocale() {
         return currentLocale;
+    }
+
+    public void setCurrentLocale(Locale locale) {
+        this.currentLocale = locale;
+        ResourceBundle.clearCache();
     }
 }

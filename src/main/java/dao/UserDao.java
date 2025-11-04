@@ -9,7 +9,6 @@ public class UserDao {
         String sql = "INSERT INTO users (username, password, confirmPassword) VALUES (?, ?, ?)";
 
         try (Connection conn = ConnectionDB.obtenerConexion()) {
-            // Check if connection is null
             if (conn == null) {
                 System.err.println("Database connection failed - cannot register user");
                 return;

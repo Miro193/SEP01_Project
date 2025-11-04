@@ -16,55 +16,30 @@ import model.CurrentUser;
 import model.Task;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-public class TaskController {
+public class TaskController extends BaseController {
 
-    // --- FXML Fields ---
-
-    // Fields for AddTask.fxml
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
-    @FXML private Label headerAddTask;
-    @FXML private Label labelTitle;
-    @FXML private Label labelDescription;
-    @FXML private Label labelDueDate;
-    @FXML private Label labelStatus;
-    @FXML private Button btnCancel;
-    @FXML private Button btnSaveTask;
-
-    // Fields for TaskList.fxml
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> descColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
-    @FXML private Button btnAddTask;
-    @FXML private Button btnDeleteTask;
-    @FXML private Button btnEditTask;
-    @FXML private Button btnCalendarView;
-    @FXML private Button btnDoneTasks;
 
-    // Common Fields
-    @FXML private MenuButton btnLanguage;
-    @FXML private MenuItem itemEnglish;
-    @FXML private MenuItem itemPersian;
-    @FXML private MenuItem itemFinnish;
-    @FXML private MenuItem itemChinese;
-
-    private TaskDao taskDao = new TaskDao();
+    private final TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
-    private ResourceBundle rb;
 
     @FXML
+    @Override
     public void initialize() {
-        // Initialization logic for TaskList.fxml
+        super.initialize();
         if (taskTable != null && CurrentUser.get() != null) {
             List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
             taskListObservable = FXCollections.observableArrayList(tasks);
@@ -81,16 +56,11 @@ public class TaskController {
             taskTable.setItems(taskListObservable);
         }
 
-        // Initialization logic for AddTask.fxml
         if (statusChoice != null) {
             statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
             statusChoice.setValue("TODO");
         }
-        // Set default language
-        handleLanguage("en", "US");
     }
-
-    // --- Navigation and Action Handlers ---
 
     @FXML
     private void handleAddTask(ActionEvent event) throws IOException {
@@ -105,8 +75,9 @@ public class TaskController {
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditTask.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditTask.fxml"), getBundle());
         Parent root = loader.load();
+        root.getProperties().put("fxmlLoaderLocation", getClass().getResource("/EditTask.fxml"));
 
         EditTaskController controller = loader.getController();
         controller.setTask(selectedTask);
@@ -172,13 +143,14 @@ public class TaskController {
         navigate(event, "/TaskList.fxml");
     }
 
-    // --- Helper Methods ---
-
     private void navigate(ActionEvent event, String fxmlPath) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-        Scene scene = new Scene(root);
+        URL fxmlUrl = getClass().getResource(fxmlPath);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl, getBundle());
+        Parent root = loader.load();
+        root.getProperties().put("fxmlLoaderLocation", fxmlUrl);
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -189,48 +161,4 @@ public class TaskController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-
-
-    @FXML
-    private void handleLanguage(String language, String country) {
-        Locale locale = new Locale(language, country);
-        rb = ResourceBundle.getBundle("messages", locale);
-
-
-        if (btnAddTask != null) btnAddTask.setText(rb.getString("taskList.addTask"));
-        if (btnDeleteTask != null) btnDeleteTask.setText(rb.getString("taskList.deleteTask"));
-        if (btnEditTask != null) btnEditTask.setText(rb.getString("taskList.editTask"));
-        if (btnCalendarView != null) btnCalendarView.setText(rb.getString("taskList.calendarView"));
-        if (btnDoneTasks != null) btnDoneTasks.setText(rb.getString("taskList.doneTasks"));
-        if (titleColumn != null) titleColumn.setText(rb.getString("taskList.title"));
-        if (descColumn != null) descColumn.setText(rb.getString("taskList.description"));
-        if (dueDateColumn != null) dueDateColumn.setText(rb.getString("taskList.dueDate"));
-        if (statusColumn != null) statusColumn.setText(rb.getString("taskList.status"));
-
-
-        if (headerAddTask != null) headerAddTask.setText(rb.getString("addTask.header"));
-        if (labelTitle != null) labelTitle.setText(rb.getString("addTask.title"));
-        if (labelDescription != null) labelDescription.setText(rb.getString("addTask.description"));
-        if (labelDueDate != null) labelDueDate.setText(rb.getString("addTask.dueDate"));
-        if (labelStatus != null) labelStatus.setText(rb.getString("addTask.status"));
-        if (btnCancel != null) btnCancel.setText(rb.getString("addTask.cancel"));
-        if (btnSaveTask != null) btnSaveTask.setText(rb.getString("addTask.save"));
-
-
-        if (btnLanguage != null) btnLanguage.setText(rb.getString("btnLanguage.text"));
-        if (itemEnglish != null) itemEnglish.setText(rb.getString("itemEnglish.text"));
-        if (itemPersian != null) itemPersian.setText(rb.getString("itemPersian.text"));
-        if (itemFinnish != null) itemFinnish.setText(rb.getString("itemFinnish.text"));
-        if (itemChinese != null) itemChinese.setText(rb.getString("itemChinese.text"));
-    }
-
-    public void onEnglishClick(ActionEvent event) { handleLanguage("en", "US"); }
-
-    public void onPersianClick(ActionEvent event) { handleLanguage("fa", "IR"); }
-
-    public void onFinnishClick(ActionEvent event) { handleLanguage("fi", "FI"); }
-
-    public void onChineseClick(ActionEvent event) { handleLanguage("zh", "CN"); }
-
 }

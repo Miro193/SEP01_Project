@@ -8,45 +8,27 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.Task;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-public class EditTaskController {
+public class EditTaskController extends BaseController {
 
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
 
-    // New FXML fields for localization
-    @FXML private Label headerEditTask;
-    @FXML private Label labelTitle;
-    @FXML private Label labelDescription;
-    @FXML private Label labelDueDate;
-    @FXML private Label labelStatus;
-    @FXML private Button btnCancel;
-    @FXML private Button btnSave;
-    @FXML private MenuButton btnLanguage;
-    @FXML private MenuItem itemEnglish;
-    @FXML private MenuItem itemPersian;
-    @FXML private MenuItem itemFinnish;
-    @FXML private MenuItem itemChinese;
-
-    private TaskDao taskDao = new TaskDao();
+    private final TaskDao taskDao = new TaskDao();
     private Task selectedTask;
-    private ResourceBundle rb;
-
-    @FXML
-    public void initialize() {
-        // Set default language
-        handleLanguage("en", "US");
-    }
 
     public void setTask(Task task) {
         this.selectedTask = task;
@@ -88,10 +70,13 @@ public class EditTaskController {
     }
 
     private void navigateBack(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/TaskList.fxml"));
-        Scene scene = new Scene(root);
+        URL fxmlUrl = getClass().getResource("/TaskList.fxml");
+        FXMLLoader loader = new FXMLLoader(fxmlUrl, getBundle());
+        Parent root = loader.load();
+        root.getProperties().put("fxmlLoaderLocation", fxmlUrl);
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -102,38 +87,4 @@ public class EditTaskController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    // --- Localization Methods ---
-
-    @FXML
-    private void handleLanguage(String language, String country) {
-        Locale locale = new Locale(language, country);
-        rb = ResourceBundle.getBundle("messages", locale);
-        headerEditTask.setText(rb.getString("editTask.header"));
-        labelTitle.setText(rb.getString("editTask.title"));
-        labelDescription.setText(rb.getString("editTask.description"));
-        labelDueDate.setText(rb.getString("editTask.dueDate"));
-        labelStatus.setText(rb.getString("editTask.status"));
-        btnCancel.setText(rb.getString("editTask.cancel"));
-        btnSave.setText(rb.getString("editTask.save"));
-        btnLanguage.setText(rb.getString("btnLanguage.text"));
-        itemEnglish.setText(rb.getString("itemEnglish.text"));
-        itemPersian.setText(rb.getString("itemPersian.text"));
-        itemFinnish.setText(rb.getString("itemFinnish.text"));
-        itemChinese.setText(rb.getString("itemChinese.text"));
-    }
-
-    public void onEnglishClick(ActionEvent event) {
-        handleLanguage("en", "US");
-    }
-
-    public void onPersianClick(ActionEvent event) {
-        handleLanguage("fa", "IR");
-    }
-
-    public void onFinnishClick(ActionEvent event) {
-        handleLanguage("fi", "FI");
-    }
-
-    public void onChineseClick(ActionEvent event) { handleLanguage("zh", "CN"); }
 }

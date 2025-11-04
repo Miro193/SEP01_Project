@@ -1,51 +1,43 @@
 package controller;
+
 import dao.TaskDao;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
-import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
-public class DoneTaskController {
+public class DoneTaskController extends BaseController {
 
     @FXML private ListView<String> doneList;
-    @FXML private Button backTolist;
 
-
-    @FXML private Label headerDoneTasks;
-    @FXML private MenuButton btnLanguage;
-    @FXML private MenuItem itemEnglish;
-    @FXML private MenuItem itemPersian;
-    @FXML private MenuItem itemFinnish;
-    @FXML private MenuItem itemChinese;
-
-    private TaskDao taskDAO = new TaskDao();
-    private ResourceBundle rb;
+    private final TaskDao taskDAO = new TaskDao();
 
     @FXML
+    @Override
     public void initialize() {
+        super.initialize();
         loadDoneTasks();
-
-        handleLanguage("en", "US");
     }
 
     @FXML
     private void backToList(ActionEvent event) throws IOException {
-        Parent taskListsRoot = FXMLLoader.load(getClass().getResource("/TaskList.fxml"));
-        Scene taskListsScene = new Scene(taskListsRoot);
+        URL fxmlUrl = getClass().getResource("/TaskList.fxml");
+        FXMLLoader loader = new FXMLLoader(fxmlUrl, getBundle());
+        Parent root = loader.load();
+        root.getProperties().put("fxmlLoaderLocation", fxmlUrl);
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(taskListsScene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -61,33 +53,4 @@ public class DoneTaskController {
             }
         }
     }
-
-
-
-    @FXML
-    private void handleLanguage(String language, String country) {
-        Locale locale = new Locale(language, country);
-        rb = ResourceBundle.getBundle("messages", locale);
-        headerDoneTasks.setText(rb.getString("doneTask.header"));
-        backTolist.setText(rb.getString("doneTask.back"));
-        btnLanguage.setText(rb.getString("btnLanguage.text"));
-        itemEnglish.setText(rb.getString("itemEnglish.text"));
-        itemPersian.setText(rb.getString("itemPersian.text"));
-        itemFinnish.setText(rb.getString("itemFinnish.text"));
-        itemChinese.setText(rb.getString("itemChinese.text"));
-    }
-
-    public void onEnglishClick(ActionEvent event) {
-        handleLanguage("en", "US");
-    }
-
-    public void onPersianClick(ActionEvent event) {
-        handleLanguage("fa", "IR");
-    }
-
-    public void onFinnishClick(ActionEvent event) {
-        handleLanguage("fi", "FI");
-    }
-
-    public void onChineseClick(ActionEvent event) { handleLanguage("zh", "CN"); }
 }

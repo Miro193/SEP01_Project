@@ -10,15 +10,15 @@
     <top>
         <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
             <children>
-                <Label fx:id="headerCalendar" text="7-Day Calendar View" style="-fx-font-size: 18px;"/>
+                <Label fx:id="headerCalendar" text="%calendar.header" style="-fx-font-size: 18px;"/>
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnBack" text="Back to Task List" onAction="#handleBack"/>
-                <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+                <Button fx:id="btnBack" text="%calendar.back" onAction="#handleBack"/>
+                <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="%btnLanguage.text">
                     <items>
-                        <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
-                        <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
-                        <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
-                        <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                        <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="%itemEnglish.text" />
+                        <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="%itemPersian.text" />
+                        <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="%itemFinnish.text" />
+                        <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="%itemChinese.text" />
                     </items>
                 </MenuButton>
             </children>
@@ -28,9 +28,9 @@
     <center>
         <TableView fx:id="calendarTable">
             <columns>
-                <TableColumn fx:id="titleColumn" text="Task" prefWidth="200"/>
-                <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="150"/>
-                <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="titleColumn" text="%calendar.task" prefWidth="200"/>
+                <TableColumn fx:id="dueDateColumn" text="%calendar.dueDate" prefWidth="150"/>
+                <TableColumn fx:id="statusColumn" text="%calendar.status" prefWidth="100"/>
             </columns>
         </TableView>
     </center>

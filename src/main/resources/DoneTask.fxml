@@ -8,18 +8,18 @@
 
     <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="400.0">
         <children>
-            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="%btnLanguage.text">
                 <items>
-                    <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
-                    <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
-                    <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
-                    <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                    <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="%itemEnglish.text" />
+                    <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="%itemPersian.text" />
+                    <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="%itemFinnish.text" />
+                    <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="%itemChinese.text" />
                 </items>
             </MenuButton>
         </children>
     </HBox>
 
-    <Label fx:id="headerDoneTasks" text="Done Tasks" style="-fx-font-size: 18px;"/>
+    <Label fx:id="headerDoneTasks" text="%doneTask.header" style="-fx-font-size: 18px;"/>
     <ListView fx:id="doneList" prefWidth="300" prefHeight="200"/>
-    <Button fx:id="backTolist" onAction="#backToList" text="Back To Tasks"/>
+    <Button fx:id="backTolist" onAction="#backToList" text="%doneTask.back"/>
 </VBox>

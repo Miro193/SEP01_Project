@@ -6,32 +6,32 @@
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.EditTaskController"
             prefWidth="400" prefHeight="400">
     <children>
-        <MenuButton fx:id="btnLanguage" layoutX="300" layoutY="10" mnemonicParsing="false" text="Language">
+        <MenuButton fx:id="btnLanguage" layoutX="300" layoutY="10" mnemonicParsing="false" text="%btnLanguage.text">
             <items>
-                <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
-                <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
-                <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
-                <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="%itemEnglish.text" />
+                <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="%itemPersian.text" />
+                <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="%itemFinnish.text" />
+                <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="%itemChinese.text" />
             </items>
         </MenuButton>
         <VBox spacing="12" layoutX="50" layoutY="50" prefWidth="300">
-            <Label fx:id="headerEditTask" text="Edit Task" style="-fx-font-size: 18px;"/>
+            <Label fx:id="headerEditTask" text="%editTask.header" style="-fx-font-size: 18px;"/>
 
-            <Label fx:id="labelTitle" text="Title:"/>
-            <TextField fx:id="titleField" promptText="Task title"/>
+            <Label fx:id="labelTitle" text="%editTask.title"/>
+            <TextField fx:id="titleField" promptText="%editTask.title"/>
 
-            <Label fx:id="labelDescription" text="Description:"/>
-            <TextArea fx:id="descField" promptText="Task description" prefRowCount="3"/>
+            <Label fx:id="labelDescription" text="%editTask.description"/>
+            <TextArea fx:id="descField" promptText="%editTask.description" prefRowCount="3"/>
 
-            <Label fx:id="labelDueDate" text="Due Date:"/>
+            <Label fx:id="labelDueDate" text="%editTask.dueDate"/>
             <DatePicker fx:id="dueDatePicker"/>
 
-            <Label fx:id="labelStatus" text="Status:"/>
+            <Label fx:id="labelStatus" text="%editTask.status"/>
             <ChoiceBox fx:id="statusChoice" prefWidth="300"/>
 
             <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button fx:id="btnCancel" text="Cancel" onAction="#handleCancel"/>
-                <Button fx:id="btnSave" text="Save" onAction="#handleUpdateTask"/>
+                <Button fx:id="btnCancel" text="%editTask.cancel" onAction="#handleCancel"/>
+                <Button fx:id="btnSave" text="%editTask.save" onAction="#handleUpdateTask"/>
             </HBox>
         </VBox>
     </children>

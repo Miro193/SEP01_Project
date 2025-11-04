@@ -13,12 +13,12 @@
    <children>
       <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="600.0">
          <children>
-            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="%btnLanguage.text">
               <items>
-                <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
-                <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
-                <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
-                <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="%itemEnglish.text" />
+                <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="%itemPersian.text" />
+                <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="%itemFinnish.text" />
+                <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="%itemChinese.text" />
               </items>
                <HBox.margin>
                   <Insets right="20.0" top="5.0" />
@@ -26,7 +26,7 @@
             </MenuButton>
          </children>
       </HBox>
-      <Label fx:id="headerLabel" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" prefWidth="561.0" style="-fx-background-color: pink;" text="My Tasks">
+      <Label fx:id="headerLabel" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" prefWidth="561.0" style="-fx-background-color: pink;" text="%firstView.header">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" />
          </VBox.margin>
@@ -36,12 +36,12 @@
       </Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button id="enter-task" fx:id="enterTask" onAction="#handleEnterTask" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: MediumSeaGreen; -fx-text-fill: black;" text="Enter Task">
+            <Button id="enter-task" fx:id="enterTask" onAction="#handleEnterTask" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: MediumSeaGreen; -fx-text-fill: black;" text="%firstView.enterTask">
                <HBox.margin>
                   <Insets left="200.0" right="20.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button id="task-lists" fx:id="taskLists" onAction="#directToTaskLists" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: pink; -fx-text-fill: black;" text="Task Lists">
+            <Button id="task-lists" fx:id="taskLists" onAction="#directToTaskLists" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: pink; -fx-text-fill: black;" text="%firstView.taskLists">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>

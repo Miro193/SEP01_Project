@@ -8,20 +8,20 @@
 
     <top>
         <ToolBar>
-            <Button fx:id="btnAddTask" text="Add Task" onAction="#handleAddTask"/>
-            <Button fx:id="btnDeleteTask" text="Delete Task" onAction="#handleDeleteTask"/>
-            <Button fx:id="btnEditTask" text="Edit Task" onAction="#handleEditTask"/>
-            <Button fx:id="btnCalendarView" text="Calendar View" onAction="#handleOpenCalendar"/>
-            <Button fx:id="btnDoneTasks" text="Done Tasks" onAction="#handleOpenDoneTasks"/>
+            <Button fx:id="btnAddTask" text="%taskList.addTask" onAction="#handleAddTask"/>
+            <Button fx:id="btnDeleteTask" text="%taskList.deleteTask" onAction="#handleDeleteTask"/>
+            <Button fx:id="btnEditTask" text="%taskList.editTask" onAction="#handleEditTask"/>
+            <Button fx:id="btnCalendarView" text="%taskList.calendarView" onAction="#handleOpenCalendar"/>
+            <Button fx:id="btnDoneTasks" text="%taskList.doneTasks" onAction="#handleOpenDoneTasks"/>
             
             <Pane HBox.hgrow="ALWAYS" />
 
-            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="%btnLanguage.text">
                 <items>
-                    <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
-                    <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
-                    <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
-                    <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                    <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="%itemEnglish.text" />
+                    <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="%itemPersian.text" />
+                    <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="%itemFinnish.text" />
+                    <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="%itemChinese.text" />
                 </items>
             </MenuButton>
         </ToolBar>
@@ -30,10 +30,10 @@
     <center>
         <TableView fx:id="taskTable">
             <columns>
-                <TableColumn fx:id="titleColumn" text="Title" prefWidth="150"/>
-                <TableColumn fx:id="descColumn" text="Description" prefWidth="200"/>
-                <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="100"/>
-                <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
+                <TableColumn fx:id="titleColumn" text="%taskList.title" prefWidth="150"/>
+                <TableColumn fx:id="descColumn" text="%taskList.description" prefWidth="200"/>
+                <TableColumn fx:id="dueDateColumn" text="%taskList.dueDate" prefWidth="100"/>
+                <TableColumn fx:id="statusColumn" text="%taskList.status" prefWidth="100"/>
             </columns>
         </TableView>
     </center>
