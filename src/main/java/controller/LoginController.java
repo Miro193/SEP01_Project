@@ -49,7 +49,7 @@ public class LoginController extends BaseController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Username and Password cannot be empty");
+            showAlert(rb.getString("error.title"), rb.getString("error.loginMessage"));
             return;
         }
 
@@ -57,7 +57,7 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-            showAlert("Success", "Login successful! Welcome " + user.getUsername());
+            showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
@@ -67,7 +67,7 @@ public class LoginController extends BaseController {
             window.setScene(firstViewScene);
             window.show();
         } else {
-            showAlert("Error", "Invalid username or password");
+            showAlert(rb.getString("error.title"), rb.getString("invalid.message"));
         }
     }
     @FXML
@@ -142,6 +142,7 @@ public class LoginController extends BaseController {
 
         // use the MenuButton (btnLanguage) to find the Stage
         Stage stage = (Stage) btnLanguage.getScene().getWindow();
+        stage.setTitle(LanguageManager.getBundle().getString("window.login.title"));
         stage.setScene(new Scene(root));
         stage.show();
     }

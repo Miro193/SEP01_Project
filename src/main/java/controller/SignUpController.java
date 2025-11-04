@@ -13,9 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.User;
 import java.io.IOException;
-
-//import utils.LanguageManager;
-
 //import java.util.Locale;
 //import java.util.ResourceBundle;
 
@@ -92,6 +89,7 @@ public class SignUpController extends BaseController {
 
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setTitle(rb.getString("window.login.title"));
 
         window.setScene(loginScene);
         window.show();

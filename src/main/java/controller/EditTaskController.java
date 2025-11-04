@@ -85,6 +85,7 @@ public class EditTaskController extends BaseController{
         Parent root = FXMLLoader.load(getClass().getResource("/TaskList.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setTitle(rb.getString("window.tasklist.title"));
         window.setScene(scene);
         window.show();
     }
