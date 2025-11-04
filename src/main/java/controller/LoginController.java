@@ -4,6 +4,7 @@ import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,12 +12,12 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.User;
-
 import java.io.IOException;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import utils.LanguageManager;
+//import java.util.Locale;
+//import java.util.ResourceBundle;
 
-public class LoginController {
+public class LoginController extends BaseController {
     @FXML private Label headerLogin;
     @FXML private Label labelUsername;
     @FXML private TextField usernameField;
@@ -28,24 +29,18 @@ public class LoginController {
     @FXML private MenuItem itemPersian;
     @FXML private MenuItem itemFinnish;
     @FXML private MenuItem itemEnglish;
-    @FXML private Button btnPersian;
-    @FXML private Button btnFinnish;
-    @FXML private Button btnEnglish;
+
 
     private UserDao userDao = new UserDao();
-    private ResourceBundle rb;
-    public String language;
-    //public Locale locale;
+
+
 
     @FXML
     public void initialize() {
-//        switch (language) {
-//            case "Persian" -> locale = new Locale("fa", "IR");
-//            case "Finnish" -> locale = new Locale("fi", "FI");
-//            default -> locale = new Locale("en", "US");
-//
-//        }
-        handleLanguage("en", "US");
+        updateLanguage();
+        languageTexts();
+
+        // handleLanguage("en", "US");
     }
 
     @FXML
@@ -94,33 +89,62 @@ public class LoginController {
         alert.showAndWait();
     }
     @FXML
-    private void handleLanguage(String language, String country) {
-            Locale locale = new Locale(language, country);
-            rb = ResourceBundle.getBundle("MessagesBundle", locale);
-            headerLogin.setText(rb.getString("headerLogin.text"));
-            labelUsername.setText(rb.getString("labelUsername.text"));
-            labelPassword.setText(rb.getString("labelPassword.text"));
-            btnLogin.setText(rb.getString("btnLogin.text"));
-            btnSignup.setText(rb.getString("btnSignup.text"));
-            btnLanguage.setText(rb.getString("btnLanguage.text"));
-            itemPersian.setText(rb.getString("itemPersian.text"));
-            itemFinnish.setText(rb.getString("itemFinnish.text"));
-            itemEnglish.setText(rb.getString("itemEnglish.text"));
-//            btnPersian.setText((rb.getString("itemPersian.text")));
-//            btnFinnish.setText((rb.getString("itemFinnish.text")));
-//            btnEnglish.setText((rb.getString("itemEnglish.text")));
+    private void languageTexts() {
+        //set texts
+        headerLogin.setText(rb.getString("headerLogin.text"));
+        labelUsername.setText(rb.getString("labelUsername.text"));
+        labelPassword.setText(rb.getString("labelPassword.text"));
+        btnLogin.setText(rb.getString("btnLogin.text"));
+        btnSignup.setText(rb.getString("btnSignup.text"));
+        btnLanguage.setText(rb.getString("btnLanguage.text"));
+        itemPersian.setText(rb.getString("itemPersian.text"));
+        itemFinnish.setText(rb.getString("itemFinnish.text"));
+        itemEnglish.setText(rb.getString("itemEnglish.text"));
+
+        // Right-to-left for Persian  //Labels appear on the right of fields.
+        //Text flows right-to-left.
+      /*  if (language.equals("fa") || language.equalsIgnoreCase("ar")) {
+            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+        } else {
+            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+        }
+
+        // Optionally set default locale
+        Locale.setDefault(locale);*/
     }
 
-    public void onEnglishClick(ActionEvent event) {
-        handleLanguage("en", "US");
+    @FXML
+    public void onEnglishClick(ActionEvent event) throws IOException {
+        LanguageManager.setLanguage("en", "US");
+        reloadScene(event);
+
     }
 
-    public void onPersianClick(ActionEvent event) {
-        handleLanguage("fa", "IR");
+    @FXML
+    public void onPersianClick(ActionEvent event) throws IOException {
+        LanguageManager.setLanguage("fa", "IR");
+        reloadScene(event);
+
     }
 
-    public void onFinnishClick(ActionEvent event) {
-        handleLanguage("fi", "FI");
+    @FXML
+    public void onFinnishClick(ActionEvent event) throws IOException {
+        LanguageManager.setLanguage("fi", "FI");
+        reloadScene(event);
+
     }
+    private void reloadScene(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(
+                getClass().getResource("/Login.fxml"),
+                LanguageManager.getBundle()  // Pass current ResourceBundle here
+        );
+        Parent root = loader.load();
+
+        // use the MenuButton (btnLanguage) to find the Stage
+        Stage stage = (Stage) btnLanguage.getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
 
 }
