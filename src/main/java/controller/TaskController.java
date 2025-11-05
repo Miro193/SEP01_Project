@@ -90,7 +90,8 @@ public class TaskController extends BaseController {
     private void handleEditTask(ActionEvent event) throws IOException {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
-            showAlert("No Task Selected", "Please select a task in the table to edit.");
+           // showAlert("No Task Selected", "Please select a task in the table to edit.");
+            showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
             return;
         }
 
@@ -112,7 +113,7 @@ public class TaskController extends BaseController {
             taskDao.delete(selectedTask);
             taskListObservable.remove(selectedTask);
         } else {
-            showAlert("No task selected", "Please select a task to delete.");
+            showAlert("error.deletemessage", "error.taskSelectMessage");
         }
     }
 
