@@ -15,15 +15,28 @@ import model.Task;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class EditTaskController {
+public class EditTaskController extends BaseController {
 
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
+    @FXML private Label lblEditTask;
+    @FXML private Label lblTitle;
+    @FXML private Label lblDescription;
+    @FXML private Label lblDueDate;
+    @FXML private Label lblStatus;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSave;
 
     private TaskDao taskDao = new TaskDao();
     private Task selectedTask;
+
+    @FXML
+    public void initialize() {
+        updateLanguage();
+        languageTexts();
+    }
 
     public void setTask(Task task) {
         this.selectedTask = task;
@@ -78,5 +91,16 @@ public class EditTaskController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void languageTexts() {
+        lblEditTask.setText(rb.getString("lblEditTask.text"));
+        lblTitle.setText(rb.getString("lblTitle.text"));
+        lblDescription.setText(rb.getString("lblDescription.text"));
+        lblDueDate.setText(rb.getString("lblDueDate.text"));
+        lblStatus.setText(rb.getString("lblStatus.text"));
+        btnCancel.setText(rb.getString("btnCancel.text"));
+        btnSave.setText(rb.getString("btnSave.text"));
     }
 }

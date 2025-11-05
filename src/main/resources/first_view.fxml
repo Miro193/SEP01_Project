@@ -9,7 +9,7 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FirstViewController">
    <children>
-      <Label alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="198.0" prefWidth="561.0" style="-fx-background-color: pink;" text="My Tasks">
+      <Label fx:id="lblHeaderMyTasks" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="198.0" prefWidth="561.0" style="-fx-background-color: pink;" text="My Tasks">
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
@@ -19,12 +19,12 @@
       </Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button id="enter-task" fx:id="enterTask" onAction="#handleEnterTask" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: MediumSeaGreen; -fx-text-fill: black;" text="Enter Task">
+            <Button id="enter-task" fx:id="btnEnterTask" onAction="#handleEnterTask" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: MediumSeaGreen; -fx-text-fill: black;" text="Enter Task">
                <HBox.margin>
                   <Insets left="200.0" right="20.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button id="task-lists" fx:id="taskLists" onAction="#directToTaskLists" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: pink; -fx-text-fill: black;" text="Task Lists">
+            <Button id="task-lists" fx:id="btnTaskLists" onAction="#directToTaskLists" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: pink; -fx-text-fill: black;" text="Task Lists">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>

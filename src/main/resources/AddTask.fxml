@@ -3,28 +3,28 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.TaskController"
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AddTaskController"
             prefWidth="400" prefHeight="350">
     <children>
         <VBox spacing="12" layoutX="50" layoutY="30" prefWidth="300">
-            <Label text="Add New Task" style="-fx-font-size: 18px;"/>
+            <Label fx:id="lblAddTask" text="Add New Task" style="-fx-font-size: 18px;"/>
 
-            <Label text="Title:"/>
+            <Label fx:id="lblTitle" text="Title:"/>
             <TextField fx:id="titleField" promptText="Task title"/>
 
 
-            <Label text="Description:"/>
+            <Label fx:id="lblDescription" text="Description:"/>
             <TextArea fx:id="descField" promptText="Task description" prefRowCount="3"/>
 
-            <Label text="Due Date:"/>
+            <Label fx:id="lblDueDate" text="Due Date:"/>
             <DatePicker fx:id="dueDatePicker"/>
 
-            <Label text="Status:"/>
+            <Label fx:id="lblStatus" text="Status:"/>
             <ChoiceBox fx:id="statusChoice"/>
 
             <HBox spacing="10" alignment="CENTER_RIGHT">
-                <Button text="Cancel" onAction="#handleCancel"/>
-                <Button text="Save Task" onAction="#handleSaveTask"/>
+                <Button fx:id="btnCancel" text="Cancel" onAction="#handleCancel"/>
+                <Button fx:id="btnSave" text="Save Task" onAction="#handleSaveTask"/>
             </HBox>
         </VBox>
     </children>

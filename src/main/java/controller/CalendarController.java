@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
@@ -21,17 +23,23 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class CalendarController {
+public class CalendarController extends BaseController {
 
     @FXML private TableView<Task> calendarTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
+    @FXML private Label lblCalendarView;
+    @FXML private Button btnBackToTaskList;
 
     private TaskDao taskDao = new TaskDao();
 
     @FXML
     public void initialize() {
+
+        updateLanguage();
+        languageTexts();
+
         if (CurrentUser.get() == null) {
             return; // Or show an error
         }
@@ -59,5 +67,14 @@ public class CalendarController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+    }
+
+    @FXML
+    private void languageTexts() {
+        lblCalendarView.setText(rb.getString("lblCalendarView.text"));
+        btnBackToTaskList.setText(rb.getString("btnBackToTaskList.text"));
+        titleColumn.setText(rb.getString("titleColumn.text"));
+        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
+        statusColumn.setText(rb.getString("statusColumn.text"));
     }
 }
