@@ -7,17 +7,21 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class FirstViewController {
+public class FirstViewController extends BaseController {
+    @FXML private Label lblHeaderMyTasks;
+    @FXML private Button btnEnterTask;
+    @FXML private Button btnTaskLists;
 
     @FXML
-    private Button enterTask;
-
-    @FXML
-    private Button taskLists;
+    public void initialize() {
+        updateLanguage();
+        languageTexts();
+    }
 
     @FXML
     private void handleEnterTask(ActionEvent event) throws IOException {
@@ -35,5 +39,12 @@ public class FirstViewController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(taskListsScene);
         window.show();
+    }
+
+    @FXML
+    private void languageTexts() {
+        lblHeaderMyTasks.setText(rb.getString("lblHeaderMyTasks.text"));
+        btnEnterTask.setText(rb.getString("btnEnterTask.text"));
+        btnTaskLists.setText(rb.getString("btnTaskLists.text"));
     }
 }

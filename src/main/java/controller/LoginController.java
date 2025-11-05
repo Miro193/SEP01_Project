@@ -19,15 +19,15 @@ import utils.LanguageManager;
 
 public class LoginController extends BaseController {
     @FXML private Label headerLogin;
-    @FXML private Label labelUsername;
+    @FXML private Label lblUsername;
     @FXML private TextField usernameField;
-    @FXML private Label labelPassword;
+    @FXML private Label lblPassword;
     @FXML private PasswordField passwordField;
     @FXML private Button btnLogin;
     @FXML private Button btnSignup;
     @FXML private MenuButton btnLanguage;
     @FXML private MenuItem itemPersian;
-    @FXML private MenuItem itemFinnish;
+    @FXML private MenuItem itemChinese;
     @FXML private MenuItem itemEnglish;
 
 
@@ -40,7 +40,6 @@ public class LoginController extends BaseController {
         updateLanguage();
         languageTexts();
 
-        // handleLanguage("en", "US");
     }
 
     @FXML
@@ -92,13 +91,13 @@ public class LoginController extends BaseController {
     private void languageTexts() {
         //set texts
         headerLogin.setText(rb.getString("headerLogin.text"));
-        labelUsername.setText(rb.getString("labelUsername.text"));
-        labelPassword.setText(rb.getString("labelPassword.text"));
+        lblUsername.setText(rb.getString("lblUsername.text"));
+        lblPassword.setText(rb.getString("lblPassword.text"));
         btnLogin.setText(rb.getString("btnLogin.text"));
         btnSignup.setText(rb.getString("btnSignup.text"));
         btnLanguage.setText(rb.getString("btnLanguage.text"));
         itemPersian.setText(rb.getString("itemPersian.text"));
-        itemFinnish.setText(rb.getString("itemFinnish.text"));
+        itemChinese.setText(rb.getString("itemChinese.text"));
         itemEnglish.setText(rb.getString("itemEnglish.text"));
 
         // Right-to-left for Persian  //Labels appear on the right of fields.
@@ -128,8 +127,8 @@ public class LoginController extends BaseController {
     }
 
     @FXML
-    public void onFinnishClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("fi", "FI");
+    public void onChineseClick(ActionEvent event) throws IOException {
+        LanguageManager.setLanguage("zh", "CN");
         reloadScene(event);
 
     }

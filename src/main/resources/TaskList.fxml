@@ -8,11 +8,11 @@
 
     <top>
         <ToolBar>
-            <Button text="Add Task" onAction="#handleAddTask"/>
-            <Button text="Delete Task" onAction="#handleDeleteTask"/>
-            <Button text="Edit Task" onAction="#handleEditTask"/>
-            <Button text="Calendar View" onAction="#handleOpenCalendar"/>
-            <Button text="Done Tasks" onAction="#handleOpenDoneTasks"/>
+            <Button fx:id="btnAddTask" text="Add Task" onAction="#handleAddTask"/>
+            <Button fx:id="btnDeleteTask" text="Delete Task" onAction="#handleDeleteTask"/>
+            <Button fx:id="btnEditTask" text="Edit Task" onAction="#handleEditTask"/>
+            <Button fx:id="btnCalendarView" text="Calendar View" onAction="#handleOpenCalendar"/>
+            <Button fx:id="btnDoneTasks" text="Done Tasks" onAction="#handleOpenDoneTasks"/>
         </ToolBar>
     </top>
 
