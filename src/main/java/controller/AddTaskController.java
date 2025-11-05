@@ -77,7 +77,8 @@ public class AddTaskController extends BaseController {
 
         taskDao.persist(newTask);
 
-        showAlert("Success", "Task has been Added successfully!");
+       // showAlert("Success", "Task has been Added successfully!");
+        showAlert(rb.getString("success.title"), rb.getString("success.taskAddmessage"));
         navigateTo(event, "/TaskList.fxml");
     }
 
