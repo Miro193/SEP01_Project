@@ -26,7 +26,7 @@ public class SignUpController extends BaseController {
     @FXML
     private Label lblSignUp;
     @FXML
-    private Label lblUserName;
+    private Label lblUsername;
     @FXML
     private TextField usernameField;
     @FXML
@@ -111,9 +111,9 @@ public class SignUpController extends BaseController {
 
         //set texts
         lblSignUp.setText(rb.getString("lblSignUp.text"));
-        lblUserName.setText(rb.getString("lblUserName.text"));
+        lblUsername.setText(rb.getString("lblUsername.text"));
         lblPassword.setText(rb.getString("lblPassword.text"));
-        lblConfirm.setText(rb.getString("labelConfirm.text"));
+        lblConfirm.setText(rb.getString("lblConfirm.text"));
         btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
         btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
 

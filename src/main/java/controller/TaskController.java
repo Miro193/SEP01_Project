@@ -20,13 +20,26 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class TaskController {
+public class TaskController extends BaseController {
 
     // Fields for AddTask.fxml
     @FXML private TextField titleField;
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
+    @FXML private Button btnAddTask;
+    @FXML private Button btnDeleteTask;
+    @FXML private Button btnEditTask;
+    @FXML private Button btnCalendarView;
+    @FXML private Button btnDoneTasks;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSave;
+    @FXML private Label lblAddTask;
+    @FXML private Label lblAddTitle;
+    @FXML private Label lblAddDescription;
+    @FXML private Label lblAddDueDate;
+    @FXML private Label lblAddStatus;
+
 
     // Fields for TaskList.fxml
     @FXML private TableView<Task> taskTable;
@@ -40,6 +53,9 @@ public class TaskController {
 
     @FXML
     public void initialize() {
+        updateLanguage();
+        languageTexts();
+
         // Initialization logic for TaskList.fxml
         if (taskTable != null && CurrentUser.get() != null) {
             List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
@@ -161,5 +177,23 @@ public class TaskController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void languageTexts() {
+        btnAddTask.setText(rb.getString("btnAddTask.text"));
+        btnDeleteTask.setText(rb.getString("btnDeleteTask.text"));
+        btnEditTask.setText(rb.getString("btnEditTask.text"));
+        btnCalendarView.setText(rb.getString("btnCalendarView.text"));
+        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));
+        titleColumn.setText(rb.getString("titleColumn.text"));
+        descColumn.setText(rb.getString("descColumn.text"));
+        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
+        statusColumn.setText(rb.getString("statusColumn.text"));
+//        lblAddTask.setText(rb.getString("lblAddTask.text"));
+//        lblAddTitle.setText(rb.getString("lblAddTitle.text"));
+//        lblAddDescription.setText(rb.getString("lblAddDescription.text"));
+//        lblAddDueDate.setText(rb.getString("lblAddDueDate.text"));
+//        lblAddStatus.setText(rb.getString("lblAddStatus.text"));
     }
 }
