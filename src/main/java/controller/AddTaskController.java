@@ -52,7 +52,7 @@ public class AddTaskController extends BaseController {
     }
 
     @FXML
-    private void handleAddNewTask(ActionEvent event) throws IOException {
+    private void handleSaveTask(ActionEvent event) throws IOException {
         String title = titleField.getText();
         String description = descField.getText();
         LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
@@ -102,7 +102,7 @@ public class AddTaskController extends BaseController {
         alert.showAndWait();
     }
     private void languageTexts() {
-        lblAddTask.setText(rb.getString("titleColumn.text"));
+        lblAddTask.setText(rb.getString("lblAddTask.text"));
         lblTitle.setText(rb.getString("lblTitle.text"));
         btnCancel.setText(rb.getString("btnCancel.text"));
         btnSave.setText(rb.getString("btnSave.text"));
@@ -113,5 +113,9 @@ public class AddTaskController extends BaseController {
 
     }
 }
+
+
+
+
 
 
