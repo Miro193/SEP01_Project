@@ -34,12 +34,12 @@ public class TaskController extends BaseController{
     @FXML private TableColumn<Task, String> descColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
-
+/*
     @FXML private Button btnAddTask;
     @FXML private Button btnDeleteTask;
     @FXML private Button btnEditTask;
     @FXML private Button btnCalendarView;
-    @FXML private Button btnDoneTasks;
+    @FXML private Button btnDoneTasks;*/
 
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
@@ -172,11 +172,11 @@ public class TaskController extends BaseController{
     }
     @FXML
     private void languageTexts() {
-        btnAddTask.setText(rb.getString("btnAddTask.text"));
+       /* btnAddTask.setText(rb.getString("btnAddTask.text"));
         btnDeleteTask.setText(rb.getString("btnDeleteTask.text"));
         btnEditTask.setText(rb.getString("btnEditTask.text"));
         btnCalendarView.setText(rb.getString("btnCalendarView.text"));
-        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));
+        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));*/
 
         titleColumn.setText(rb.getString("titleColumn.text"));
         descColumn.setText(rb.getString("descColumn.text"));

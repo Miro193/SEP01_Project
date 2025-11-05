@@ -20,7 +20,8 @@ public class DoneTaskController extends BaseController {
 
     @FXML private ListView<String> doneList;
     @FXML private Label lblDoneTask;
-    @FXML private Button backToTasks;
+    @FXML private Button backToList;
+
 
     private TaskDao taskDAO = new TaskDao();
 
@@ -53,7 +54,8 @@ public class DoneTaskController extends BaseController {
     }
     @FXML
     private void languageTexts() {
-        backToTasks.setText(rb.getString("backTolist.text"));
+        backToList.setText(rb.getString("backToList.text"));
         lblDoneTask.setText(rb.getString("lblDoneTask.text"));
+
     }
 }

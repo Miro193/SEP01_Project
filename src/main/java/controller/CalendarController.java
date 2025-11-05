@@ -21,7 +21,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-public class CalendarController {
+public class CalendarController extends BaseController {
 
     @FXML private TableView<Task> calendarTable;
     @FXML private TableColumn<Task, String> titleColumn;
@@ -59,5 +59,12 @@ public class CalendarController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
+    }
+    @FXML
+    private void languageTexts() {
+        titleColumn.setText(rb.getString("titleColumn.text"));
+        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
+        statusColumn.setText(rb.getString("statusColumn.text"));
+
     }
 }
