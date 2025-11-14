@@ -2,7 +2,6 @@
 DROP DATABASE IF EXISTS StudyPlanner;
 CREATE DATABASE StudyPlanner;
 USE StudyPlanner;
-
 -- Users table
     CREATE TABLE Users (
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -21,7 +20,6 @@ CREATE TABLE Task (
     language VARCHAR(10) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
-
 --Stores interface text translations
 CREATE TABLE translations (
     translation_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -32,7 +30,6 @@ CREATE TABLE translations (
 
 
 INSERT INTO translations (translation_key, translation_value, language) VALUES
-
 
 ('headerLogin', 'Login', 'en'),
 ('lblUsername', 'Username', 'en'),
@@ -106,7 +103,6 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 
 ('backToList', 'Back To Tasks', 'en'),
 ('lblDoneTask', 'Done Tasks', 'en');
-
 
 INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('headerLogin', 'Kirjaudu sisään', 'fi'),
