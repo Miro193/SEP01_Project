@@ -10,7 +10,6 @@ USE StudyPlanner;
     password VARCHAR(100) NOT NULL,
     confirmPassword VARCHAR(100) NOT NULL
 );
-
 -- Tasks assigned to users
 CREATE TABLE Task (
     task_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -29,7 +28,6 @@ CREATE TABLE translations (
     translation_key VARCHAR(100) NOT NULL,
     translation_value VARCHAR(255) NOT NULL,
     language VARCHAR(10) NOT NULL
-
 );
 
 
