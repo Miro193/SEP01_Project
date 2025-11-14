@@ -36,7 +36,7 @@ public class ConnectionDB {
                 host = "localhost"; // fallback
             }
 
-            String url = "jdbc:mariadb://" + host + ":3306/Studyplanner";
+            String url = "jdbc:mariadb://" + host + ":3306/StudyplannerSimple";
             String user = "root";
             String password = "root";
 
