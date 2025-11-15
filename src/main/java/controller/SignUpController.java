@@ -21,6 +21,8 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import utils.LanguageManager;
+
 public class SignUpController extends BaseController {
 
     @FXML
@@ -64,14 +66,15 @@ public class SignUpController extends BaseController {
 
         if (username.isEmpty() || password.isEmpty()) {
             // showAlert("Error", "Please fill all fields!");
-            showAlert(rb.getString("error.title"), rb.getString("error.fillAll"));
+            showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.fillAll"));
             return;
         }
 
         User existingUser = userDao.login(username, password);
         if (existingUser != null) {
             //showAlert("Error", "Username already exists!");
-            showAlert(rb.getString("error.title"), rb.getString("error.usernameExists"));
+            //showAlert(rb.getString("error.title"), rb.getString("error.usernameExists"));
+            showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.usernameExists"));
 
             return;
         }
@@ -80,7 +83,7 @@ public class SignUpController extends BaseController {
         userDao.register(newUser);
 
         //showAlert("Success", "Account created successfully!");
-        showAlert(rb.getString("success.title"), rb.getString("success.accountCreated"));
+        showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.accountCreated"));
 
         handleLoginRedirect(event);
     }
@@ -110,12 +113,12 @@ public class SignUpController extends BaseController {
         //rb = ResourceBundle.getBundle("MessagesBundle", locale);
 
         //set texts
-        lblSignUp.setText(rb.getString("lblSignUp.text"));
-        lblUsername.setText(rb.getString("lblUsername.text"));
-        lblPassword.setText(rb.getString("lblPassword.text"));
-        lblConfirm.setText(rb.getString("lblConfirm.text"));
-        btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
-        btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
+        lblSignUp.setText(LanguageManager.getTranslation("lblSignUp.text"));
+        lblUsername.setText(LanguageManager.getTranslation("lblUsername.text"));
+        lblPassword.setText(LanguageManager.getTranslation("lblPassword.text"));
+        lblConfirm.setText(LanguageManager.getTranslation("lblConfirm.text"));
+        btnCreateAccount.setText(LanguageManager.getTranslation("btnCreateAccount.text"));
+        btnBackToLogin.setText(LanguageManager.getTranslation("btnBackToLogin.text"));
 
 
     }

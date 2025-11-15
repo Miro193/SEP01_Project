@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
+import utils.LanguageManager;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -71,10 +72,10 @@ public class CalendarController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        lblCalendarView.setText(rb.getString("lblCalendarView.text"));
-        btnBackToTaskList.setText(rb.getString("btnBackToTaskList.text"));
-        titleColumn.setText(rb.getString("titleColumn.text"));
-        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));
+        lblCalendarView.setText(LanguageManager.getTranslation("lblCalendarView.text"));
+        btnBackToTaskList.setText(LanguageManager.getTranslation("btnBackToTaskList.text"));
+        titleColumn.setText(LanguageManager.getTranslation("titleColumn.text"));
+        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn.text"));
+        statusColumn.setText(LanguageManager.getTranslation("statusColumn.text"));
     }
 }

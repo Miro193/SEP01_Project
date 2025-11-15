@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Task;
+import utils.LanguageManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -95,12 +96,12 @@ public class EditTaskController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        lblEditTask.setText(rb.getString("lblEditTask.text"));
-        lblTitle.setText(rb.getString("lblTitle.text"));
-        lblDescription.setText(rb.getString("lblDescription.text"));
-        lblDueDate.setText(rb.getString("lblDueDate.text"));
-        lblStatus.setText(rb.getString("lblStatus.text"));
-        btnCancel.setText(rb.getString("btnCancel.text"));
-        btnSave.setText(rb.getString("btnSave.text"));
+        lblEditTask.setText(LanguageManager.getTranslation("lblEditTask.text"));
+        lblTitle.setText(LanguageManager.getTranslation("lblTitle.text"));
+        lblDescription.setText(LanguageManager.getTranslation("lblDescription.text"));
+        lblDueDate.setText(LanguageManager.getTranslation("lblDueDate.text"));
+        lblStatus.setText(LanguageManager.getTranslation("lblStatus.text"));
+        btnCancel.setText(LanguageManager.getTranslation("btnCancel.text"));
+        btnSave.setText(LanguageManager.getTranslation("btnSave.text"));
     }
 }
