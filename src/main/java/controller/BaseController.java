@@ -15,6 +15,9 @@ public abstract class BaseController {
    public void updateLanguage() {
        localizedStrings = LanguageManager.getLocalizedStrings();
    }
+    public String getTranslation(String key) {
+        return LanguageManager.getTranslation(key);
+    }
 
 
 }

@@ -1,5 +1,5 @@
 package controller;
-
+import utils.LanguageManager;
 import dao.TaskDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -212,7 +212,17 @@ public class TaskController extends BaseController {
         titleColumn.setText(rb.getString("titleColumn.text"));
         descColumn.setText(rb.getString("descColumn.text"));
         dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));
+        statusColumn.setText(rb.getString("statusColumn.text"));*/
+        btnAddTask.setText(LanguageManager.getTranslation("btnAddTask.text"));
+        btnDeleteTask.setText(LanguageManager.getTranslation("btnDeleteTask.text"));
+        btnEditTask.setText(LanguageManager.getTranslation("btnEditTask.text"));
+        btnCalendarView.setText(LanguageManager.getTranslation("btnCalendarView.text"));
+        btnDoneTasks.setText(LanguageManager.getTranslation("btnDoneTasks.text"));
+        titleColumn.setText(LanguageManager.getTranslation("titleColumn.text"));
+        descColumn.setText(LanguageManager.getTranslation("descColumn.text"));
+        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn.text"));
+        statusColumn.setText(LanguageManager.getTranslation("statusColumn.text"));
+
 
     }
 }

@@ -30,4 +30,18 @@ public class LanguageManager {
     public static Locale getCurrentLocale() {
         return currentLocale;
     }
+    //in localizedStrings map searchs with key:
+    public static String getTranslation(String key) {
+        if (localizedStrings == null) {
+            setLanguage("en", "US");
+        }
+
+        if (!localizedStrings.containsKey(key)) {
+            System.out.println("Translation key" +key+" not found for language: "+currentLocale.getLanguage());
+
+            return "TRANSLATION_MISSING";
+        }
+
+        return localizedStrings.get(key);
+    }
 }
