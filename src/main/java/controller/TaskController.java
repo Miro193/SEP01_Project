@@ -112,7 +112,8 @@ public class TaskController extends BaseController {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
             // showAlert("No Task Selected", "Please select a task in the table to edit.");
-            showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
+           // showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
+            LanguageManager.getTranslation("error.noTaskmessage");
             return;
         }
 

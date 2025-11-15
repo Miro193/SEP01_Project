@@ -56,7 +56,8 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-            showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
+           // showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
+            showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.loginMessage") + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
@@ -66,7 +67,7 @@ public class LoginController extends BaseController {
             window.setScene(firstViewScene);
             window.show();
         } else {
-            showAlert(rb.getString("error.title"), rb.getString("invalid.message"));
+            showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("invalid.message"));
         }
     }
     @FXML
@@ -90,15 +91,16 @@ public class LoginController extends BaseController {
     @FXML
     private void languageTexts() {
         //set texts
-        headerLogin.setText(rb.getString("headerLogin.text"));
-        lblUsername.setText(rb.getString("lblUsername.text"));
-        lblPassword.setText(rb.getString("lblPassword.text"));
-        btnLogin.setText(rb.getString("btnLogin.text"));
-        btnSignup.setText(rb.getString("btnSignup.text"));
-        btnLanguage.setText(rb.getString("btnLanguage.text"));
-        itemPersian.setText(rb.getString("itemPersian.text"));
-        itemChinese.setText(rb.getString("itemChinese.text"));
-        itemEnglish.setText(rb.getString("itemEnglish.text"));
+        headerLogin.setText(LanguageManager.getTranslation("headerLogin.text"));
+        lblUsername.setText(LanguageManager.getTranslation("lblUsername.text"));
+        lblPassword.setText(LanguageManager.getTranslation("lblPassword.text"));
+        btnLogin.setText(LanguageManager.getTranslation("btnLogin.text"));
+       // btnSignup.setText(rb.getString("btnSignup.text"));
+        btnSignup.setText(LanguageManager.getTranslation("btnSignup.text"));
+        btnLanguage.setText(LanguageManager.getTranslation("btnLanguage.text"));
+        itemPersian.setText(LanguageManager.getTranslation("itemPersian.text"));
+        itemChinese.setText(LanguageManager.getTranslation("itemChinese.text"));
+        itemEnglish.setText(LanguageManager.getTranslation("itemEnglish.text"));
 
         // Right-to-left for Persian  //Labels appear on the right of fields.
         //Text flows right-to-left.
@@ -134,8 +136,8 @@ public class LoginController extends BaseController {
     }
     private void reloadScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/Login.fxml"),
-                LanguageManager.getBundle()  // Pass current ResourceBundle here
+                getClass().getResource("/Login.fxml")
+               // LanguageManager.getBundle()  // Pass current ResourceBundle here
         );
         Parent root = loader.load();
 
