@@ -68,6 +68,8 @@ public class TaskController extends BaseController {
     private TableColumn<Task, String> dueDateColumn;
     @FXML
     private TableColumn<Task, String> statusColumn;
+    @FXML
+    private TableColumn<Task, String> languageColumn;
 
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
@@ -90,7 +92,7 @@ public class TaskController extends BaseController {
                 return new SimpleStringProperty(dueDate != null ? dueDate.format(formatter) : "");
             });
             statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
-
+            languageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLanguage()));
             taskTable.setItems(taskListObservable);
         }
 
@@ -173,6 +175,7 @@ public class TaskController extends BaseController {
         newTask.setDescription(description);
         newTask.setDueDate(dueDate);
         newTask.setStatus(status);
+        newTask.setLanguage(language);
 
         taskDao.persist(newTask);
 
@@ -223,7 +226,7 @@ public class TaskController extends BaseController {
         descColumn.setText(LanguageManager.getTranslation("descColumn.text"));
         dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn.text"));
         statusColumn.setText(LanguageManager.getTranslation("statusColumn.text"));
-
+        languageColumn.setText(LanguageManager.getTranslation("languageColumn.text"));
 
     }
 }
