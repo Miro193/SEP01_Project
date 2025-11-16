@@ -28,8 +28,8 @@ public class TaskDao {
 
 
     public void persist(Task task) {
-        String sql = "INSERT INTO task (user_id, title, description, status, dueDate) VALUES (?, ?, ?, ?, ?)";
-//        (Connection conn = ConnectionDB.obtenerConexion();
+        String sql = "INSERT INTO task (user_id, title, description, status, dueDate, language) VALUES (?, ?, ?, ?, ?, ?)";
+  //        (Connection conn = ConnectionDB.obtenerConexion();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, task.getUserId());
@@ -37,6 +37,7 @@ public class TaskDao {
             stmt.setString(3, task.getDescription());
             stmt.setString(4, task.getStatus());
             stmt.setTimestamp(5, Timestamp.valueOf(task.getDueDate()));
+            stmt.setString(6, task.getLanguage());
             stmt.executeUpdate();
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
@@ -167,6 +168,7 @@ public class TaskDao {
         task.setTitle(rs.getString("title"));
         task.setDescription(rs.getString("description"));
         task.setStatus(rs.getString("status"));
+        task.setLanguage(rs.getString("language"));
 
         Timestamp ts = rs.getTimestamp("dueDate");
         if (ts != null) {

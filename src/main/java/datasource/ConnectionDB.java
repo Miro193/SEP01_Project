@@ -36,9 +36,9 @@ public class ConnectionDB {
                 host = "localhost"; // fallback
             }
 
-            String url = "jdbc:mariadb://" + host + ":3306/StudyplannerSimple";
+            String url = "jdbc:mariadb://" + host + ":3306/studyplanner";
             String user = "root";
-            String password = "root";
+            String password = "admin";
 
             System.out.println("Connecting to: " + url);
             Connection conn = DriverManager.getConnection(url, user, password);

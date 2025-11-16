@@ -32,13 +32,7 @@ public class TaskController extends BaseController {
     @FXML private Button btnEditTask;
     @FXML private Button btnCalendarView;
     @FXML private Button btnDoneTasks;
-    @FXML private Button btnCancel;
-    @FXML private Button btnSave;
-    @FXML private Label lblAddTask;
-    @FXML private Label lblAddTitle;
-    @FXML private Label lblAddDescription;
-    @FXML private Label lblAddDueDate;
-    @FXML private Label lblAddStatus;
+
 
 
     // Fields for TaskList.fxml
@@ -47,6 +41,7 @@ public class TaskController extends BaseController {
     @FXML private TableColumn<Task, String> descColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
+    @FXML private TableColumn<Task, Integer> languageColumn;
 
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
@@ -151,6 +146,7 @@ public class TaskController extends BaseController {
         newTask.setDescription(description);
         newTask.setDueDate(dueDate);
         newTask.setStatus(status);
+        newTask.setLanguage(language);
 
         taskDao.persist(newTask);
 
@@ -191,10 +187,7 @@ public class TaskController extends BaseController {
         descColumn.setText(rb.getString("descColumn.text"));
         dueDateColumn.setText(rb.getString("dueDateColumn.text"));
         statusColumn.setText(rb.getString("statusColumn.text"));
-//        lblAddTask.setText(rb.getString("lblAddTask.text"));
-//        lblAddTitle.setText(rb.getString("lblAddTitle.text"));
-//        lblAddDescription.setText(rb.getString("lblAddDescription.text"));
-//        lblAddDueDate.setText(rb.getString("lblAddDueDate.text"));
-//        lblAddStatus.setText(rb.getString("lblAddStatus.text"));
+        languageColumn.setText(rb.getString("languageColumn.text"));
+
     }
 }
