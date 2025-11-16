@@ -1,13 +1,18 @@
 package dao;
 
 import datasource.ConnectionDB;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Logger;
+
 // connect to database for take
 public class LocalizationDao {
+    Logger log = Logger.getLogger(LocalizationDao.class.getName());
 
     public Map<String, String> getLocalizedStrings(Locale locale) {
         Map<String, String> strings = new HashMap<>();
@@ -22,9 +27,10 @@ public class LocalizationDao {
                     strings.put(rs.getString("translation_key"), rs.getString("translation_value"));
                 }
             }
-            System.out.println("✅ Loaded localization strings for language: " + lang );
+            log.info("✅ Loaded localization strings for language: " + lang );
         } catch (SQLException e) {
-            System.err.println("❌ Database connection failed: ");
+            // Katsokaa tämä log.info pitäisi olle error tai log.error
+            log.info("❌ Database connection failed: ");
             e.printStackTrace();
         }
 

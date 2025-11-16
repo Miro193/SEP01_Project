@@ -82,7 +82,6 @@ public class AddTaskController extends BaseController {
 
         taskDao.persist(newTask);
 
-       // showAlert("Success", "Task has been Added successfully!");
         showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.taskAddmessage"));
         navigateTo(event, "/TaskList.fxml");
     }
@@ -114,8 +113,6 @@ public class AddTaskController extends BaseController {
         lblDescription.setText(LanguageManager.getTranslation("lblDescription"));
         lblDueDate.setText(LanguageManager.getTranslation("lblDueDate"));
         lblStatus.setText(LanguageManager.getTranslation("lblStatus"));
-
-
     }
 }
 

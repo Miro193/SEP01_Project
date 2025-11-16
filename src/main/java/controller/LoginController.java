@@ -54,14 +54,11 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-           // showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
             showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.loginMessage") + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
-
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
             window.setScene(firstViewScene);
             window.show();
         } else {
@@ -88,7 +85,6 @@ public class LoginController extends BaseController {
     }
     @FXML
     private void languageTexts() {
-        //set texts
         headerLogin.setText(LanguageManager.getTranslation("headerLogin"));
         lblUsername.setText(LanguageManager.getTranslation("lblUsername"));
         lblPassword.setText(LanguageManager.getTranslation("lblPassword"));

@@ -13,14 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.User;
 import java.io.IOException;
-
-
-//import utils.LanguageManager;
-
-//import java.util.Locale;
-//import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import utils.LanguageManager;
 
@@ -48,12 +40,10 @@ public class SignUpController extends BaseController {
     private Button btnBackToLogin;
 
     private UserDao userDao = new UserDao();
-    //private ResourceBundle rb;
-
 
     @FXML
     public void initialize() {
-        updateLanguage(); //from BaseController
+        updateLanguage();
         languageTexts();
 
     }
@@ -66,24 +56,19 @@ public class SignUpController extends BaseController {
 
 
         if (username.isEmpty() || password.isEmpty()) {
-            // showAlert("Error", "Please fill all fields!");
             showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.fillAll"));
             return;
         }
 
         User existingUser = userDao.login(username, password);
         if (existingUser != null) {
-            //showAlert("Error", "Username already exists!");
-            //showAlert(rb.getString("error.title"), rb.getString("error.usernameExists"));
             showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.usernameExists"));
-
             return;
         }
 
         User newUser = new User(username, password, confirmPassword);
         userDao.register(newUser);
 
-        //showAlert("Success", "Account created successfully!");
         showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.accountCreated"));
 
         handleLoginRedirect(event);
@@ -110,18 +95,12 @@ public class SignUpController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        // Locale locale = new Locale(language, country);
-        //rb = ResourceBundle.getBundle("MessagesBundle", locale);
-
-        //set texts
         lblSignUp.setText(LanguageManager.getTranslation("lblSignUp"));
         lblUsername.setText(LanguageManager.getTranslation("lblUsername"));
         lblPassword.setText(LanguageManager.getTranslation("lblPassword"));
         lblConfirm.setText(LanguageManager.getTranslation("lblConfirm"));
         btnCreateAccount.setText(LanguageManager.getTranslation("btnCreateAccount"));
         btnBackToLogin.setText(LanguageManager.getTranslation("btnBackToLogin"));
-
-
     }
 
 }
