@@ -72,10 +72,10 @@ public class CalendarController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        lblCalendarView.setText(LanguageManager.getTranslation("lblCalendarView.text"));
-        btnBackToTaskList.setText(LanguageManager.getTranslation("btnBackToTaskList.text"));
-        titleColumn.setText(LanguageManager.getTranslation("titleColumn.text"));
-        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn.text"));
-        statusColumn.setText(LanguageManager.getTranslation("statusColumn.text"));
+        lblCalendarView.setText(LanguageManager.getTranslation("lblCalendarView"));
+        btnBackToTaskList.setText(LanguageManager.getTranslation("btnBackToTaskList"));
+        titleColumn.setText(LanguageManager.getTranslation("titleColumn"));
+        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn"));
+        statusColumn.setText(LanguageManager.getTranslation("statusColumn"));
     }
 }
