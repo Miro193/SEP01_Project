@@ -23,7 +23,6 @@
                 <TableColumn fx:id="descColumn" text="Description" prefWidth="200"/>
                 <TableColumn fx:id="dueDateColumn" text="Due Date" prefWidth="100"/>
                 <TableColumn fx:id="statusColumn" text="Status" prefWidth="100"/>
-                <TableColumn fx:id="languageColumn"  text="Language" prefWidth="100"/>
             </columns>
         </TableView>
     </center>

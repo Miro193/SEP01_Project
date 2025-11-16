@@ -169,7 +169,7 @@ public class TaskDao {
         task.setTitle(rs.getString("title"));
         task.setDescription(rs.getString("description"));
         task.setStatus(rs.getString("status"));
-        task.setLanguage(rs.getString("language"));
+       // task.setLanguage(rs.getString("language"));
 
         Timestamp ts = rs.getTimestamp("dueDate");
         if (ts != null) {

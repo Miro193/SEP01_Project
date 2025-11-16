@@ -58,6 +58,9 @@ public class AddTaskController extends BaseController {
         String description = descField.getText();
         LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
         String status = statusChoice.getValue();
+        String language = LanguageManager.getCurrentLocale() != null
+                ? LanguageManager.getCurrentLocale().getLanguage()
+                : "en";
 
         if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
             showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.validation"));
@@ -75,6 +78,7 @@ public class AddTaskController extends BaseController {
         newTask.setDescription(description);
         newTask.setDueDate(dueDate);
         newTask.setStatus(status);
+        newTask.setLanguage(language);
 
         taskDao.persist(newTask);
 
@@ -99,19 +103,17 @@ public class AddTaskController extends BaseController {
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(title);
-//        alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
     }
     private void languageTexts() {
-        lblAddTask.setText(LanguageManager.getTranslation("lblAddTask.text"));
-        //lblTitle.setText(rb.getString("lblTitle.text"));
-        lblTitle.setText(LanguageManager.getTranslation("lblTitle.text"));
-        btnCancel.setText(LanguageManager.getTranslation("btnCancel.text"));
-        btnSave.setText(LanguageManager.getTranslation("btnSave.text"));
-        lblDescription.setText(LanguageManager.getTranslation("lblDescription.text"));
-        lblDueDate.setText(LanguageManager.getTranslation("lblDueDate.text"));
-        lblStatus.setText(LanguageManager.getTranslation("lblStatus.text"));
+        lblAddTask.setText(LanguageManager.getTranslation("lblAddTask"));
+        lblTitle.setText(LanguageManager.getTranslation("lblTitle"));
+        btnCancel.setText(LanguageManager.getTranslation("btnCancel"));
+        btnSave.setText(LanguageManager.getTranslation("btnSave"));
+        lblDescription.setText(LanguageManager.getTranslation("lblDescription"));
+        lblDueDate.setText(LanguageManager.getTranslation("lblDueDate"));
+        lblStatus.setText(LanguageManager.getTranslation("lblStatus"));
 
 
     }

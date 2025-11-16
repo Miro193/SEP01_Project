@@ -79,6 +79,10 @@ public class TaskController extends BaseController {
     public void initialize() {
         updateLanguage();
         languageTexts();
+        if (languageColumn != null) {
+            languageColumn.setVisible(false);
+        }
+
 
         // Initialization logic for TaskList.fxml
         if (taskTable != null && CurrentUser.get() != null) {
@@ -93,7 +97,7 @@ public class TaskController extends BaseController {
                 return new SimpleStringProperty(dueDate != null ? dueDate.format(formatter) : "");
             });
             statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
-            languageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLanguage()));
+            //languageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLanguage()));
             taskTable.setItems(taskListObservable);
         }
 
@@ -152,39 +156,7 @@ public class TaskController extends BaseController {
         navigate(event, "/DoneTask.fxml");
     }
 
-    // Methods for AddTask.fxml
-    @FXML
-    private void handleSaveTask(ActionEvent event) throws IOException {
-        String title = titleField.getText();
-        String description = descField.getText();
-        LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
-        String status = statusChoice.getValue();
-        String language = LanguageManager.getCurrentLocale().getLanguage();
 
-
-        if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
-            showAlert("Validation Error", "Title, Due Date, and Status are required fields.");
-            return;
-        }
-
-        if (CurrentUser.get() == null) {
-            showAlert("Authentication Error", "No user is logged in. Please log in to save a task.");
-            return;
-        }
-
-        Task newTask = new Task();
-        newTask.setUserId(CurrentUser.get().getId());
-        newTask.setTitle(title);
-        newTask.setDescription(description);
-        newTask.setDueDate(dueDate);
-        newTask.setStatus(status);
-        newTask.setLanguage(language);
-
-        taskDao.persist(newTask);
-
-        showAlert("Success", "Task has been saved successfully!");
-        navigate(event, "/TaskList.fxml");
-    }
 
     @FXML
     private void handleCancel(ActionEvent event) throws IOException {
@@ -210,26 +182,17 @@ public class TaskController extends BaseController {
 
     @FXML
     private void languageTexts() {
-       /* btnAddTask.setText(rb.getString("btnAddTask.text"));
 
-        btnDeleteTask.setText(rb.getString("btnDeleteTask.text"));
-        btnEditTask.setText(rb.getString("btnEditTask.text"));
-        btnCalendarView.setText(rb.getString("btnCalendarView.text"));
-        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));
-        titleColumn.setText(rb.getString("titleColumn.text"));
-        descColumn.setText(rb.getString("descColumn.text"));
-        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));*/
-        btnAddTask.setText(LanguageManager.getTranslation("btnAddTask.text"));
-        btnDeleteTask.setText(LanguageManager.getTranslation("btnDeleteTask.text"));
-        btnEditTask.setText(LanguageManager.getTranslation("btnEditTask.text"));
-        btnCalendarView.setText(LanguageManager.getTranslation("btnCalendarView.text"));
-        btnDoneTasks.setText(LanguageManager.getTranslation("btnDoneTasks.text"));
-        titleColumn.setText(LanguageManager.getTranslation("titleColumn.text"));
-        descColumn.setText(LanguageManager.getTranslation("descColumn.text"));
-        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn.text"));
-        statusColumn.setText(LanguageManager.getTranslation("statusColumn.text"));
-        languageColumn.setText(LanguageManager.getTranslation("languageColumn.text"));
+        btnAddTask.setText(LanguageManager.getTranslation("btnAddTask"));
+        btnDeleteTask.setText(LanguageManager.getTranslation("btnDeleteTask"));
+        btnEditTask.setText(LanguageManager.getTranslation("btnEditTask"));
+        btnCalendarView.setText(LanguageManager.getTranslation("btnCalendarView"));
+        btnDoneTasks.setText(LanguageManager.getTranslation("btnDoneTasks"));
+        titleColumn.setText(LanguageManager.getTranslation("titleColumn"));
+        descColumn.setText(LanguageManager.getTranslation("descColumn"));
+        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn"));
+        statusColumn.setText(LanguageManager.getTranslation("statusColumn"));
+      //  languageColumn.setText(LanguageManager.getTranslation("languageColumn"));
 
     }
 }
