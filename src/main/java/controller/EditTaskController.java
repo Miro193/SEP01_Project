@@ -96,12 +96,12 @@ public class EditTaskController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        lblEditTask.setText(LanguageManager.getTranslation("lblEditTask.text"));
-        lblTitle.setText(LanguageManager.getTranslation("lblTitle.text"));
-        lblDescription.setText(LanguageManager.getTranslation("lblDescription.text"));
-        lblDueDate.setText(LanguageManager.getTranslation("lblDueDate.text"));
-        lblStatus.setText(LanguageManager.getTranslation("lblStatus.text"));
-        btnCancel.setText(LanguageManager.getTranslation("btnCancel.text"));
-        btnSave.setText(LanguageManager.getTranslation("btnSave.text"));
+        lblEditTask.setText(LanguageManager.getTranslation("lblEditTask"));
+        lblTitle.setText(LanguageManager.getTranslation("lblTitle"));
+        lblDescription.setText(LanguageManager.getTranslation("lblDescription"));
+        lblDueDate.setText(LanguageManager.getTranslation("lblDueDate"));
+        lblStatus.setText(LanguageManager.getTranslation("lblStatus"));
+        btnCancel.setText(LanguageManager.getTranslation("btnCancel"));
+        btnSave.setText(LanguageManager.getTranslation("btnSave"));
     }
 }

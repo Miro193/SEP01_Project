@@ -91,16 +91,15 @@ public class LoginController extends BaseController {
     @FXML
     private void languageTexts() {
         //set texts
-        headerLogin.setText(LanguageManager.getTranslation("headerLogin.text"));
-        lblUsername.setText(LanguageManager.getTranslation("lblUsername.text"));
-        lblPassword.setText(LanguageManager.getTranslation("lblPassword.text"));
-        btnLogin.setText(LanguageManager.getTranslation("btnLogin.text"));
-       // btnSignup.setText(rb.getString("btnSignup.text"));
-        btnSignup.setText(LanguageManager.getTranslation("btnSignup.text"));
-        btnLanguage.setText(LanguageManager.getTranslation("btnLanguage.text"));
-        itemPersian.setText(LanguageManager.getTranslation("itemPersian.text"));
-        itemChinese.setText(LanguageManager.getTranslation("itemChinese.text"));
-        itemEnglish.setText(LanguageManager.getTranslation("itemEnglish.text"));
+        headerLogin.setText(LanguageManager.getTranslation("headerLogin"));
+        lblUsername.setText(LanguageManager.getTranslation("lblUsername"));
+        lblPassword.setText(LanguageManager.getTranslation("lblPassword"));
+        btnLogin.setText(LanguageManager.getTranslation("btnLogin"));
+        btnSignup.setText(LanguageManager.getTranslation("btnSignup"));
+        btnLanguage.setText(LanguageManager.getTranslation("btnLanguage"));
+        itemPersian.setText(LanguageManager.getTranslation("itemPersian"));
+        itemChinese.setText(LanguageManager.getTranslation("itemChinese"));
+        itemEnglish.setText(LanguageManager.getTranslation("itemEnglish"));
 
         // Right-to-left for Persian  //Labels appear on the right of fields.
         //Text flows right-to-left.

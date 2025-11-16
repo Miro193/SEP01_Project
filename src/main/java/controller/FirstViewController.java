@@ -44,8 +44,8 @@ public class FirstViewController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        lblHeaderMyTasks.setText(LanguageManager.getTranslation("lblHeaderMyTasks.text"));
-        btnEnterTask.setText(LanguageManager.getTranslation("btnEnterTask.text"));
-        btnTaskLists.setText(LanguageManager.getTranslation("btnTaskLists.text"));
+        lblHeaderMyTasks.setText(LanguageManager.getTranslation("lblHeaderMyTasks"));
+        btnEnterTask.setText(LanguageManager.getTranslation("btnEnterTask"));
+        btnTaskLists.setText(LanguageManager.getTranslation("btnTaskLists"));
     }
 }

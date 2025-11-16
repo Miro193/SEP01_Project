@@ -12,7 +12,7 @@ public class Task {
     private String language;
 
 
-    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status, String language) {
+    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status) {
         this.id = id;
         this.userId = userId;
         this.title = title;
@@ -77,5 +77,5 @@ public class Task {
         this.status = status;
     }
 
-    public void setLanguage(String language) {this.language = language;}
+   public void setLanguage(String language) {this.language = language;}
 }
