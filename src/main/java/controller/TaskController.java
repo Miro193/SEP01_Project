@@ -31,6 +31,7 @@ public class TaskController extends BaseController {
     private DatePicker dueDatePicker;
     @FXML
     private ChoiceBox<String> statusChoice;
+
     @FXML
     private Button btnAddTask;
     @FXML
@@ -158,6 +159,8 @@ public class TaskController extends BaseController {
         String description = descField.getText();
         LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
         String status = statusChoice.getValue();
+        String language = LanguageManager.getCurrentLocale().getLanguage();
+
 
         if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
             showAlert("Validation Error", "Title, Due Date, and Status are required fields.");
