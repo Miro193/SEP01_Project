@@ -1,5 +1,5 @@
 package controller;
-
+import utils.LanguageManager;
 import dao.TaskDao;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -23,30 +23,54 @@ import java.util.List;
 public class TaskController extends BaseController {
 
     // Fields for AddTask.fxml
-    @FXML private TextField titleField;
-    @FXML private TextArea descField;
-    @FXML private DatePicker dueDatePicker;
-    @FXML private ChoiceBox<String> statusChoice;
-    @FXML private Button btnAddTask;
-    @FXML private Button btnDeleteTask;
-    @FXML private Button btnEditTask;
-    @FXML private Button btnCalendarView;
-    @FXML private Button btnDoneTasks;
-    @FXML private Button btnCancel;
-    @FXML private Button btnSave;
-    @FXML private Label lblAddTask;
-    @FXML private Label lblAddTitle;
-    @FXML private Label lblAddDescription;
-    @FXML private Label lblAddDueDate;
-    @FXML private Label lblAddStatus;
+    @FXML
+    private TextField titleField;
+    @FXML
+    private TextArea descField;
+    @FXML
+    private DatePicker dueDatePicker;
+    @FXML
+    private ChoiceBox<String> statusChoice;
+
+    @FXML
+    private Button btnAddTask;
+    @FXML
+    private Button btnDeleteTask;
+    @FXML
+    private Button btnEditTask;
+    @FXML
+    private Button btnCalendarView;
+    @FXML
+    private Button btnDoneTasks;
+    @FXML
+    private Button btnCancel;
+    @FXML
+    private Button btnSave;
+    @FXML
+    private Label lblAddTask;
+    @FXML
+    private Label lblAddTitle;
+    @FXML
+    private Label lblAddDescription;
+    @FXML
+    private Label lblAddDueDate;
+    @FXML
+    private Label lblAddStatus;
 
 
     // Fields for TaskList.fxml
-    @FXML private TableView<Task> taskTable;
-    @FXML private TableColumn<Task, String> titleColumn;
-    @FXML private TableColumn<Task, String> descColumn;
-    @FXML private TableColumn<Task, String> dueDateColumn;
-    @FXML private TableColumn<Task, String> statusColumn;
+    @FXML
+    private TableView<Task> taskTable;
+    @FXML
+    private TableColumn<Task, String> titleColumn;
+    @FXML
+    private TableColumn<Task, String> descColumn;
+    @FXML
+    private TableColumn<Task, String> dueDateColumn;
+    @FXML
+    private TableColumn<Task, String> statusColumn;
+    @FXML
+    private TableColumn<Task, String> languageColumn;
 
     private TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
@@ -55,6 +79,10 @@ public class TaskController extends BaseController {
     public void initialize() {
         updateLanguage();
         languageTexts();
+        if (languageColumn != null) {
+            languageColumn.setVisible(false);
+        }
+
 
         // Initialization logic for TaskList.fxml
         if (taskTable != null && CurrentUser.get() != null) {
@@ -69,7 +97,7 @@ public class TaskController extends BaseController {
                 return new SimpleStringProperty(dueDate != null ? dueDate.format(formatter) : "");
             });
             statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
-
+            //languageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLanguage()));
             taskTable.setItems(taskListObservable);
         }
 
@@ -90,8 +118,9 @@ public class TaskController extends BaseController {
     private void handleEditTask(ActionEvent event) throws IOException {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
-           // showAlert("No Task Selected", "Please select a task in the table to edit.");
-            showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
+            // showAlert("No Task Selected", "Please select a task in the table to edit.");
+           // showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
+            LanguageManager.getTranslation("error.noTaskmessage");
             return;
         }
 
@@ -127,36 +156,7 @@ public class TaskController extends BaseController {
         navigate(event, "/DoneTask.fxml");
     }
 
-    // Methods for AddTask.fxml
-    @FXML
-    private void handleSaveTask(ActionEvent event) throws IOException {
-        String title = titleField.getText();
-        String description = descField.getText();
-        LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
-        String status = statusChoice.getValue();
 
-        if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
-            showAlert("Validation Error", "Title, Due Date, and Status are required fields.");
-            return;
-        }
-
-        if (CurrentUser.get() == null) {
-            showAlert("Authentication Error", "No user is logged in. Please log in to save a task.");
-            return;
-        }
-
-        Task newTask = new Task();
-        newTask.setUserId(CurrentUser.get().getId());
-        newTask.setTitle(title);
-        newTask.setDescription(description);
-        newTask.setDueDate(dueDate);
-        newTask.setStatus(status);
-
-        taskDao.persist(newTask);
-
-        showAlert("Success", "Task has been saved successfully!");
-        navigate(event, "/TaskList.fxml");
-    }
 
     @FXML
     private void handleCancel(ActionEvent event) throws IOException {
@@ -182,19 +182,17 @@ public class TaskController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        btnAddTask.setText(rb.getString("btnAddTask.text"));
-        btnDeleteTask.setText(rb.getString("btnDeleteTask.text"));
-        btnEditTask.setText(rb.getString("btnEditTask.text"));
-        btnCalendarView.setText(rb.getString("btnCalendarView.text"));
-        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));
-        titleColumn.setText(rb.getString("titleColumn.text"));
-        descColumn.setText(rb.getString("descColumn.text"));
-        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));
-//        lblAddTask.setText(rb.getString("lblAddTask.text"));
-//        lblAddTitle.setText(rb.getString("lblAddTitle.text"));
-//        lblAddDescription.setText(rb.getString("lblAddDescription.text"));
-//        lblAddDueDate.setText(rb.getString("lblAddDueDate.text"));
-//        lblAddStatus.setText(rb.getString("lblAddStatus.text"));
+
+        btnAddTask.setText(LanguageManager.getTranslation("btnAddTask"));
+        btnDeleteTask.setText(LanguageManager.getTranslation("btnDeleteTask"));
+        btnEditTask.setText(LanguageManager.getTranslation("btnEditTask"));
+        btnCalendarView.setText(LanguageManager.getTranslation("btnCalendarView"));
+        btnDoneTasks.setText(LanguageManager.getTranslation("btnDoneTasks"));
+        titleColumn.setText(LanguageManager.getTranslation("titleColumn"));
+        descColumn.setText(LanguageManager.getTranslation("descColumn"));
+        dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn"));
+        statusColumn.setText(LanguageManager.getTranslation("statusColumn"));
+      //  languageColumn.setText(LanguageManager.getTranslation("languageColumn"));
+
     }
 }

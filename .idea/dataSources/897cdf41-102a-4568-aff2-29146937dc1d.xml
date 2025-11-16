@@ -1,270 +1,174 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<dataSource name="studyplanner@localhost [2]">
+<dataSource name="studyplanner@localhost">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.53">
     <root id="1">
       <DefaultCasing>lower/lower</DefaultCasing>
       <DefaultEngine>InnoDB</DefaultEngine>
-      <Grants>|root||appuser|localhost|ALTER|G
-|root||root||ALTER|G
-|root||root|127.0.0.1|ALTER|G
+      <Grants>|root||root|127.0.0.1|ALTER|G
 |root||root|::1|ALTER|G
+|root||root|afshin|ALTER|G
 |root||root|localhost|ALTER|G
-|root||root|saeids|ALTER|G
-|root||appuser|localhost|ALTER ROUTINE|G
-|root||root||ALTER ROUTINE|G
 |root||root|127.0.0.1|ALTER ROUTINE|G
 |root||root|::1|ALTER ROUTINE|G
+|root||root|afshin|ALTER ROUTINE|G
 |root||root|localhost|ALTER ROUTINE|G
-|root||root|saeids|ALTER ROUTINE|G
-|root||appuser|localhost|BINLOG ADMIN|G
-|root||root||BINLOG ADMIN|G
 |root||root|127.0.0.1|BINLOG ADMIN|G
 |root||root|::1|BINLOG ADMIN|G
+|root||root|afshin|BINLOG ADMIN|G
 |root||root|localhost|BINLOG ADMIN|G
-|root||root|saeids|BINLOG ADMIN|G
-|root||root||BINLOG MONITOR|G
 |root||root|127.0.0.1|BINLOG MONITOR|G
 |root||root|::1|BINLOG MONITOR|G
+|root||root|afshin|BINLOG MONITOR|G
 |root||root|localhost|BINLOG MONITOR|G
-|root||root|saeids|BINLOG MONITOR|G
-|root||appuser|localhost|BINLOG REPLAY|G
-|root||root||BINLOG REPLAY|G
 |root||root|127.0.0.1|BINLOG REPLAY|G
 |root||root|::1|BINLOG REPLAY|G
+|root||root|afshin|BINLOG REPLAY|G
 |root||root|localhost|BINLOG REPLAY|G
-|root||root|saeids|BINLOG REPLAY|G
-|root||appuser|localhost|CONNECTION ADMIN|G
-|root||root||CONNECTION ADMIN|G
 |root||root|127.0.0.1|CONNECTION ADMIN|G
 |root||root|::1|CONNECTION ADMIN|G
+|root||root|afshin|CONNECTION ADMIN|G
 |root||root|localhost|CONNECTION ADMIN|G
-|root||root|saeids|CONNECTION ADMIN|G
-|root||appuser|localhost|CREATE|G
-|root||root||CREATE|G
 |root||root|127.0.0.1|CREATE|G
 |root||root|::1|CREATE|G
+|root||root|afshin|CREATE|G
 |root||root|localhost|CREATE|G
-|root||root|saeids|CREATE|G
-|root||appuser|localhost|CREATE ROUTINE|G
-|root||root||CREATE ROUTINE|G
 |root||root|127.0.0.1|CREATE ROUTINE|G
 |root||root|::1|CREATE ROUTINE|G
+|root||root|afshin|CREATE ROUTINE|G
 |root||root|localhost|CREATE ROUTINE|G
-|root||root|saeids|CREATE ROUTINE|G
-|root||appuser|localhost|CREATE TABLESPACE|G
-|root||root||CREATE TABLESPACE|G
 |root||root|127.0.0.1|CREATE TABLESPACE|G
 |root||root|::1|CREATE TABLESPACE|G
+|root||root|afshin|CREATE TABLESPACE|G
 |root||root|localhost|CREATE TABLESPACE|G
-|root||root|saeids|CREATE TABLESPACE|G
-|root||appuser|localhost|CREATE TEMPORARY TABLES|G
-|root||root||CREATE TEMPORARY TABLES|G
 |root||root|127.0.0.1|CREATE TEMPORARY TABLES|G
 |root||root|::1|CREATE TEMPORARY TABLES|G
+|root||root|afshin|CREATE TEMPORARY TABLES|G
 |root||root|localhost|CREATE TEMPORARY TABLES|G
-|root||root|saeids|CREATE TEMPORARY TABLES|G
-|root||appuser|localhost|CREATE USER|G
-|root||root||CREATE USER|G
 |root||root|127.0.0.1|CREATE USER|G
 |root||root|::1|CREATE USER|G
+|root||root|afshin|CREATE USER|G
 |root||root|localhost|CREATE USER|G
-|root||root|saeids|CREATE USER|G
-|root||appuser|localhost|CREATE VIEW|G
-|root||root||CREATE VIEW|G
 |root||root|127.0.0.1|CREATE VIEW|G
 |root||root|::1|CREATE VIEW|G
+|root||root|afshin|CREATE VIEW|G
 |root||root|localhost|CREATE VIEW|G
-|root||root|saeids|CREATE VIEW|G
-|root||appuser|localhost|DELETE|G
-|root||root||DELETE|G
 |root||root|127.0.0.1|DELETE|G
 |root||root|::1|DELETE|G
+|root||root|afshin|DELETE|G
 |root||root|localhost|DELETE|G
-|root||root|saeids|DELETE|G
-|root||root||DELETE HISTORY|G
 |root||root|127.0.0.1|DELETE HISTORY|G
 |root||root|::1|DELETE HISTORY|G
+|root||root|afshin|DELETE HISTORY|G
 |root||root|localhost|DELETE HISTORY|G
-|root||root|saeids|DELETE HISTORY|G
-|root||appuser|localhost|DROP|G
-|root||root||DROP|G
 |root||root|127.0.0.1|DROP|G
 |root||root|::1|DROP|G
+|root||root|afshin|DROP|G
 |root||root|localhost|DROP|G
-|root||root|saeids|DROP|G
-|root||appuser|localhost|EVENT|G
-|root||root||EVENT|G
 |root||root|127.0.0.1|EVENT|G
 |root||root|::1|EVENT|G
+|root||root|afshin|EVENT|G
 |root||root|localhost|EVENT|G
-|root||root|saeids|EVENT|G
-|root||appuser|localhost|EXECUTE|G
-|root||root||EXECUTE|G
 |root||root|127.0.0.1|EXECUTE|G
 |root||root|::1|EXECUTE|G
+|root||root|afshin|EXECUTE|G
 |root||root|localhost|EXECUTE|G
-|root||root|saeids|EXECUTE|G
-|root||appuser|localhost|FEDERATED ADMIN|G
-|root||root||FEDERATED ADMIN|G
 |root||root|127.0.0.1|FEDERATED ADMIN|G
 |root||root|::1|FEDERATED ADMIN|G
+|root||root|afshin|FEDERATED ADMIN|G
 |root||root|localhost|FEDERATED ADMIN|G
-|root||root|saeids|FEDERATED ADMIN|G
-|root||appuser|localhost|FILE|G
-|root||root||FILE|G
 |root||root|127.0.0.1|FILE|G
 |root||root|::1|FILE|G
+|root||root|afshin|FILE|G
 |root||root|localhost|FILE|G
-|root||root|saeids|FILE|G
-|root||appuser|localhost|INDEX|G
-|root||root||INDEX|G
 |root||root|127.0.0.1|INDEX|G
 |root||root|::1|INDEX|G
+|root||root|afshin|INDEX|G
 |root||root|localhost|INDEX|G
-|root||root|saeids|INDEX|G
-|root||appuser|localhost|INSERT|G
-|root||root||INSERT|G
 |root||root|127.0.0.1|INSERT|G
 |root||root|::1|INSERT|G
+|root||root|afshin|INSERT|G
 |root||root|localhost|INSERT|G
-|root||root|saeids|INSERT|G
-|root||appuser|localhost|LOCK TABLES|G
-|root||root||LOCK TABLES|G
 |root||root|127.0.0.1|LOCK TABLES|G
 |root||root|::1|LOCK TABLES|G
+|root||root|afshin|LOCK TABLES|G
 |root||root|localhost|LOCK TABLES|G
-|root||root|saeids|LOCK TABLES|G
-|root||appuser|localhost|PROCESS|G
-|root||root||PROCESS|G
 |root||root|127.0.0.1|PROCESS|G
 |root||root|::1|PROCESS|G
+|root||root|afshin|PROCESS|G
 |root||root|localhost|PROCESS|G
-|root||root|saeids|PROCESS|G
-|root||appuser|localhost|READ_ONLY ADMIN|G
-|root||root||READ_ONLY ADMIN|G
 |root||root|127.0.0.1|READ_ONLY ADMIN|G
 |root||root|::1|READ_ONLY ADMIN|G
+|root||root|afshin|READ_ONLY ADMIN|G
 |root||root|localhost|READ_ONLY ADMIN|G
-|root||root|saeids|READ_ONLY ADMIN|G
-|root||appuser|localhost|REFERENCES|G
-|root||root||REFERENCES|G
 |root||root|127.0.0.1|REFERENCES|G
 |root||root|::1|REFERENCES|G
+|root||root|afshin|REFERENCES|G
 |root||root|localhost|REFERENCES|G
-|root||root|saeids|REFERENCES|G
-|root||appuser|localhost|RELOAD|G
-|root||root||RELOAD|G
 |root||root|127.0.0.1|RELOAD|G
 |root||root|::1|RELOAD|G
+|root||root|afshin|RELOAD|G
 |root||root|localhost|RELOAD|G
-|root||root|saeids|RELOAD|G
-|root||appuser|localhost|REPLICATION MASTER ADMIN|G
-|root||root||REPLICATION MASTER ADMIN|G
 |root||root|127.0.0.1|REPLICATION MASTER ADMIN|G
 |root||root|::1|REPLICATION MASTER ADMIN|G
+|root||root|afshin|REPLICATION MASTER ADMIN|G
 |root||root|localhost|REPLICATION MASTER ADMIN|G
-|root||root|saeids|REPLICATION MASTER ADMIN|G
-|root||appuser|localhost|REPLICATION SLAVE|G
-|root||root||REPLICATION SLAVE|G
 |root||root|127.0.0.1|REPLICATION SLAVE|G
 |root||root|::1|REPLICATION SLAVE|G
+|root||root|afshin|REPLICATION SLAVE|G
 |root||root|localhost|REPLICATION SLAVE|G
-|root||root|saeids|REPLICATION SLAVE|G
-|root||appuser|localhost|REPLICATION SLAVE ADMIN|G
-|root||root||REPLICATION SLAVE ADMIN|G
 |root||root|127.0.0.1|REPLICATION SLAVE ADMIN|G
 |root||root|::1|REPLICATION SLAVE ADMIN|G
+|root||root|afshin|REPLICATION SLAVE ADMIN|G
 |root||root|localhost|REPLICATION SLAVE ADMIN|G
-|root||root|saeids|REPLICATION SLAVE ADMIN|G
-|root||appuser|localhost|SELECT|G
-|root||root||SELECT|G
 |root||root|127.0.0.1|SELECT|G
 |root||root|::1|SELECT|G
+|root||root|afshin|SELECT|G
 |root||root|localhost|SELECT|G
-|root||root|saeids|SELECT|G
-|root||appuser|localhost|SET USER|G
-|root||root||SET USER|G
 |root||root|127.0.0.1|SET USER|G
 |root||root|::1|SET USER|G
+|root||root|afshin|SET USER|G
 |root||root|localhost|SET USER|G
-|root||root|saeids|SET USER|G
-|root||root||SHOW CREATE ROUTINE|G
 |root||root|127.0.0.1|SHOW CREATE ROUTINE|G
 |root||root|::1|SHOW CREATE ROUTINE|G
+|root||root|afshin|SHOW CREATE ROUTINE|G
 |root||root|localhost|SHOW CREATE ROUTINE|G
-|root||root|saeids|SHOW CREATE ROUTINE|G
-|root||appuser|localhost|SHOW DATABASES|G
-|root||root||SHOW DATABASES|G
 |root||root|127.0.0.1|SHOW DATABASES|G
 |root||root|::1|SHOW DATABASES|G
+|root||root|afshin|SHOW DATABASES|G
 |root||root|localhost|SHOW DATABASES|G
-|root||root|saeids|SHOW DATABASES|G
-|root||appuser|localhost|SHOW VIEW|G
-|root||root||SHOW VIEW|G
 |root||root|127.0.0.1|SHOW VIEW|G
 |root||root|::1|SHOW VIEW|G
+|root||root|afshin|SHOW VIEW|G
 |root||root|localhost|SHOW VIEW|G
-|root||root|saeids|SHOW VIEW|G
-|root||appuser|localhost|SHUTDOWN|G
-|root||root||SHUTDOWN|G
 |root||root|127.0.0.1|SHUTDOWN|G
 |root||root|::1|SHUTDOWN|G
+|root||root|afshin|SHUTDOWN|G
 |root||root|localhost|SHUTDOWN|G
-|root||root|saeids|SHUTDOWN|G
-|root||root||SLAVE MONITOR|G
 |root||root|127.0.0.1|SLAVE MONITOR|G
 |root||root|::1|SLAVE MONITOR|G
+|root||root|afshin|SLAVE MONITOR|G
 |root||root|localhost|SLAVE MONITOR|G
-|root||root|saeids|SLAVE MONITOR|G
-|root||appuser|localhost|SUPER|G
-|root||root||SUPER|G
 |root||root|127.0.0.1|SUPER|G
 |root||root|::1|SUPER|G
+|root||root|afshin|SUPER|G
 |root||root|localhost|SUPER|G
-|root||root|saeids|SUPER|G
-|root||appuser|localhost|TRIGGER|G
-|root||root||TRIGGER|G
 |root||root|127.0.0.1|TRIGGER|G
 |root||root|::1|TRIGGER|G
+|root||root|afshin|TRIGGER|G
 |root||root|localhost|TRIGGER|G
-|root||root|saeids|TRIGGER|G
-|root||appuser|localhost|UPDATE|G
-|root||root||UPDATE|G
 |root||root|127.0.0.1|UPDATE|G
 |root||root|::1|UPDATE|G
+|root||root|afshin|UPDATE|G
 |root||root|localhost|UPDATE|G
-|root||root|saeids|UPDATE|G
-|root||appuser|localhost|grant option|G
-|root||root||grant option|G
 |root||root|127.0.0.1|grant option|G
 |root||root|::1|grant option|G
+|root||root|afshin|grant option|G
 |root||root|localhost|grant option|G
-|root||root|saeids|grant option|G
-car|schema||appuser|localhost|DELETE|G
-car|schema||appuser|localhost|INSERT|G
-car|schema||appuser|localhost|SELECT|G
-car|schema||appuser|localhost|UPDATE|G
-currencydb|schema||appuser|localhost|ALTER|G
-currencydb|schema||appuser|localhost|ALTER ROUTINE|G
-currencydb|schema||appuser|localhost|CREATE|G
-currencydb|schema||appuser|localhost|CREATE ROUTINE|G
-currencydb|schema||appuser|localhost|CREATE TEMPORARY TABLES|G
-currencydb|schema||appuser|localhost|CREATE VIEW|G
-currencydb|schema||appuser|localhost|DELETE|G
-currencydb|schema||appuser|localhost|DELETE HISTORY|G
-currencydb|schema||appuser|localhost|DROP|G
-currencydb|schema||appuser|localhost|EVENT|G
-currencydb|schema||appuser|localhost|EXECUTE|G
-currencydb|schema||appuser|localhost|INDEX|G
-currencydb|schema||appuser|localhost|INSERT|G
-currencydb|schema||appuser|localhost|LOCK TABLES|G
-currencydb|schema||appuser|localhost|REFERENCES|G
-currencydb|schema||appuser|localhost|SELECT|G
-currencydb|schema||appuser|localhost|SHOW CREATE ROUTINE|G
-currencydb|schema||appuser|localhost|SHOW VIEW|G
-currencydb|schema||appuser|localhost|TRIGGER|G
-currencydb|schema||appuser|localhost|UPDATE|G</Grants>
-      <ServerVersion>11.3.0</ServerVersion>
+trafficlight|schema||appuser|localhost|DELETE|G
+trafficlight|schema||appuser|localhost|INSERT|G
+trafficlight|schema||appuser|localhost|SELECT|G
+trafficlight|schema||appuser|localhost|UPDATE|G</Grants>
+      <ServerVersion>11.5.2</ServerVersion>
     </root>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
@@ -947,7 +851,6 @@ currencydb|schema||appuser|localhost|UPDATE|G</Grants>
     </collation>
     <collation id="340" parent="1" name="ucs2_general_ci">
       <Charset>ucs2</Charset>
-      <DefaultForCharset>1</DefaultForCharset>
     </collation>
     <collation id="341" parent="1" name="ucs2_general_mysql500_ci">
       <Charset>ucs2</Charset>
@@ -1063,7 +966,6 @@ currencydb|schema||appuser|localhost|UPDATE|G</Grants>
     </collation>
     <collation id="378" parent="1" name="utf16_general_ci">
       <Charset>utf16</Charset>
-      <DefaultForCharset>1</DefaultForCharset>
     </collation>
     <collation id="379" parent="1" name="utf16_general_nopad_ci">
       <Charset>utf16</Charset>
@@ -1176,7 +1078,6 @@ currencydb|schema||appuser|localhost|UPDATE|G</Grants>
     </collation>
     <collation id="415" parent="1" name="utf32_general_ci">
       <Charset>utf32</Charset>
-      <DefaultForCharset>1</DefaultForCharset>
     </collation>
     <collation id="416" parent="1" name="utf32_general_nopad_ci">
       <Charset>utf32</Charset>
@@ -1274,517 +1175,387 @@ currencydb|schema||appuser|localhost|UPDATE|G</Grants>
     <collation id="447" parent="1" name="utf8mb3_estonian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="448" parent="1" name="utf8mb3_general_ci">
-      <Charset>utf8mb3</Charset>
-      <DefaultForCharset>1</DefaultForCharset>
-    </collation>
-    <collation id="449" parent="1" name="utf8mb3_general_mysql500_ci">
+    <collation id="448" parent="1" name="utf8mb3_general1400_as_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="450" parent="1" name="utf8mb3_general_nopad_ci">
+    <collation id="449" parent="1" name="utf8mb3_general_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="451" parent="1" name="utf8mb3_german2_ci">
+    <collation id="450" parent="1" name="utf8mb3_general_mysql500_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="452" parent="1" name="utf8mb3_hungarian_ci">
+    <collation id="451" parent="1" name="utf8mb3_general_nopad_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="453" parent="1" name="utf8mb3_icelandic_ci">
+    <collation id="452" parent="1" name="utf8mb3_german2_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="454" parent="1" name="utf8mb3_latvian_ci">
+    <collation id="453" parent="1" name="utf8mb3_hungarian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="455" parent="1" name="utf8mb3_lithuanian_ci">
+    <collation id="454" parent="1" name="utf8mb3_icelandic_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="456" parent="1" name="utf8mb3_myanmar_ci">
+    <collation id="455" parent="1" name="utf8mb3_latvian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="457" parent="1" name="utf8mb3_nopad_bin">
+    <collation id="456" parent="1" name="utf8mb3_lithuanian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="458" parent="1" name="utf8mb3_persian_ci">
+    <collation id="457" parent="1" name="utf8mb3_myanmar_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="459" parent="1" name="utf8mb3_polish_ci">
+    <collation id="458" parent="1" name="utf8mb3_nopad_bin">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="460" parent="1" name="utf8mb3_roman_ci">
+    <collation id="459" parent="1" name="utf8mb3_persian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="461" parent="1" name="utf8mb3_romanian_ci">
+    <collation id="460" parent="1" name="utf8mb3_polish_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="462" parent="1" name="utf8mb3_sinhala_ci">
+    <collation id="461" parent="1" name="utf8mb3_roman_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="463" parent="1" name="utf8mb3_slovak_ci">
+    <collation id="462" parent="1" name="utf8mb3_romanian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="464" parent="1" name="utf8mb3_slovenian_ci">
+    <collation id="463" parent="1" name="utf8mb3_sinhala_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="465" parent="1" name="utf8mb3_spanish2_ci">
+    <collation id="464" parent="1" name="utf8mb3_slovak_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="466" parent="1" name="utf8mb3_spanish_ci">
+    <collation id="465" parent="1" name="utf8mb3_slovenian_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="467" parent="1" name="utf8mb3_swedish_ci">
+    <collation id="466" parent="1" name="utf8mb3_spanish2_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="468" parent="1" name="utf8mb3_thai_520_w2">
+    <collation id="467" parent="1" name="utf8mb3_spanish_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="469" parent="1" name="utf8mb3_turkish_ci">
+    <collation id="468" parent="1" name="utf8mb3_swedish_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="470" parent="1" name="utf8mb3_unicode_520_ci">
+    <collation id="469" parent="1" name="utf8mb3_thai_520_w2">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="471" parent="1" name="utf8mb3_unicode_520_nopad_ci">
+    <collation id="470" parent="1" name="utf8mb3_turkish_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="472" parent="1" name="utf8mb3_unicode_ci">
+    <collation id="471" parent="1" name="utf8mb3_unicode_520_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="473" parent="1" name="utf8mb3_unicode_nopad_ci">
+    <collation id="472" parent="1" name="utf8mb3_unicode_520_nopad_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="474" parent="1" name="utf8mb3_vietnamese_ci">
+    <collation id="473" parent="1" name="utf8mb3_unicode_ci">
       <Charset>utf8mb3</Charset>
     </collation>
-    <collation id="475" parent="1" name="utf8mb4_bin">
+    <collation id="474" parent="1" name="utf8mb3_unicode_nopad_ci">
+      <Charset>utf8mb3</Charset>
+    </collation>
+    <collation id="475" parent="1" name="utf8mb3_vietnamese_ci">
+      <Charset>utf8mb3</Charset>
+    </collation>
+    <collation id="476" parent="1" name="utf8mb4_bin">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="476" parent="1" name="utf8mb4_croatian_ci">
+    <collation id="477" parent="1" name="utf8mb4_croatian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="477" parent="1" name="utf8mb4_croatian_mysql561_ci">
+    <collation id="478" parent="1" name="utf8mb4_croatian_mysql561_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="478" parent="1" name="utf8mb4_czech_ci">
+    <collation id="479" parent="1" name="utf8mb4_czech_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="479" parent="1" name="utf8mb4_danish_ci">
+    <collation id="480" parent="1" name="utf8mb4_danish_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="480" parent="1" name="utf8mb4_esperanto_ci">
+    <collation id="481" parent="1" name="utf8mb4_esperanto_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="481" parent="1" name="utf8mb4_estonian_ci">
+    <collation id="482" parent="1" name="utf8mb4_estonian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="482" parent="1" name="utf8mb4_general_ci">
-      <Charset>utf8mb4</Charset>
-      <DefaultForCharset>1</DefaultForCharset>
-    </collation>
-    <collation id="483" parent="1" name="utf8mb4_general_nopad_ci">
+    <collation id="483" parent="1" name="utf8mb4_general1400_as_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="484" parent="1" name="utf8mb4_german2_ci">
+    <collation id="484" parent="1" name="utf8mb4_general_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="485" parent="1" name="utf8mb4_hungarian_ci">
+    <collation id="485" parent="1" name="utf8mb4_general_nopad_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="486" parent="1" name="utf8mb4_icelandic_ci">
+    <collation id="486" parent="1" name="utf8mb4_german2_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="487" parent="1" name="utf8mb4_latvian_ci">
+    <collation id="487" parent="1" name="utf8mb4_hungarian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="488" parent="1" name="utf8mb4_lithuanian_ci">
+    <collation id="488" parent="1" name="utf8mb4_icelandic_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="489" parent="1" name="utf8mb4_myanmar_ci">
+    <collation id="489" parent="1" name="utf8mb4_latvian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="490" parent="1" name="utf8mb4_nopad_bin">
+    <collation id="490" parent="1" name="utf8mb4_lithuanian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="491" parent="1" name="utf8mb4_persian_ci">
+    <collation id="491" parent="1" name="utf8mb4_myanmar_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="492" parent="1" name="utf8mb4_polish_ci">
+    <collation id="492" parent="1" name="utf8mb4_nopad_bin">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="493" parent="1" name="utf8mb4_roman_ci">
+    <collation id="493" parent="1" name="utf8mb4_persian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="494" parent="1" name="utf8mb4_romanian_ci">
+    <collation id="494" parent="1" name="utf8mb4_polish_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="495" parent="1" name="utf8mb4_sinhala_ci">
+    <collation id="495" parent="1" name="utf8mb4_roman_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="496" parent="1" name="utf8mb4_slovak_ci">
+    <collation id="496" parent="1" name="utf8mb4_romanian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="497" parent="1" name="utf8mb4_slovenian_ci">
+    <collation id="497" parent="1" name="utf8mb4_sinhala_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="498" parent="1" name="utf8mb4_spanish2_ci">
+    <collation id="498" parent="1" name="utf8mb4_slovak_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="499" parent="1" name="utf8mb4_spanish_ci">
+    <collation id="499" parent="1" name="utf8mb4_slovenian_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="500" parent="1" name="utf8mb4_swedish_ci">
+    <collation id="500" parent="1" name="utf8mb4_spanish2_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="501" parent="1" name="utf8mb4_thai_520_w2">
+    <collation id="501" parent="1" name="utf8mb4_spanish_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="502" parent="1" name="utf8mb4_turkish_ci">
+    <collation id="502" parent="1" name="utf8mb4_swedish_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="503" parent="1" name="utf8mb4_unicode_520_ci">
+    <collation id="503" parent="1" name="utf8mb4_thai_520_w2">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="504" parent="1" name="utf8mb4_unicode_520_nopad_ci">
+    <collation id="504" parent="1" name="utf8mb4_turkish_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="505" parent="1" name="utf8mb4_unicode_ci">
+    <collation id="505" parent="1" name="utf8mb4_unicode_520_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="506" parent="1" name="utf8mb4_unicode_nopad_ci">
+    <collation id="506" parent="1" name="utf8mb4_unicode_520_nopad_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <collation id="507" parent="1" name="utf8mb4_vietnamese_ci">
+    <collation id="507" parent="1" name="utf8mb4_unicode_ci">
       <Charset>utf8mb4</Charset>
     </collation>
-    <schema id="508" parent="1" name="currencydb">
+    <collation id="508" parent="1" name="utf8mb4_unicode_nopad_ci">
+      <Charset>utf8mb4</Charset>
+    </collation>
+    <collation id="509" parent="1" name="utf8mb4_vietnamese_ci">
+      <Charset>utf8mb4</Charset>
+    </collation>
+    <schema id="510" parent="1" name="africatähti">
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <schema id="509" parent="1" name="demogame">
+    <schema id="511" parent="1" name="ankkalinna">
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <schema id="510" parent="1" name="employee">
+    <schema id="512" parent="1" name="bmi_localization">
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </schema>
+    <schema id="513" parent="1" name="company">
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <schema id="511" parent="1" name="information_schema">
+    <schema id="514" parent="1" name="converter">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="515" parent="1" name="demogame">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="516" parent="1" name="flight_game">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="517" parent="1" name="information_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
-    <schema id="512" parent="1" name="mysql">
+    <schema id="518" parent="1" name="javafx_mariadb">
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <schema id="513" parent="1" name="performance_schema">
+    <schema id="519" parent="1" name="javafx_mariadb1">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="520" parent="1" name="mysql">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="521" parent="1" name="performance_schema">
       <CollationName>utf8mb3_general_ci</CollationName>
     </schema>
-    <schema id="514" parent="1" name="studyplanner">
+    <schema id="522" parent="1" name="rahtipeli">
+      <CollationName>latin1_swedish_ci</CollationName>
+    </schema>
+    <schema id="523" parent="1" name="studyplanner">
+      <AutoIntrospectionLevel>3</AutoIntrospectionLevel>
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2025-09-27.07:23:21</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLevel>3</LastIntrospectionLevel>
+      <LastIntrospectionLocalTimestamp>2025-11-15.15:19:48</LastIntrospectionLocalTimestamp>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </schema>
+    <schema id="524" parent="1" name="sys">
+      <CollationName>utf8mb3_general_ci</CollationName>
+    </schema>
+    <schema id="525" parent="1" name="trafficlight">
       <CollationName>latin1_swedish_ci</CollationName>
     </schema>
-    <schema id="515" parent="1" name="taskdb">
-      <CollationName>latin1_swedish_ci</CollationName>
-    </schema>
-    <schema id="516" parent="1" name="trafficlight">
-      <CollationName>latin1_swedish_ci</CollationName>
-    </schema>
-    <user id="517" parent="1" name="appuser">
+    <user id="526" parent="1" name="appuser">
       <Host>localhost</Host>
     </user>
-    <user id="518" parent="1" name="mariadb.sys">
+    <user id="527" parent="1" name="mariadb.sys">
       <Host>localhost</Host>
     </user>
-    <user id="519" parent="1" name="root"/>
-    <user id="520" parent="1" name="root">
+    <user id="528" parent="1" name="root">
       <Host>127.0.0.1</Host>
     </user>
-    <user id="521" parent="1" name="root">
+    <user id="529" parent="1" name="root">
       <Host>::1</Host>
     </user>
-    <user id="522" parent="1" name="root">
+    <user id="530" parent="1" name="root">
+      <Host>afshin</Host>
+    </user>
+    <user id="531" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <user id="523" parent="1" name="root">
-      <Host>saeids</Host>
-    </user>
-    <table id="524" parent="514" name="calendarevent">
+    <table id="532" parent="523" name="task">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>latin1_swedish_ci</CollationName>
     </table>
-    <table id="525" parent="514" name="signup">
+    <table id="533" parent="523" name="translations">
+      <DetailsLevel>3</DetailsLevel>
+      <Engine>InnoDB</Engine>
+      <CollationName>utf8mb4_unicode_ci</CollationName>
+    </table>
+    <table id="534" parent="523" name="users">
+      <DetailsLevel>3</DetailsLevel>
       <Engine>InnoDB</Engine>
       <CollationName>latin1_swedish_ci</CollationName>
     </table>
-    <table id="526" parent="514" name="task">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <table id="527" parent="514" name="taskhistory">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <table id="528" parent="514" name="taskstats">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <table id="529" parent="514" name="users">
-      <Engine>InnoDB</Engine>
-      <CollationName>latin1_swedish_ci</CollationName>
-    </table>
-    <column id="530" parent="524" name="id">
-      <AutoIncrement>3</AutoIncrement>
+    <column id="535" parent="532" name="task_id">
+      <AutoIncrement>1</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="531" parent="524" name="user_id">
+    <column id="536" parent="532" name="user_id">
+      <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="532" parent="524" name="title">
+    <column id="537" parent="532" name="title">
+      <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="533" parent="524" name="description">
+    <column id="538" parent="532" name="description">
       <Position>4</Position>
       <StoredType>text|0s</StoredType>
     </column>
-    <column id="534" parent="524" name="event_date">
-      <Position>5</Position>
-      <StoredType>date|0s</StoredType>
-    </column>
-    <column id="535" parent="524" name="event_time">
-      <Position>6</Position>
-      <StoredType>time|0s</StoredType>
-    </column>
-    <foreign-key id="536" parent="524" name="calendarevent_ibfk_1">
-      <ColNames>user_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>users</RefTableName>
-    </foreign-key>
-    <index id="537" parent="524" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="538" parent="524" name="user_id">
-      <ColNames>user_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="539" parent="524" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="540" parent="525" name="id">
-      <AutoIncrement>3</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="541" parent="525" name="user_id">
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="542" parent="525" name="sign_up_date">
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-      <StoredType>date|0s</StoredType>
-    </column>
-    <column id="543" parent="525" name="status">
-      <DefaultExpression>&apos;active&apos;</DefaultExpression>
-      <Position>4</Position>
-      <StoredType>varchar(20)|0s</StoredType>
-    </column>
-    <foreign-key id="544" parent="525" name="signup_ibfk_1">
-      <ColNames>user_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>users</RefTableName>
-    </foreign-key>
-    <index id="545" parent="525" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="546" parent="525" name="user_id">
-      <ColNames>user_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="547" parent="525" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="548" parent="526" name="task_id">
-      <AutoIncrement>3</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="549" parent="526" name="user_id">
-      <Position>2</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="550" parent="526" name="title">
-      <Position>3</Position>
-      <StoredType>varchar(100)|0s</StoredType>
-    </column>
-    <column id="551" parent="526" name="description">
-      <Position>4</Position>
-      <StoredType>text|0s</StoredType>
-    </column>
-    <column id="552" parent="526" name="status">
+    <column id="539" parent="532" name="status">
       <Position>5</Position>
       <StoredType>varchar(20)|0s</StoredType>
     </column>
-    <column id="553" parent="526" name="dueDate">
+    <column id="540" parent="532" name="dueDate">
       <Position>6</Position>
-      <StoredType>date|0s</StoredType>
-    </column>
-    <foreign-key id="554" parent="526" name="task_ibfk_1">
-      <ColNames>user_id</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>users</RefTableName>
-    </foreign-key>
-    <index id="555" parent="526" name="PRIMARY">
-      <ColNames>task_id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="556" parent="526" name="user_id">
-      <ColNames>user_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="557" parent="526" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="558" parent="527" name="id">
-      <AutoIncrement>3</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="559" parent="527" name="task_id">
-      <Position>2</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="560" parent="527" name="changed_by">
-      <Position>3</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="561" parent="527" name="change_type">
-      <Position>4</Position>
-      <StoredType>varchar(50)|0s</StoredType>
-    </column>
-    <column id="562" parent="527" name="change_date">
-      <Position>5</Position>
       <StoredType>datetime|0s</StoredType>
     </column>
-    <column id="563" parent="527" name="old_status">
-      <Position>6</Position>
-      <StoredType>varchar(20)|0s</StoredType>
-    </column>
-    <column id="564" parent="527" name="new_status">
+    <column id="541" parent="532" name="language">
+      <NotNull>1</NotNull>
       <Position>7</Position>
-      <StoredType>varchar(20)|0s</StoredType>
+      <StoredType>varchar(10)|0s</StoredType>
     </column>
-    <foreign-key id="565" parent="527" name="taskhistory_ibfk_1">
-      <ColNames>task_id</ColNames>
-      <RefColNames>task_id</RefColNames>
-      <RefTableName>task</RefTableName>
-    </foreign-key>
-    <foreign-key id="566" parent="527" name="taskhistory_ibfk_2">
-      <ColNames>changed_by</ColNames>
-      <RefColNames>id</RefColNames>
-      <RefTableName>users</RefTableName>
-    </foreign-key>
-    <index id="567" parent="527" name="PRIMARY">
-      <ColNames>id</ColNames>
-      <Type>btree</Type>
-      <Unique>1</Unique>
-    </index>
-    <index id="568" parent="527" name="task_id">
-      <ColNames>task_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="569" parent="527" name="changed_by">
-      <ColNames>changed_by</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="570" parent="527" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
-    </key>
-    <column id="571" parent="528" name="id">
-      <AutoIncrement>3</AutoIncrement>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="572" parent="528" name="user_id">
-      <Position>2</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="573" parent="528" name="total_tasks">
-      <Position>3</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="574" parent="528" name="completed_tasks">
-      <Position>4</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="575" parent="528" name="pending_tasks">
-      <Position>5</Position>
-      <StoredType>int(11)|0s</StoredType>
-    </column>
-    <column id="576" parent="528" name="last_updated">
-      <Position>6</Position>
-      <StoredType>date|0s</StoredType>
-    </column>
-    <foreign-key id="577" parent="528" name="taskstats_ibfk_1">
+    <foreign-key id="542" parent="532" name="task_ibfk_1">
       <ColNames>user_id</ColNames>
       <RefColNames>id</RefColNames>
       <RefTableName>users</RefTableName>
     </foreign-key>
-    <index id="578" parent="528" name="PRIMARY">
-      <ColNames>id</ColNames>
+    <index id="543" parent="532" name="PRIMARY">
+      <ColNames>task_id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <index id="579" parent="528" name="user_id">
+    <index id="544" parent="532" name="user_id">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="580" parent="528" name="PRIMARY">
+    <key id="545" parent="532" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
-    <column id="581" parent="529" name="id">
-      <AutoIncrement>3</AutoIncrement>
+    <column id="546" parent="533" name="translation_id">
+      <AutoIncrement>355</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int(11)|0s</StoredType>
     </column>
-    <column id="582" parent="529" name="username">
+    <column id="547" parent="533" name="translation_key">
+      <NotNull>1</NotNull>
       <Position>2</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="583" parent="529" name="password">
+    <column id="548" parent="533" name="translation_value">
+      <NotNull>1</NotNull>
+      <Position>3</Position>
+      <StoredType>varchar(255)|0s</StoredType>
+    </column>
+    <column id="549" parent="533" name="language">
+      <NotNull>1</NotNull>
+      <Position>4</Position>
+      <StoredType>varchar(10)|0s</StoredType>
+    </column>
+    <index id="550" parent="533" name="PRIMARY">
+      <ColNames>translation_id</ColNames>
+      <Type>btree</Type>
+      <Unique>1</Unique>
+    </index>
+    <key id="551" parent="533" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
+    </key>
+    <column id="552" parent="534" name="id">
+      <AutoIncrement>1</AutoIncrement>
+      <NotNull>1</NotNull>
+      <Position>1</Position>
+      <StoredType>int(11)|0s</StoredType>
+    </column>
+    <column id="553" parent="534" name="username">
+      <NotNull>1</NotNull>
+      <Position>2</Position>
+      <StoredType>varchar(100)|0s</StoredType>
+    </column>
+    <column id="554" parent="534" name="password">
+      <NotNull>1</NotNull>
       <Position>3</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <column id="584" parent="529" name="confirmPassword">
+    <column id="555" parent="534" name="confirmPassword">
+      <NotNull>1</NotNull>
       <Position>4</Position>
       <StoredType>varchar(100)|0s</StoredType>
     </column>
-    <index id="585" parent="529" name="PRIMARY">
+    <index id="556" parent="534" name="PRIMARY">
       <ColNames>id</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="586" parent="529" name="PRIMARY">
+    <key id="557" parent="534" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>

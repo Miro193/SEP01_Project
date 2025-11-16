@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import utils.LanguageManager;
 
 import java.io.IOException;
 
@@ -43,8 +44,8 @@ public class FirstViewController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        lblHeaderMyTasks.setText(rb.getString("lblHeaderMyTasks.text"));
-        btnEnterTask.setText(rb.getString("btnEnterTask.text"));
-        btnTaskLists.setText(rb.getString("btnTaskLists.text"));
+        lblHeaderMyTasks.setText(LanguageManager.getTranslation("lblHeaderMyTasks.text"));
+        btnEnterTask.setText(LanguageManager.getTranslation("btnEnterTask.text"));
+        btnTaskLists.setText(LanguageManager.getTranslation("btnTaskLists.text"));
     }
 }
