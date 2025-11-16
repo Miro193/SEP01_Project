@@ -16,8 +16,8 @@ class TaskTest {
 
     @BeforeEach
     void setUp() {
-        task1 = new Task(12, 1, "Math Homework", "Complete exercises 1–10", LocalDateTime.of(2025,10,15,9,30), "TODO");
-        task2 = new Task(14, 1, "Science Project", "Build a volcano model", LocalDateTime.of(2025,9,20,12,30), "IN_PROGRESS");
+        task1 = new Task(12, 1, "Math Homework", "Complete exercises 1–10", LocalDateTime.of(2025,10,15,9,30), "TODO","en");
+        task2 = new Task(14, 1, "Science Project", "Build a volcano model", LocalDateTime.of(2025,9,20,12,30), "IN_PROGRESS","en");
         task3 = new Task();
     }
 
