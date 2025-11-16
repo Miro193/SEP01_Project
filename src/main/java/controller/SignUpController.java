@@ -113,12 +113,12 @@ public class SignUpController extends BaseController {
         //rb = ResourceBundle.getBundle("MessagesBundle", locale);
 
         //set texts
-        lblSignUp.setText(LanguageManager.getTranslation("lblSignUp.text"));
-        lblUsername.setText(LanguageManager.getTranslation("lblUsername.text"));
-        lblPassword.setText(LanguageManager.getTranslation("lblPassword.text"));
-        lblConfirm.setText(LanguageManager.getTranslation("lblConfirm.text"));
-        btnCreateAccount.setText(LanguageManager.getTranslation("btnCreateAccount.text"));
-        btnBackToLogin.setText(LanguageManager.getTranslation("btnBackToLogin.text"));
+        lblSignUp.setText(LanguageManager.getTranslation("lblSignUp"));
+        lblUsername.setText(LanguageManager.getTranslation("lblUsername"));
+        lblPassword.setText(LanguageManager.getTranslation("lblPassword"));
+        lblConfirm.setText(LanguageManager.getTranslation("lblConfirm"));
+        btnCreateAccount.setText(LanguageManager.getTranslation("btnCreateAccount"));
+        btnBackToLogin.setText(LanguageManager.getTranslation("btnBackToLogin"));
 
 
     }
