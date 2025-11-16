@@ -9,15 +9,17 @@ public class Task {
     private String description;
     private LocalDateTime dueDate;
     private String status;
+    private String language;
 
 
-    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status) {
+    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status, String language) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
         this.status = status;
+        this.language = language;
     }
 
 
@@ -47,6 +49,10 @@ public class Task {
     public String getStatus() {
         return status;
     }
+
+    public String getLanguage() {return language;}
+
+
     public void setId(int id) {
         this.id = id;
     }
@@ -70,4 +76,6 @@ public class Task {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public void setLanguage(String language) {this.language = language;}
 }
