@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
+import utils.Translation;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -53,7 +54,7 @@ public class TaskController extends BaseController {
 
     @FXML
     public void initialize() {
-        updateLanguage();
+
         languageTexts();
 
         // Initialization logic for TaskList.fxml
@@ -182,15 +183,16 @@ public class TaskController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        btnAddTask.setText(rb.getString("btnAddTask.text"));
-        btnDeleteTask.setText(rb.getString("btnDeleteTask.text"));
-        btnEditTask.setText(rb.getString("btnEditTask.text"));
-        btnCalendarView.setText(rb.getString("btnCalendarView.text"));
-        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));
-        titleColumn.setText(rb.getString("titleColumn.text"));
-        descColumn.setText(rb.getString("descColumn.text"));
-        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));
+        btnAddTask.setText(Translation.getText("btnAddTask"));
+        btnDeleteTask.setText(Translation.getText("btnDeleteTask"));
+        btnEditTask.setText(Translation.getText("btnEditTask"));
+        btnCalendarView.setText(Translation.getText("btnCalendarView"));
+        btnDoneTasks.setText(Translation.getText("btnDoneTasks"));
+
+        titleColumn.setText(Translation.getText("titleColumn"));
+        descColumn.setText(Translation.getText("descColumn"));
+        dueDateColumn.setText(Translation.getText("dueDateColumn"));
+        statusColumn.setText(Translation.getText("statusColumn"));
 //        lblAddTask.setText(rb.getString("lblAddTask.text"));
 //        lblAddTitle.setText(rb.getString("lblAddTitle.text"));
 //        lblAddDescription.setText(rb.getString("lblAddDescription.text"));

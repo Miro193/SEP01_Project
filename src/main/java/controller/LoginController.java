@@ -14,6 +14,7 @@ import model.CurrentUser;
 import model.User;
 import java.io.IOException;
 import utils.LanguageManager;
+import utils.Translation;
 //import java.util.Locale;
 //import java.util.ResourceBundle;
 
@@ -35,10 +36,13 @@ public class LoginController extends BaseController {
 
 
 
+
     @FXML
     public void initialize() {
-        updateLanguage();
+        //updateLanguage();
         languageTexts();
+
+
 
     }
 
@@ -56,7 +60,11 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-            showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
+            //showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
+            showAlert(
+            Translation.getText("success.title"),
+                    Translation.getText("success.loginMessage") + " " + user.getUsername());
+
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
@@ -66,7 +74,12 @@ public class LoginController extends BaseController {
             window.setScene(firstViewScene);
             window.show();
         } else {
-            showAlert(rb.getString("error.title"), rb.getString("invalid.message"));
+            showAlert(
+                    Translation.getText("error.title"),
+                    Translation.getText("invalid.message")
+            );
+            //showAlert(rb.getString("error.title"), rb.getString("invalid.message"));
+
         }
     }
     @FXML
@@ -89,7 +102,18 @@ public class LoginController extends BaseController {
     }
     @FXML
     private void languageTexts() {
-        //set texts
+        headerLogin.setText(Translation.getText("headerLogin"));
+        lblUsername.setText(Translation.getText("lblUsername"));
+        lblPassword.setText(Translation.getText("lblPassword"));
+        btnLogin.setText(Translation.getText("btnLogin"));
+        btnSignup.setText(Translation.getText("btnSignup"));
+        btnLanguage.setText(Translation.getText("btnLanguage"));
+        itemPersian.setText(Translation.getText("itemPersian"));
+        itemChinese.setText(Translation.getText("itemChinese"));
+        itemEnglish.setText(Translation.getText("itemEnglish"));
+
+
+        /*set texts
         headerLogin.setText(rb.getString("headerLogin.text"));
         lblUsername.setText(rb.getString("lblUsername.text"));
         lblPassword.setText(rb.getString("lblPassword.text"));
@@ -102,7 +126,7 @@ public class LoginController extends BaseController {
 
         // Right-to-left for Persian  //Labels appear on the right of fields.
         //Text flows right-to-left.
-      /*  if (language.equals("fa") || language.equalsIgnoreCase("ar")) {
+       if (language.equals("fa") || language.equalsIgnoreCase("ar")) {
             headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
         } else {
             headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
@@ -114,22 +138,30 @@ public class LoginController extends BaseController {
 
     @FXML
     public void onEnglishClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("en", "US");
-        reloadScene(event);
+        Translation.setCurrentLanguage("en");
+        languageTexts();
+        //LanguageManager.setLanguage("en", "US");
+        //reloadScene(event);
 
     }
 
     @FXML
     public void onPersianClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("fa", "IR");
-        reloadScene(event);
+        Translation.setCurrentLanguage("fa");
+        languageTexts();
+
+        //LanguageManager.setLanguage("fa", "IR");
+        //reloadScene(event);
 
     }
 
     @FXML
     public void onChineseClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("zh", "CN");
-        reloadScene(event);
+        Translation.setCurrentLanguage("zh");
+        languageTexts();
+
+        //LanguageManager.setLanguage("zh", "CN");
+        //reloadScene(event);
 
     }
     private void reloadScene(ActionEvent event) throws IOException {

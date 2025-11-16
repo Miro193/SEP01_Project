@@ -21,6 +21,9 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import utils.LanguageManager;
+import utils.Translation;
+
 public class SignUpController extends BaseController {
 
     @FXML
@@ -45,12 +48,14 @@ public class SignUpController extends BaseController {
     private Button btnBackToLogin;
 
     private UserDao userDao = new UserDao();
+
+
     //private ResourceBundle rb;
 
 
     @FXML
     public void initialize() {
-        updateLanguage(); //from BaseController
+        //updateLanguage(); //from BaseController
         languageTexts();
 
     }
@@ -110,12 +115,12 @@ public class SignUpController extends BaseController {
         //rb = ResourceBundle.getBundle("MessagesBundle", locale);
 
         //set texts
-        lblSignUp.setText(rb.getString("lblSignUp.text"));
-        lblUsername.setText(rb.getString("lblUsername.text"));
-        lblPassword.setText(rb.getString("lblPassword.text"));
-        lblConfirm.setText(rb.getString("lblConfirm.text"));
-        btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
-        btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
+        lblSignUp.setText(Translation.getText("lblSignUp"));
+        lblUsername.setText(Translation.getText("lblUsername"));
+        lblPassword.setText(Translation.getText("lblPassword"));
+        lblConfirm.setText(Translation.getText("lblConfirm"));
+        btnCreateAccount.setText(Translation.getText("btnCreateAccount"));
+        btnBackToLogin.setText(Translation.getText("btnBackToLogin"));
 
 
     }
