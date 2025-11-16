@@ -14,8 +14,6 @@ import model.CurrentUser;
 import model.User;
 import java.io.IOException;
 import utils.LanguageManager;
-//import java.util.Locale;
-//import java.util.ResourceBundle;
 
 public class LoginController extends BaseController {
     @FXML private Label headerLogin;
@@ -133,6 +131,7 @@ public class LoginController extends BaseController {
         reloadScene(event);
 
     }
+    // tarkistetaan vielä metodi
     private void reloadScene(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/Login.fxml")
