@@ -19,7 +19,7 @@ CREATE TABLE Task (
     description TEXT,
     status VARCHAR(20),
     dueDate DATETIME,
-    language VARCHAR(10) NOT NULL,
+    -- language VARCHAR(10) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
