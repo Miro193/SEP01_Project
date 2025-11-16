@@ -97,7 +97,6 @@ public class TaskController extends BaseController {
                 return new SimpleStringProperty(dueDate != null ? dueDate.format(formatter) : "");
             });
             statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
-            //languageColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getLanguage()));
             taskTable.setItems(taskListObservable);
         }
 
@@ -118,8 +117,6 @@ public class TaskController extends BaseController {
     private void handleEditTask(ActionEvent event) throws IOException {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
-            // showAlert("No Task Selected", "Please select a task in the table to edit.");
-           // showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
             LanguageManager.getTranslation("error.noTaskmessage");
             return;
         }
@@ -182,7 +179,6 @@ public class TaskController extends BaseController {
 
     @FXML
     private void languageTexts() {
-
         btnAddTask.setText(LanguageManager.getTranslation("btnAddTask"));
         btnDeleteTask.setText(LanguageManager.getTranslation("btnDeleteTask"));
         btnEditTask.setText(LanguageManager.getTranslation("btnEditTask"));
@@ -192,7 +188,5 @@ public class TaskController extends BaseController {
         descColumn.setText(LanguageManager.getTranslation("descColumn"));
         dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn"));
         statusColumn.setText(LanguageManager.getTranslation("statusColumn"));
-      //  languageColumn.setText(LanguageManager.getTranslation("languageColumn"));
-
     }
 }
