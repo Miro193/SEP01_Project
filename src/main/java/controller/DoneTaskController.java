@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
@@ -16,8 +17,9 @@ import java.io.IOException;
 import java.util.List;
 import utils.LanguageManager;
 
-public class DoneTaskController {
-
+public class DoneTaskController extends BaseController {
+    @FXML private Button backToList;
+    @FXML private Label lblDoneTask;
     @FXML private ListView<String> doneList;
 
 
@@ -50,5 +52,11 @@ public class DoneTaskController {
                 doneList.getItems().add(task.getTitle());
             }
         }
+    }
+
+    @FXML
+    private void languageTexts() {
+        backToList.setText(LanguageManager.getTranslation("backToList"));
+        lblDoneTask.setText(LanguageManager.getTranslation("lblDoneTask"));
     }
 }
