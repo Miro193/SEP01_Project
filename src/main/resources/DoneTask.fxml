@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.DoneTaskController"
-      spacing="10" alignment="CENTER" prefWidth="400" prefHeight="300">
+      spacing="10" alignment="CENTER" prefWidth="400" prefHeight="400">
 
-    <Button id="backToList" fx:id="backTolist" onAction="#backToList" text="Back To Tasks"></Button>
-    <Label text="Done Tasks" style="-fx-font-size: 18px;"/>
-    <ListView fx:id="doneList" prefWidth="300" prefHeight="200"/>
+    <Button fx:id="backToList" id="backToList" onAction="#backToList" text="Back To Tasks"></Button>
+    <Label fx:id="lblDoneTask" text="Done Tasks" style="-fx-font-size: 18px;"/>
+    <ListView fx:id="doneList" prefWidth="300" prefHeight="200" />
 </VBox>

@@ -32,30 +32,18 @@ public class TaskController extends BaseController {
     @FXML
     private ChoiceBox<String> statusChoice;
 
-    @FXML
-    private Button btnAddTask;
-    @FXML
-    private Button btnDeleteTask;
-    @FXML
-    private Button btnEditTask;
-    @FXML
-    private Button btnCalendarView;
-    @FXML
-    private Button btnDoneTasks;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnSave;
-    @FXML
-    private Label lblAddTask;
-    @FXML
-    private Label lblAddTitle;
-    @FXML
-    private Label lblAddDescription;
-    @FXML
-    private Label lblAddDueDate;
-    @FXML
-    private Label lblAddStatus;
+    @FXML private Button btnAddTask;
+    @FXML private Button btnDeleteTask;
+    @FXML private Button btnEditTask;
+    @FXML private Button btnCalendarView;
+    @FXML private Button btnDoneTasks;
+    @FXML private Button btnCancel;
+    @FXML private Button btnSave;
+    @FXML private Label lblAddTask;
+    @FXML private Label lblAddTitle;
+    @FXML private Label lblAddDescription;
+    @FXML private Label lblAddDueDate;
+    @FXML private Label lblAddStatus;
 
 
     // Fields for TaskList.fxml
