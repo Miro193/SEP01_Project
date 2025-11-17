@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.LoginController"
-            prefWidth="400" prefHeight="250">
+            prefWidth="400" prefHeight="250" fx:id="rootAnchorPane">
     <children>
         <Label fx:id="headerLogin" text="Login" layoutX="170" layoutY="20" style="-fx-font-size: 18px;"/>
 
