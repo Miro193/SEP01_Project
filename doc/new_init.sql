@@ -33,8 +33,9 @@ CREATE TABLE translations (
     language VARCHAR(10) NOT NULL
 );
 
-
+-- english
 INSERT INTO translations (translation_key, translation_value, language) VALUES
+-- login
 ('headerLogin', 'Login', 'en'),
 ('lblUsername', 'Username', 'en'),
 ('lblPassword', 'Password', 'en'),
@@ -47,7 +48,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.loginMessage', 'Username and Password cannot be empty', 'en'),
 ('success.loginMessage', 'Login successful! Welcome', 'en'),
 ('invalid.message', 'Invalid username or password', 'en'),
-
+-- signup
 ('lblSignUp', 'Sign up', 'en'),
 ('lblUsername', 'Username:', 'en'),
 ('lblPassword', 'Password:', 'en'),
@@ -60,11 +61,11 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.usernameExists', 'Username already exists!', 'en'),
 ('success.title', 'Success', 'en'),
 ('success.accountCreated', 'Account created successfully!', 'en'),
-
+-- first view
 ('lblHeaderMyTasks', 'My Tasks', 'en'),
 ('btnEnterTask', 'Enter Task', 'en'),
 ('btnTaskLists', 'Task Lists', 'en'),
-
+-- tasklist
 ('btnAddTask', 'Add Task', 'en'),
 ('btnDeleteTask', 'Delete Task', 'en'),
 ('btnEditTask', 'Edit Task', 'en'),
@@ -79,9 +80,12 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.deleteMessage', 'Please select a task to delete', 'en'),
 ('error.taskSelectMessage', 'No task selected', 'en'),
 ('success.taskAddMessage', 'Task has been added successfully!', 'en'),
-
+('success.editTitle', 'Success', 'en'),
+('success.taskEditMessage', 'Task has been updated successfully!', 'en'),
+('success.loginMessage', 'Login successful! Welcome!', 'en'),
+-- add task
 ('lblAddTask', 'Add New Task', 'en'),
-
+-- edit task
 ('lblEditTask', 'Edit Task', 'en'),
 ('lblTitle', 'Title:', 'en'),
 ('lblDescription', 'Description:', 'en'),
@@ -89,7 +93,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('lblStatus', 'Status:', 'en'),
 ('btnCancel', 'Cancel', 'en'),
 ('btnSave', 'Save', 'en'),
-
+-- calendar
 ('lblCalendarView', '7-Day Calendar View', 'en'),
 ('btnBackToTaskList', 'Back to Task List', 'en'),
 
@@ -104,11 +108,13 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('success.updated', 'Task has been updated successfully!', 'en'),
 
 ('window.taskList.title', 'Tasks', 'en'),
-
+-- done task
 ('backToList', 'Back To Tasks', 'en'),
 ('lblDoneTask', 'Done Tasks', 'en');
 
+-- finnish
 INSERT INTO translations (translation_key, translation_value, language) VALUES
+-- login
 ('headerLogin', 'Kirjaudu sisään', 'fi'),
 ('lblUsername', 'Käyttäjätunnus', 'fi'),
 ('lblPassword', 'Salasana', 'fi'),
@@ -121,7 +127,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.loginMessage', 'Käyttäjätunnus ja salasana eivät voi olla tyhjiä', 'fi'),
 ('success.loginMessage', 'Kirjautuminen onnistui! Tervetuloa', 'fi'),
 ('invalid.message', 'Virheellinen käyttäjätunnus tai salasana', 'fi'),
-
+-- signup
 ('lblSignUp', 'Rekisteröidy', 'fi'),
 ('lblUsername', 'Käyttäjätunnus:', 'fi'),
 ('lblPassword', 'Salasana:', 'fi'),
@@ -134,11 +140,11 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.usernameExists', 'Käyttäjätunnus on jo olemassa!', 'fi'),
 ('success.title', 'Onnistui', 'fi'),
 ('success.accountCreated', 'Tili luotu onnistuneesti!', 'fi'),
-
+-- first view
 ('lblHeaderMyTasks', 'Omat tehtävät', 'fi'),
 ('btnEnterTask', 'Lisää tehtävä', 'fi'),
 ('btnTaskLists', 'Tehtävälistat', 'fi'),
-
+-- task list
 ('btnAddTask', 'Lisää tehtävä', 'fi'),
 ('btnDeleteTask', 'Poista tehtävä', 'fi'),
 ('btnEditTask', 'Muokkaa tehtävää', 'fi'),
@@ -153,9 +159,13 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.deleteMessage', 'Valitse poistettava tehtävä', 'fi'),
 ('error.taskSelectMessage', 'Tehtävää ei valittu', 'fi'),
 ('success.taskAddMessage', 'Tehtävä lisätty onnistuneesti!', 'fi'),
+('success.editTitle', 'Success', 'en'),
+('success.taskEditMessage', 'Task has been updated successfully!', 'en'),
 
+('success.taskEditMessage', 'Tehtävä muokattu onnistuneesti!', 'fi'),
+-- add task
 ('lblAddTask', 'Lisää uusi tehtävä', 'fi'),
-
+-- adit task
 ('lblEditTask', 'Muokkaa tehtävää', 'fi'),
 ('lblTitle', 'Otsikko:', 'fi'),
 ('lblDescription', 'Kuvaus:', 'fi'),
@@ -163,7 +173,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('lblStatus', 'Tila:', 'fi'),
 ('btnCancel', 'Peruuta', 'fi'),
 ('btnSave', 'Tallenna', 'fi'),
-
+-- calendar
 ('lblCalendarView', '7 päivän kalenterinäkymä', 'fi'),
 ('btnBackToTaskList', 'Takaisin tehtävälistaan', 'fi'),
 
@@ -178,11 +188,13 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('success.updated', 'Tehtävä päivitetty onnistuneesti!', 'fi'),
 
 ('window.taskList.title', 'Tehtävät', 'fi'),
-
+-- done task
 ('backToList', 'Takaisin tehtäviin', 'fi'),
 ('lblDoneTask', 'Valmiit tehtävät', 'fi');
 
+-- chinese (simplified)
 INSERT INTO translations (translation_key, translation_value, language) VALUES
+-- login
 ('headerLogin', '登录', 'zh'),
 ('lblUsername', '用户名', 'zh'),
 ('lblPassword', '密码', 'zh'),
@@ -195,7 +207,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.loginMessage', '用户名和密码不能为空', 'zh'),
 ('success.loginMessage', '登录成功！欢迎', 'zh'),
 ('invalid.message', '用户名或密码无效', 'zh'),
-
+-- signup
 ('lblSignUp', '注册', 'zh'),
 ('lblUsername', '用户名:', 'zh'),
 ('lblPassword', '密码:', 'zh'),
@@ -208,11 +220,11 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.usernameExists', '用户名已存在！', 'zh'),
 ('success.title', '成功', 'zh'),
 ('success.accountCreated', '账户创建成功！', 'zh'),
-
+-- first view
 ('lblHeaderMyTasks', '我的任务', 'zh'),
 ('btnEnterTask', '输入任务', 'zh'),
 ('btnTaskLists', '任务列表', 'zh'),
-
+-- task list
 ('btnAddTask', '添加任务', 'zh'),
 ('btnDeleteTask', '删除任务', 'zh'),
 ('btnEditTask', '编辑任务', 'zh'),
@@ -227,9 +239,11 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.deleteMessage', '请选择要删除的任务', 'zh'),
 ('error.taskSelectMessage', '未选择任务', 'zh'),
 ('success.taskAddMessage', '任务已成功添加！', 'zh'),
-
+('success.editTitle', 'Success', 'en'),
+('success.taskEditMessage', '任务已成功更新！', 'zh'),
+-- add task
 ('lblAddTask', '添加新任务', 'zh'),
-
+-- edit task
 ('lblEditTask', '编辑任务', 'zh'),
 ('lblTitle', '标题:', 'zh'),
 ('lblDescription', '描述:', 'zh'),
@@ -237,7 +251,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('lblStatus', '状态:', 'zh'),
 ('btnCancel', '取消', 'zh'),
 ('btnSave', '保存', 'zh'),
-
+-- calendar
 ('lblCalendarView', '7天日历视图', 'zh'),
 ('btnBackToTaskList', '返回任务列表', 'zh'),
 
@@ -252,12 +266,13 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('success.updated', '任务已成功更新！', 'zh'),
 
 ('window.taskList.title', '任务', 'zh'),
-
+-- done task
 ('backToList', '返回任务', 'zh'),
 ('lblDoneTask', '已完成任务', 'zh');
 
-
+-- persian
 INSERT INTO translations (translation_key, translation_value, language) VALUES
+-- login
 ('headerLogin', 'ورود', 'fa'),
 ('lblUsername', 'نام کاربری', 'fa'),
 ('lblPassword', 'رمز عبور', 'fa'),
@@ -270,7 +285,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.loginMessage', 'نام کاربری و رمز عبور نمی‌تواند خالی باشد', 'fa'),
 ('success.loginMessage', 'ورود موفقیت‌آمیز! خوش آمدید', 'fa'),
 ('invalid.message', 'نام کاربری یا رمز عبور نامعتبر است', 'fa'),
-
+-- signup
 ('lblSignUp', 'ثبت نام', 'fa'),
 ('lblUsername', 'نام کاربری:', 'fa'),
 ('lblPassword', 'رمز عبور:', 'fa'),
@@ -283,7 +298,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.usernameExists', 'نام کاربری از قبل وجود دارد!', 'fa'),
 ('success.title', 'موفقیت', 'fa'),
 ('success.accountCreated', 'حساب با موفقیت ایجاد شد!', 'fa'),
-
+-- first view
 ('lblHeaderMyTasks', 'وظایف من', 'fa'),
 ('btnEnterTask', 'افزودن وظیفه', 'fa'),
 ('btnTaskLists', 'لیست وظایف', 'fa'),
@@ -302,7 +317,8 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.deleteMessage', 'لطفاً یک وظیفه برای حذف انتخاب کنید', 'fa'),
 ('error.taskSelectMessage', 'هیچ وظیفه‌ای انتخاب نشده است', 'fa'),
 ('success.taskAddMessage', 'وظیفه با موفقیت اضافه شد!', 'fa'),
-
+('success.taskEditMessage', 'وظیفه با موفقیت به‌روزرسانی شد!', 'fa'),
+('success.title', 'موفقیت', 'fa'),
 ('lblAddTask', 'افزودن وظیفه جدید', 'fa'),
 
 ('lblEditTask', 'ویرایش وظیفه', 'fa'),
