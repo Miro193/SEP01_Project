@@ -1,6 +1,8 @@
 -- Reset and initialize StudyPlanner (main database)
 DROP DATABASE IF EXISTS StudyPlanner;
-CREATE DATABASE StudyPlanner;
+CREATE DATABASE StudyPlanner
+    CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
 USE StudyPlanner;
 
 -- Users table
@@ -29,13 +31,10 @@ CREATE TABLE translations (
     translation_key VARCHAR(100) NOT NULL,
     translation_value VARCHAR(255) NOT NULL,
     language VARCHAR(10) NOT NULL
-
 );
 
 
 INSERT INTO translations (translation_key, translation_value, language) VALUES
-
-
 ('headerLogin', 'Login', 'en'),
 ('lblUsername', 'Username', 'en'),
 ('lblPassword', 'Password', 'en'),
@@ -49,14 +48,12 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('success.loginMessage', 'Login successful! Welcome', 'en'),
 ('invalid.message', 'Invalid username or password', 'en'),
 
-
 ('lblSignUp', 'Sign up', 'en'),
 ('lblUsername', 'Username:', 'en'),
 ('lblPassword', 'Password:', 'en'),
 ('lblConfirm', 'Confirm:', 'en'),
 ('btnCreateAccount', 'Create Account', 'en'),
 ('btnBackToLogin', 'Back to Login', 'en'),
-
 
 ('error.title', 'Error', 'en'),
 ('error.fillAll', 'Please fill all fields!', 'en'),
@@ -83,6 +80,8 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.taskSelectMessage', 'No task selected', 'en'),
 ('success.taskAddMessage', 'Task has been added successfully!', 'en'),
 
+('lblAddTask', 'Add New Task', 'en'),
+
 ('lblEditTask', 'Edit Task', 'en'),
 ('lblTitle', 'Title:', 'en'),
 ('lblDescription', 'Description:', 'en'),
@@ -108,7 +107,6 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 
 ('backToList', 'Back To Tasks', 'en'),
 ('lblDoneTask', 'Done Tasks', 'en');
-
 
 INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('headerLogin', 'Kirjaudu sisään', 'fi'),
@@ -155,6 +153,8 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.deleteMessage', 'Valitse poistettava tehtävä', 'fi'),
 ('error.taskSelectMessage', 'Tehtävää ei valittu', 'fi'),
 ('success.taskAddMessage', 'Tehtävä lisätty onnistuneesti!', 'fi'),
+
+('lblAddTask', 'Lisää uusi tehtävä', 'fi'),
 
 ('lblEditTask', 'Muokkaa tehtävää', 'fi'),
 ('lblTitle', 'Otsikko:', 'fi'),
@@ -228,6 +228,8 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.taskSelectMessage', '未选择任务', 'zh'),
 ('success.taskAddMessage', '任务已成功添加！', 'zh'),
 
+('lblAddTask', '添加新任务', 'zh'),
+
 ('lblEditTask', '编辑任务', 'zh'),
 ('lblTitle', '标题:', 'zh'),
 ('lblDescription', '描述:', 'zh'),
@@ -300,6 +302,8 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('error.deleteMessage', 'لطفاً یک وظیفه برای حذف انتخاب کنید', 'fa'),
 ('error.taskSelectMessage', 'هیچ وظیفه‌ای انتخاب نشده است', 'fa'),
 ('success.taskAddMessage', 'وظیفه با موفقیت اضافه شد!', 'fa'),
+
+('lblAddTask', 'افزودن وظیفه جدید', 'fa'),
 
 ('lblEditTask', 'ویرایش وظیفه', 'fa'),
 ('lblTitle', 'عنوان:', 'fa'),
