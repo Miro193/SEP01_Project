@@ -46,7 +46,7 @@ public class LoginController extends BaseController {
         String password = passwordField.getText();
 
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert("Error", "Username and Password cannot be empty");
+            showAlert(getTranslation("error.title"), getTranslation("error.loginMessage"));
             return;
         }
 
@@ -54,11 +54,13 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-            showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.loginMessage") + user.getUsername());
+            showAlert(getTranslation("success.title"),getTranslation("success.loginMessage") + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
+
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
             window.setScene(firstViewScene);
             window.show();
         } else {
@@ -85,6 +87,7 @@ public class LoginController extends BaseController {
     }
     @FXML
     private void languageTexts() {
+        //set texts
         headerLogin.setText(LanguageManager.getTranslation("headerLogin"));
         lblUsername.setText(LanguageManager.getTranslation("lblUsername"));
         lblPassword.setText(LanguageManager.getTranslation("lblPassword"));
@@ -108,38 +111,29 @@ public class LoginController extends BaseController {
     }
 
     @FXML
-    public void onEnglishClick(ActionEvent event) throws IOException {
+    public void onEnglishClick(ActionEvent event)  {
         LanguageManager.setLanguage("en", "US");
-        reloadScene(event);
+        updateLanguage();
+        languageTexts();
 
     }
 
     @FXML
-    public void onPersianClick(ActionEvent event) throws IOException {
+    public void onPersianClick(ActionEvent event) {
         LanguageManager.setLanguage("fa", "IR");
-        reloadScene(event);
+        updateLanguage();
+        languageTexts();
 
     }
 
     @FXML
-    public void onChineseClick(ActionEvent event) throws IOException {
+    public void onChineseClick(ActionEvent event)  {
         LanguageManager.setLanguage("zh", "CN");
-        reloadScene(event);
+        updateLanguage();
+        languageTexts();
 
     }
-    // tarkistetaan vielä metodi
-    private void reloadScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/Login.fxml")
-               // LanguageManager.getBundle()  // Pass current ResourceBundle here
-        );
-        Parent root = loader.load();
 
-        // use the MenuButton (btnLanguage) to find the Stage
-        Stage stage = (Stage) btnLanguage.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
 
 
 }

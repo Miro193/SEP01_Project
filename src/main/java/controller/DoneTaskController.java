@@ -14,13 +14,12 @@ import javafx.scene.control.ListView;
 
 import java.io.IOException;
 import java.util.List;
+import utils.LanguageManager;
 
 public class DoneTaskController {
 
     @FXML private ListView<String> doneList;
 
-    @FXML
-    private Button backToTasks;
 
     private TaskDao taskDAO = new TaskDao();
 
@@ -32,9 +31,12 @@ public class DoneTaskController {
         window.setScene(taskListsScene);
         window.show();
     }
-
+    @FXML
     public void initialize() {
         loadDoneTasks();
+        updateLanguage();
+        languageTexts();
+
     }
 
     private void loadDoneTasks() {

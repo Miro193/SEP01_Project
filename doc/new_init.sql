@@ -23,7 +23,7 @@ CREATE TABLE Task (
     FOREIGN KEY (user_id) REFERENCES Users(id)
 );
 
---Stores interface text translations
+-- Stores interface text translations
 CREATE TABLE translations (
     translation_id INT PRIMARY KEY AUTO_INCREMENT,
     translation_key VARCHAR(100) NOT NULL,
