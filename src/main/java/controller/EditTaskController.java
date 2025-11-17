@@ -69,7 +69,7 @@ public class EditTaskController extends BaseController {
 
         taskDao.update(selectedTask);
 
-        showAlert("Success", "Task has been updated successfully!");
+        showAlert(LanguageManager.getTranslation("success.editTitle"), LanguageManager.getTranslation("success.taskEditMessage"));
         navigateBack(event);
     }
 

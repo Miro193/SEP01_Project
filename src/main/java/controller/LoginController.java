@@ -1,6 +1,8 @@
 package controller;
 
 import dao.UserDao;
+import javafx.scene.layout.AnchorPane;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,8 @@ import javafx.stage.Stage;
 import model.CurrentUser;
 import model.User;
 import java.io.IOException;
+import java.util.Locale;
+
 import utils.LanguageManager;
 
 public class LoginController extends BaseController {
@@ -27,17 +31,15 @@ public class LoginController extends BaseController {
     @FXML private MenuItem itemPersian;
     @FXML private MenuItem itemChinese;
     @FXML private MenuItem itemEnglish;
+    @FXML private AnchorPane rootAnchorPane;
 
 
     private UserDao userDao = new UserDao();
-
-
 
     @FXML
     public void initialize() {
         updateLanguage();
         languageTexts();
-
     }
 
     @FXML
@@ -67,11 +69,11 @@ public class LoginController extends BaseController {
             showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("invalid.message"));
         }
     }
+
     @FXML
     private void handleSignupRedirect(ActionEvent event) throws IOException {
         Parent signUpRoot = FXMLLoader.load(getClass().getResource("/SignUp.fxml"));
         Scene signUpScene = new Scene(signUpRoot);
-
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -85,6 +87,7 @@ public class LoginController extends BaseController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
     @FXML
     private void languageTexts() {
         //set texts
@@ -97,17 +100,6 @@ public class LoginController extends BaseController {
         itemPersian.setText(LanguageManager.getTranslation("itemPersian"));
         itemChinese.setText(LanguageManager.getTranslation("itemChinese"));
         itemEnglish.setText(LanguageManager.getTranslation("itemEnglish"));
-
-        // Right-to-left for Persian  //Labels appear on the right of fields.
-        //Text flows right-to-left.
-      /*  if (language.equals("fa") || language.equalsIgnoreCase("ar")) {
-            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        } else {
-            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        }
-
-        // Optionally set default locale
-        Locale.setDefault(locale);*/
     }
 
     @FXML
@@ -115,7 +107,6 @@ public class LoginController extends BaseController {
         LanguageManager.setLanguage("en", "US");
         updateLanguage();
         languageTexts();
-
     }
 
     @FXML
@@ -123,7 +114,6 @@ public class LoginController extends BaseController {
         LanguageManager.setLanguage("fa", "IR");
         updateLanguage();
         languageTexts();
-
     }
 
     @FXML
@@ -131,9 +121,25 @@ public class LoginController extends BaseController {
         LanguageManager.setLanguage("zh", "CN");
         updateLanguage();
         languageTexts();
-
     }
 
-
-
+    // Right-to-left for Persian  //Labels appear on the right of fields.
+//    private void applyTextDirection(Locale locale) {
+//        locale = new Locale("fa", "IR");
+//        String lang = LanguageManager.setLanguage();
+//        boolean isRTL = lang.equals("fa") || lang.equals("ur") || lang.equals("ar") || lang.equals("he");
+//
+//        Platform.runLater(() -> {
+//            if (rootAnchorPane != null) {
+//                // Flip the full layout direction
+//                rootAnchorPane.setNodeOrientation(
+//                        isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+//                );
+//            }
+//
+//            // Align text fields
+//            tfWeight.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+//            tfHeight.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+//        });
+//    }
 }
