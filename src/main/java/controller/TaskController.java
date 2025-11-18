@@ -1,6 +1,7 @@
 package controller;
 import utils.LanguageManager;
 import dao.TaskDao;
+import java.io.IOException;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,8 +15,6 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
-
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -74,7 +73,7 @@ public class TaskController extends BaseController {
 
         // Initialization logic for TaskList.fxml
         if (taskTable != null && CurrentUser.get() != null) {
-            List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
+            List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getUserID());
             taskListObservable = FXCollections.observableArrayList(tasks);
 
             titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
@@ -105,7 +104,7 @@ public class TaskController extends BaseController {
     private void handleEditTask(ActionEvent event) throws IOException {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
-            LanguageManager.getTranslation("error.noTaskmessage");
+            LanguageManager.getTranslation("error.noTaskMessage");
             return;
         }
 
@@ -141,14 +140,11 @@ public class TaskController extends BaseController {
         navigate(event, "/DoneTask.fxml");
     }
 
-
-
     @FXML
     private void handleCancel(ActionEvent event) throws IOException {
         navigate(event, "/TaskList.fxml");
     }
 
-    // Helper methods
     private void navigate(ActionEvent event, String fxmlPath) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
         Scene scene = new Scene(root);

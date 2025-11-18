@@ -37,7 +37,7 @@ class TaskDaoTest {
 
     @AfterEach
     void cleanUp() throws Exception {
-        try (Statement stmt = conn.createStatement();) {
+        try (Statement stmt = conn.createStatement()) {
             stmt.execute("DELETE FROM task");
         }
     }
@@ -53,9 +53,9 @@ class TaskDaoTest {
         task.setLanguage("en");
 
         taskDao.persist(task);
-        assertNotNull(task.getId());
+        assertNotNull(task.getTaskId());
 
-        Task found = taskDao.find(task.getId());
+        Task found = taskDao.find(task.getTaskId());
         assertNotNull(found);
         assertEquals("Test Task", found.getTitle());
         assertEquals("Test Desc", found.getDescription());
@@ -65,6 +65,7 @@ class TaskDaoTest {
     @Test
     void testUpdate() {
         Task task = new Task();
+        task.setTaskId(1);
         task.setUserId(1);
         task.setTitle("Test Title");
         task.setDescription("Test Desc");
@@ -72,20 +73,20 @@ class TaskDaoTest {
         task.setDueDate(LocalDateTime.now());
 
         taskDao.persist(task);
-        assertNotNull(task.getId());
+        assertNotNull(task.getTaskId());
 
         task.setTitle("Updated Title");
         taskDao.update(task);
 
-        Task updated = taskDao.find(task.getId());
+        Task updated = taskDao.find(task.getTaskId());
         assertEquals("Updated Title", updated.getTitle());
     }
 
     @Test
-//    @DisplayName("Test to findAll user tasks")
     void testFindAll() {
         Task task1 = new Task();
-        task1.setUserId(3);
+        task1.setTaskId(1);
+        task1.setUserId(1);
         task1.setTitle("Task 1");
         task1.setDescription("Desc 1");
         task1.setStatus("TODO");
@@ -94,6 +95,7 @@ class TaskDaoTest {
         taskDao.persist(task1);
 
         Task task2 = new Task();
+        task2.setTaskId(2);
         task2.setUserId(2);
         task2.setTitle("Task 2");
         task2.setDescription("Desc 2");
@@ -117,8 +119,8 @@ class TaskDaoTest {
         task.setDueDate(LocalDateTime.now());
         taskDao.persist(task);
 
-        assertNotNull(task.getId());
-        int taskId = task.getId();
+        assertNotNull(task.getTaskId());
+        int taskId = task.getTaskId();
         taskDao.delete(task);
         Task deleted = taskDao.find(taskId);
         assertNull(deleted);

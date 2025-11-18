@@ -46,7 +46,7 @@ public class DoneTaskController extends BaseController {
             return;
         }
 
-        List<Task> tasks = taskDAO.getTasksByUserId(CurrentUser.get().getId());
+        List<Task> tasks = taskDAO.getTasksByUserId(CurrentUser.get().getUserID());
         for (Task task : tasks) {
             if ("Done".equalsIgnoreCase(task.getStatus())) {
                 doneList.getItems().add(task.getTitle());

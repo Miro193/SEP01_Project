@@ -1,7 +1,7 @@
 package model;
 
 public class User {
-    private int id;
+    private int userID;
     private String username;
     private String password;
     private String confirmPassword;
@@ -18,12 +18,12 @@ public class User {
         this.password = password;
     }
 
-    public int getId() {
-        return id;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -48,6 +48,6 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{id=" + id + ", username='" + username + "'}";
+        return "User{id=" + userID + ", username='" + username + "'}";
     }
 }
