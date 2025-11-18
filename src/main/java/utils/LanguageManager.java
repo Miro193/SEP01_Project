@@ -1,5 +1,8 @@
 package utils;
 
+import javafx.application.Platform;
+import javafx.geometry.NodeOrientation;
+
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -20,4 +23,7 @@ public class LanguageManager {
     public static Locale getCurrentLocale() {
         return currentLocale;
     }
+
+
+
 }

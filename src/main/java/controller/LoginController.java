@@ -9,13 +9,12 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.User;
 import java.io.IOException;
 import utils.LanguageManager;
-//import java.util.Locale;
-//import java.util.ResourceBundle;
 
 public class LoginController extends BaseController {
     @FXML private Label headerLogin;
@@ -29,6 +28,7 @@ public class LoginController extends BaseController {
     @FXML private MenuItem itemPersian;
     @FXML private MenuItem itemChinese;
     @FXML private MenuItem itemEnglish;
+    @FXML private AnchorPane rootAnchorPane;
 
 
     private UserDao userDao = new UserDao();
@@ -39,6 +39,7 @@ public class LoginController extends BaseController {
     public void initialize() {
         updateLanguage();
         languageTexts();
+        applyTextDirection();
 
     }
 
@@ -78,6 +79,7 @@ public class LoginController extends BaseController {
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         window.setScene(signUpScene);
+        window.setTitle("Sign Up");
         window.show();
     }
 
@@ -100,16 +102,25 @@ public class LoginController extends BaseController {
         itemChinese.setText(rb.getString("itemChinese.text"));
         itemEnglish.setText(rb.getString("itemEnglish.text"));
 
-        // Right-to-left for Persian  //Labels appear on the right of fields.
-        //Text flows right-to-left.
-      /*  if (language.equals("fa") || language.equalsIgnoreCase("ar")) {
-            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        } else {
-            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
+    }
+
+    private void applyTextDirection() {
+        String lang = LanguageManager.getCurrentLocale().getLanguage();
+        boolean isRTL = lang.equals("fa");
+
+        if (rootAnchorPane != null) {
+            rootAnchorPane.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
         }
 
-        // Optionally set default locale
-        Locale.setDefault(locale);*/
+        // Apply to text fields
+        if (usernameField != null) {
+            usernameField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
+        if (passwordField != null) {
+            passwordField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
     }
 
     @FXML

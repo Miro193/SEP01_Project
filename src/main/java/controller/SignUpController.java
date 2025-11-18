@@ -13,14 +13,14 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.User;
 import java.io.IOException;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.layout.AnchorPane;
 
-//import utils.LanguageManager;
-
-//import java.util.Locale;
-//import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import utils.LanguageManager;
+
 public class SignUpController extends BaseController {
 
     @FXML
@@ -43,6 +43,8 @@ public class SignUpController extends BaseController {
     private Button btnCreateAccount;
     @FXML
     private Button btnBackToLogin;
+    @FXML
+    private AnchorPane rootAnchorPane;
 
     private UserDao userDao = new UserDao();
     //private ResourceBundle rb;
@@ -52,6 +54,7 @@ public class SignUpController extends BaseController {
     public void initialize() {
         updateLanguage(); //from BaseController
         languageTexts();
+        applyTextDirection();
 
     }
 
@@ -104,12 +107,9 @@ public class SignUpController extends BaseController {
         alert.showAndWait();
     }
 
+
     @FXML
     private void languageTexts() {
-        // Locale locale = new Locale(language, country);
-        //rb = ResourceBundle.getBundle("MessagesBundle", locale);
-
-        //set texts
         lblSignUp.setText(rb.getString("lblSignUp.text"));
         lblUsername.setText(rb.getString("lblUsername.text"));
         lblPassword.setText(rb.getString("lblPassword.text"));
@@ -118,6 +118,27 @@ public class SignUpController extends BaseController {
         btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
 
 
+    }
+    private void applyTextDirection() {
+        String lang = LanguageManager.getCurrentLocale().getLanguage();
+        boolean isRTL = lang.equals("fa");
+
+        if (rootAnchorPane != null) {
+            rootAnchorPane.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
+        }
+
+        // Apply to text fields
+        if (usernameField != null) {
+            usernameField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
+        if (passwordField != null) {
+            passwordField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
+        if (confirmPasswordField != null) {
+            confirmPasswordField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
     }
 
 }
