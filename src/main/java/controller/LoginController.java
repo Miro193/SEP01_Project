@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import model.CurrentUser;
 import model.User;
 import java.io.IOException;
-import java.util.Locale;
 
 import utils.LanguageManager;
 
@@ -40,6 +39,7 @@ public class LoginController extends BaseController {
     public void initialize() {
         updateLanguage();
         languageTexts();
+        applyTextDirection();
     }
 
     @FXML
@@ -90,7 +90,6 @@ public class LoginController extends BaseController {
 
     @FXML
     private void languageTexts() {
-        //set texts
         headerLogin.setText(LanguageManager.getTranslation("headerLogin"));
         lblUsername.setText(LanguageManager.getTranslation("lblUsername"));
         lblPassword.setText(LanguageManager.getTranslation("lblPassword"));
@@ -100,6 +99,25 @@ public class LoginController extends BaseController {
         itemPersian.setText(LanguageManager.getTranslation("itemPersian"));
         itemChinese.setText(LanguageManager.getTranslation("itemChinese"));
         itemEnglish.setText(LanguageManager.getTranslation("itemEnglish"));
+    }
+
+    private void applyTextDirection() {
+        String lang = LanguageManager.getCurrentLocale().getLanguage();
+        boolean isRTL = lang.equals("fa");
+
+        if (rootAnchorPane != null) {
+            rootAnchorPane.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
+        }
+
+        // Apply to text fields
+        if (usernameField != null) {
+            usernameField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
+        if (passwordField != null) {
+            passwordField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+        }
     }
 
     @FXML
@@ -123,23 +141,4 @@ public class LoginController extends BaseController {
         languageTexts();
     }
 
-    // Right-to-left for Persian  //Labels appear on the right of fields.
-//    private void applyTextDirection(Locale locale) {
-//        locale = new Locale("fa", "IR");
-//        String lang = LanguageManager.setLanguage();
-//        boolean isRTL = lang.equals("fa") || lang.equals("ur") || lang.equals("ar") || lang.equals("he");
-//
-//        Platform.runLater(() -> {
-//            if (rootAnchorPane != null) {
-//                // Flip the full layout direction
-//                rootAnchorPane.setNodeOrientation(
-//                        isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
-//                );
-//            }
-//
-//            // Align text fields
-//            tfWeight.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
-//            tfHeight.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
-//        });
-//    }
 }

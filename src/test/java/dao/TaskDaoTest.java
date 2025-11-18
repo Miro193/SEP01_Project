@@ -20,10 +20,9 @@ class TaskDaoTest {
 
     @BeforeAll
     static void setupDB() throws Exception {
-//        taskDao = new TaskDao();
         conn = DriverManager.getConnection("jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1");
         Statement stmt = conn.createStatement();
-        stmt.execute("CREATE TABLE task (task_id INT AUTO_INCREMENT PRIMARY KEY, user_id INT, title VARCHAR(255), description VARCHAR(255), status VARCHAR(50), dueDate TIMESTAMP)");
+        stmt.execute("CREATE TABLE task (task_id INT AUTO_INCREMENT PRIMARY KEY, user_id INT, title VARCHAR(255), description VARCHAR(255), status VARCHAR(50), dueDate TIMESTAMP, language VARCHAR(50))");
     }
 
     @AfterAll
@@ -38,8 +37,9 @@ class TaskDaoTest {
 
     @AfterEach
     void cleanUp() throws Exception {
-        Statement stmt = conn.createStatement();
-        stmt.execute("DELETE FROM task");
+        try (Statement stmt = conn.createStatement();) {
+            stmt.execute("DELETE FROM task");
+        }
     }
 
     @Test
@@ -50,6 +50,7 @@ class TaskDaoTest {
         task.setDescription("Test Desc");
         task.setStatus("TODO");
         task.setDueDate(LocalDateTime.now());
+        task.setLanguage("en");
 
         taskDao.persist(task);
         assertNotNull(task.getId());
@@ -89,6 +90,7 @@ class TaskDaoTest {
         task1.setDescription("Desc 1");
         task1.setStatus("TODO");
         task1.setDueDate(LocalDateTime.now());
+        task1.setLanguage("en");
         taskDao.persist(task1);
 
         Task task2 = new Task();
@@ -97,6 +99,7 @@ class TaskDaoTest {
         task2.setDescription("Desc 2");
         task2.setStatus("DONE");
         task2.setDueDate(LocalDateTime.now());
+        task2.setLanguage("en");
         taskDao.persist(task2);
 
         List<Task> allTasks = taskDao.findAll();
@@ -137,6 +140,7 @@ class TaskDaoTest {
         task2.setDescription("Desc 2");
         task2.setStatus("DONE");
         task2.setDueDate(LocalDateTime.now());
+        task2.setLanguage("en");
         taskDao.persist(task2);
 
         List<Task> user1Tasks = taskDao.getTasksByUserId(1);
