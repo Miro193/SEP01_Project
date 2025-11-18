@@ -3,8 +3,10 @@ package utils;
 import java.util.Locale;
 import dao.LocalizationDao;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class LanguageManager {
+    private static Logger log = Logger.getLogger(LanguageManager.class.getName());
 
     private static Locale currentLocale = new Locale("en", "US");
     private static Map<String, String> localizedStrings;
@@ -27,7 +29,7 @@ public class LanguageManager {
             setLanguage("en", "US");
         }
         if (!localizedStrings.containsKey(key)) {
-            System.out.println("Translation key" +key+" not found for language: "+currentLocale.getLanguage());
+            log.info("Translation key" + key + " not found for language: " + currentLocale.getLanguage());
 
             return "TRANSLATION_MISSING";
         }

@@ -29,7 +29,7 @@ public class LoginController extends BaseController {
     @FXML private MenuItem itemEnglish;
 
 
-    private UserDao userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
 
 
@@ -37,7 +37,6 @@ public class LoginController extends BaseController {
     public void initialize() {
         updateLanguage();
         languageTexts();
-
     }
 
     @FXML
@@ -67,6 +66,7 @@ public class LoginController extends BaseController {
             showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("invalid.message"));
         }
     }
+
     @FXML
     private void handleSignupRedirect(ActionEvent event) throws IOException {
         Parent signUpRoot = FXMLLoader.load(getClass().getResource("/SignUp.fxml"));
