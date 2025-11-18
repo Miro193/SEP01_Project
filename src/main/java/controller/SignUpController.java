@@ -3,6 +3,7 @@ import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -10,6 +11,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
 import java.io.IOException;
@@ -38,13 +40,18 @@ public class SignUpController extends BaseController {
     private Button btnCreateAccount;
     @FXML
     private Button btnBackToLogin;
+    @FXML
+    private AnchorPane rootAnchorPane;
 
     private UserDao userDao = new UserDao();
+    private static final String ALIGN_RIGHT = "-fx-text-alignment: right;";
+    private static final String ALIGN_LEFT = "-fx-text-alignment: left;";
 
     @FXML
     public void initialize() {
         updateLanguage();
         languageTexts();
+        applyTextDirection();
 
     }
 
@@ -101,6 +108,28 @@ public class SignUpController extends BaseController {
         lblConfirm.setText(LanguageManager.getTranslation("lblConfirm"));
         btnCreateAccount.setText(LanguageManager.getTranslation("btnCreateAccount"));
         btnBackToLogin.setText(LanguageManager.getTranslation("btnBackToLogin"));
+    }
+    private void applyTextDirection() {
+        String lang = LanguageManager.getCurrentLocale().getLanguage();
+        boolean isRTL = lang.equals("fa");
+        String alignment = isRTL ? ALIGN_RIGHT : ALIGN_LEFT;
+
+        if (rootAnchorPane != null) {
+            rootAnchorPane.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
+        }
+
+        // Apply to text fields
+        if (usernameField != null ) {
+            usernameField.setStyle(alignment);
+        }
+        if (passwordField != null) {
+            passwordField.setStyle(alignment);
+        }
+        if (confirmPasswordField != null) {
+            confirmPasswordField.setStyle(alignment);
+        }
     }
 
 }

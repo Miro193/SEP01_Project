@@ -19,12 +19,9 @@ public class Task {
         this.description = description;
         this.dueDate = dueDate;
         this.status = status;
-        this.language = language;
     }
 
-
     public Task() {}
-
 
     public int getId() {
         return id;
