@@ -1,9 +1,7 @@
 package model;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserTest {
@@ -17,15 +15,14 @@ class UserTest {
         user2 = new User("Bob", "1234", "1234");
 
     }
-//    @DisplayName("Testing setId and getId: ");
+
     @Test
     void testSetAndGetId() {
         int identifier = 1;
-        user1.setId(identifier);
-        assertNotNull(user1.getId());
-        assertEquals(identifier, user1.getId());
-        assertNotEquals(5, user1.getId());
-
+        user1.setUserID(identifier);
+        assertNotNull(user1.getUserID());
+        assertEquals(identifier, user1.getUserID());
+        assertNotEquals(5, user1.getUserID());
     }
 
     @Test
@@ -34,7 +31,6 @@ class UserTest {
         user1.setUsername(username2);
         assertNotNull(user1.getUsername());
         assertEquals(username2, user1.getUsername());
-
     }
 
     @Test
@@ -68,5 +64,4 @@ class UserTest {
         user5.setConfirmPassword("1111");
         assertEquals(user5.getPassword(), user5.getConfirmPassword());
     }
-
 }

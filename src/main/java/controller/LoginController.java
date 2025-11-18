@@ -1,8 +1,7 @@
 package controller;
 
 import dao.UserDao;
-import javafx.scene.layout.AnchorPane;
-import javafx.application.Platform;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,14 +9,22 @@ import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.User;
-import java.io.IOException;
-
 import utils.LanguageManager;
 
+/**
+ * This is for login functionality.
+ */
 public class LoginController extends BaseController {
     @FXML private Label headerLogin;
     @FXML private Label lblUsername;
@@ -35,6 +42,10 @@ public class LoginController extends BaseController {
 
     private UserDao userDao = new UserDao();
 
+    /**
+     * This method is automatically called
+     * after the FXML file has been loaded.
+     */
     @FXML
     public void initialize() {
         updateLanguage();
@@ -56,7 +67,8 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-            showAlert(getTranslation("success.title"),getTranslation("success.loginMessage") + user.getUsername());
+            showAlert(getTranslation("success.title"),
+                    getTranslation("success.loginMessage") + user.getUsername());
             Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
             Scene firstViewScene = new Scene(firstViewRoot);
 
@@ -66,7 +78,8 @@ public class LoginController extends BaseController {
             window.setScene(firstViewScene);
             window.show();
         } else {
-            showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("invalid.message"));
+            showAlert(LanguageManager.getTranslation("error.title"),
+                    LanguageManager.getTranslation("invalid.message"));
         }
     }
 
@@ -88,6 +101,9 @@ public class LoginController extends BaseController {
         alert.showAndWait();
     }
 
+    /**
+     * Database localization texts.
+     */
     @FXML
     private void languageTexts() {
         headerLogin.setText(LanguageManager.getTranslation("headerLogin"));
@@ -113,13 +129,18 @@ public class LoginController extends BaseController {
 
         // Apply to text fields
         if (usernameField != null) {
-            usernameField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+            usernameField.setStyle(
+                    isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
         }
         if (passwordField != null) {
-            passwordField.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+            passwordField.setStyle(
+                    isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
         }
     }
 
+    /**
+     * Set language to English.
+     */
     @FXML
     public void onEnglishClick(ActionEvent event)  {
         LanguageManager.setLanguage("en", "US");
@@ -127,6 +148,9 @@ public class LoginController extends BaseController {
         languageTexts();
     }
 
+    /**
+     * Set language to Persian.
+     */
     @FXML
     public void onPersianClick(ActionEvent event) {
         LanguageManager.setLanguage("fa", "IR");
@@ -134,11 +158,13 @@ public class LoginController extends BaseController {
         languageTexts();
     }
 
+    /**
+     * Set language to Chinese.
+     */
     @FXML
     public void onChineseClick(ActionEvent event)  {
         LanguageManager.setLanguage("zh", "CN");
         updateLanguage();
         languageTexts();
     }
-
 }

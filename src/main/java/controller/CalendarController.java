@@ -48,7 +48,7 @@ public class CalendarController extends BaseController {
         LocalDate startDate = LocalDate.now();
         LocalDate endDate = startDate.plusDays(7);
 
-        List<Task> tasks = taskDao.getTasksByDateRange(CurrentUser.get().getId(), startDate, endDate);
+        List<Task> tasks = taskDao.getTasksByDateRange(CurrentUser.get().getUserID(), startDate, endDate);
         ObservableList<Task> taskListObservable = FXCollections.observableArrayList(tasks);
 
         titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));

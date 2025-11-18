@@ -1,5 +1,8 @@
 package controller;
+
+
 import dao.UserDao;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,50 +12,44 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.User;
-import java.io.IOException;
-import javafx.scene.control.*;
 import utils.LanguageManager;
 
+/**
+ * This is for register functionality.
+ */
 public class SignUpController extends BaseController {
 
-    @FXML
-    private Label lblSignUp;
-    @FXML
-    private Label lblUsername;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private Label lblPassword;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Label lblConfirm;
-    @FXML
-    private PasswordField confirmPasswordField;
-    @FXML
-    private Button btnSignUp;
-    @FXML
-    private Button btnCreateAccount;
-    @FXML
-    private Button btnBackToLogin;
-    @FXML
-    private AnchorPane rootAnchorPane;
+    @FXML private Label lblSignUp;
+    @FXML private Label lblUsername;
+    @FXML private TextField usernameField;
+    @FXML private Label lblPassword;
+    @FXML private PasswordField passwordField;
+    @FXML private Label lblConfirm;
+    @FXML private PasswordField confirmPasswordField;
+    @FXML private Button btnSignUp;
+    @FXML private Button btnCreateAccount;
+    @FXML private Button btnBackToLogin;
+    @FXML private AnchorPane rootAnchorPane;
 
     private UserDao userDao = new UserDao();
     private static final String ALIGN_RIGHT = "-fx-text-alignment: right;";
     private static final String ALIGN_LEFT = "-fx-text-alignment: left;";
 
+    /**
+     * This method is automatically called
+     * after the FXML file has been loaded.
+     */
     @FXML
     public void initialize() {
         updateLanguage();
         languageTexts();
         applyTextDirection();
-
     }
 
     @FXML
@@ -61,22 +58,24 @@ public class SignUpController extends BaseController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-
         if (username.isEmpty() || password.isEmpty()) {
-            showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.fillAll"));
+            showAlert(LanguageManager.getTranslation("error.title"),
+                    LanguageManager.getTranslation("error.fillAll"));
             return;
         }
 
         User existingUser = userDao.login(username, password);
         if (existingUser != null) {
-            showAlert(LanguageManager.getTranslation("error.title"), LanguageManager.getTranslation("error.usernameExists"));
+            showAlert(LanguageManager.getTranslation("error.title"),
+                    LanguageManager.getTranslation("error.usernameExists"));
             return;
         }
 
         User newUser = new User(username, password, confirmPassword);
         userDao.register(newUser);
 
-        showAlert(LanguageManager.getTranslation("success.title"), LanguageManager.getTranslation("success.accountCreated"));
+        showAlert(LanguageManager.getTranslation("success.title"),
+                LanguageManager.getTranslation("success.accountCreated"));
 
         handleLoginRedirect(event);
     }
@@ -85,7 +84,6 @@ public class SignUpController extends BaseController {
     private void handleLoginRedirect(ActionEvent event) throws IOException {
         Parent loginRoot = FXMLLoader.load(getClass().getResource("/Login.fxml"));
         Scene loginScene = new Scene(loginRoot);
-
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
@@ -109,6 +107,7 @@ public class SignUpController extends BaseController {
         btnCreateAccount.setText(LanguageManager.getTranslation("btnCreateAccount"));
         btnBackToLogin.setText(LanguageManager.getTranslation("btnBackToLogin"));
     }
+
     private void applyTextDirection() {
         String lang = LanguageManager.getCurrentLocale().getLanguage();
         boolean isRTL = lang.equals("fa");
@@ -121,7 +120,7 @@ public class SignUpController extends BaseController {
         }
 
         // Apply to text fields
-        if (usernameField != null ) {
+        if (usernameField != null) {
             usernameField.setStyle(alignment);
         }
         if (passwordField != null) {
