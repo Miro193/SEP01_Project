@@ -67,11 +67,12 @@ package dao;
 
 import datasource.ConnectionDB;
 import model.User;
-
 import java.sql.*;
+import java.util.logging.Logger;
 
 public class UserDao {
     private Connection testConn;
+    private static final Logger log = Logger.getLogger(UserDao.class.getName());
 
     public UserDao() {
         this.testConn = null;
@@ -99,19 +100,18 @@ public class UserDao {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    user.setId(rs.getInt(1));
+                    user.setUserID(rs.getInt(1));
                 }
             }
 
         } catch (SQLException e) {
-            System.err.println("Registration error: " + e.getMessage());
+            log.severe("Registration error: " + e.getMessage());
         }
     }
 
     public User login(String username, String password) {
-       // String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
           String sql =
-                  "SELECT username, password," +
+                  "SELECT id, username, password " +
                           "FROM users " +
                           "WHERE username = ? AND password = ? ";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
@@ -124,13 +124,12 @@ public class UserDao {
                             rs.getString("username"),
                             rs.getString("password")
                     );
-                    user.setId(rs.getInt("id"));
+                    user.setUserID(rs.getInt("id"));
                     return user;
                 }
             }
-
         } catch (SQLException e) {
-            System.err.println("Login error: " + e.getMessage());
+            log.severe("Login error: " + e.getMessage());
         }
         return null;
     }

@@ -1,9 +1,7 @@
 package controller;
 
 import dao.TaskDao;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,8 +20,6 @@ import utils.LanguageManager;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 public class AddTaskController extends BaseController {
     @FXML private TextField titleField;
@@ -73,7 +69,7 @@ public class AddTaskController extends BaseController {
         }
 
         Task newTask = new Task();
-        newTask.setUserId(CurrentUser.get().getId());
+        newTask.setUserId(CurrentUser.get().getUserID());
         newTask.setTitle(title);
         newTask.setDescription(description);
         newTask.setDueDate(dueDate);

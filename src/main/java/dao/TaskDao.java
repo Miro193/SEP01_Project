@@ -39,7 +39,7 @@ public class TaskDao {
 
             try (ResultSet rs = stmt.getGeneratedKeys()) {
                 if (rs.next()) {
-                    task.setId(rs.getInt(1));
+                    task.setTaskId(rs.getInt(1));
                 }
             }
         } catch (SQLException e) {
@@ -48,7 +48,6 @@ public class TaskDao {
     }
 
     public Task find(int id) {
-       // String sql = "SELECT * FROM task WHERE task_id = ?";
         String sql =
                 "SELECT task_id, user_id, title, description, status, dueDate " +
                         "FROM task " +
@@ -70,8 +69,7 @@ public class TaskDao {
 
     public List<Task> findAll() {
         List<Task> tasks = new ArrayList<>();
-       // String sql = "SELECT * FROM task";
-          String sql = "SELECT task_id, title, description, status, dueDate FROM task";
+          String sql = "SELECT task_id, user_id, title, description, status, dueDate FROM task";
 
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -131,7 +129,7 @@ public class TaskDao {
             stmt.setString(2, task.getDescription());
             stmt.setString(3, task.getStatus());
             stmt.setTimestamp(4, Timestamp.valueOf(task.getDueDate()));
-            stmt.setInt(5, task.getId());
+            stmt.setInt(5, task.getTaskId());
 
             stmt.executeUpdate();
 
@@ -139,13 +137,12 @@ public class TaskDao {
             e.printStackTrace();
         }
     }
-
 
     public void delete(Task task) {
         String sql = "DELETE FROM task WHERE task_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
-            stmt.setInt(1, task.getId());
+            stmt.setInt(1, task.getTaskId());
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -153,10 +150,9 @@ public class TaskDao {
         }
     }
 
-
     private Task mapResultSetToTask(ResultSet rs) throws SQLException {
         Task task = new Task();
-        task.setId(rs.getInt("task_id"));
+        task.setTaskId(rs.getInt("task_id"));
         task.setUserId(rs.getInt("user_id"));
         task.setTitle(rs.getString("title"));
         task.setDescription(rs.getString("description"));
@@ -166,8 +162,6 @@ public class TaskDao {
         if (ts != null) {
             task.setDueDate(ts.toLocalDateTime());
         }
-
         return task;
     }
-
 }

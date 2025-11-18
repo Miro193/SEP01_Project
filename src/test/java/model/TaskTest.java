@@ -1,12 +1,8 @@
 package model;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
@@ -23,11 +19,11 @@ class TaskTest {
 
     @Test
     void testSetAndGetId() {
-        assertNotNull(task1.getId());
-        assertEquals(12, task1.getId());
+        assertNotNull(task1.getTaskId());
+        assertEquals(12, task1.getTaskId());
         Task task3 = new Task();
-        task3.setId(1);
-        assertEquals(1, task3.getId());
+        task3.setTaskId(1);
+        assertEquals(1, task3.getTaskId());
     }
 
     @Test
@@ -72,5 +68,4 @@ class TaskTest {
         task3.setStatus(status);
         assertEquals(status, task3.getStatus());
     }
-
 }

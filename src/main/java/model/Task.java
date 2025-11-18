@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDateTime;
 
 public class Task {
-    private int id;
+    private int taskId;
     private int userId;
     private String title;
     private String description;
@@ -12,8 +12,8 @@ public class Task {
     private String language;
 
 
-    public Task(int id, int userId, String title, String description, LocalDateTime dueDate, String status) {
-        this.id = id;
+    public Task(int taskId, int userId, String title, String description, LocalDateTime dueDate, String status) {
+        this.taskId = taskId;
         this.userId = userId;
         this.title = title;
         this.description = description;
@@ -23,8 +23,8 @@ public class Task {
 
     public Task() {}
 
-    public int getId() {
-        return id;
+    public int getTaskId() {
+        return taskId;
     }
 
     public int getUserId() {
@@ -50,8 +50,8 @@ public class Task {
     public String getLanguage() {return language;}
 
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTaskId(int taskId) {
+        this.taskId = taskId;
     }
 
     public void setUserId(int userId) {
