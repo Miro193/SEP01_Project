@@ -24,25 +24,6 @@ public class LanguageManager {
    }
 
 
-//    private void applyTextDirection(Locale currentLocale) {
-//
-//        String lang = currentLocale.getLanguage();
-//        boolean isRTL = lang.equals("fa") || lang.equals("ur") || lang.equals("ar") || lang.equals("he");
-//
-//        Platform.runLater(() -> {
-//            if (rootVBox != null) {
-//                // Flip the full layout direction
-//                rootVBox.setNodeOrientation(
-//                        isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
-//                );
-//            }
-//
-//            // Align text fields
-//            tfWeight.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
-//            tfHeight.setStyle(isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
-//        });
-//    }
-
     public static Locale getCurrentLocale() {
         return currentLocale;
     }

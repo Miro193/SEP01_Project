@@ -10,7 +10,9 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.logging.Logger;
 
-// connect to database for take
+/*
+connect to database for take
+ */
 public class LocalizationDao {
     Logger log = Logger.getLogger(LocalizationDao.class.getName());
 
@@ -29,11 +31,9 @@ public class LocalizationDao {
             }
             log.info("✅ Loaded localization strings for language: " + lang );
         } catch (SQLException e) {
-            // Katsokaa tämä log.info pitäisi olle error tai log.error
             log.info("❌ Database connection failed: ");
             e.printStackTrace();
         }
-
         return strings;
     }
 }

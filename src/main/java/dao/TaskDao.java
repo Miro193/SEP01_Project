@@ -27,12 +27,9 @@ public class TaskDao {
         return conn;
     }
 
-
     public void persist(Task task) {
         String sql = "INSERT INTO task (user_id, title, description, status, dueDate, language) VALUES (?, ?, ?, ?, ?, ?)";
-//        (Connection conn = ConnectionDB.obtenerConexion();
         try (PreparedStatement stmt = getConnection().prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-
             stmt.setInt(1, task.getUserId());
             stmt.setString(2, task.getTitle());
             stmt.setString(3, task.getDescription());
@@ -46,15 +43,18 @@ public class TaskDao {
                     task.setId(rs.getInt(1));
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-
     public Task find(int id) {
-        String sql = "SELECT * FROM task WHERE task_id = ?";
+       // String sql = "SELECT * FROM task WHERE task_id = ?";
+        String sql =
+                "SELECT task_id, user_id, title, description, status, dueDate " +
+                        "FROM task " +
+                        "WHERE task_id = ?";
+
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, id);
@@ -63,17 +63,16 @@ public class TaskDao {
                     return mapResultSetToTask(rs);
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
 
-
     public List<Task> findAll() {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM task";
+       // String sql = "SELECT * FROM task";
+          String sql = "SELECT task_id, title, description, status, dueDate FROM task";
 
         try (PreparedStatement stmt = getConnection().prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
@@ -81,18 +80,15 @@ public class TaskDao {
             while (rs.next()) {
                 tasks.add(mapResultSetToTask(rs));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return tasks;
     }
 
-
     public List<Task> getTasksByUserId(int userId) {
         List<Task> tasks = new ArrayList<>();
         String sql = "SELECT * FROM task WHERE user_id = ?";
-
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
@@ -101,7 +97,6 @@ public class TaskDao {
                     tasks.add(mapResultSetToTask(rs));
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -123,13 +118,11 @@ public class TaskDao {
                     tasks.add(mapResultSetToTask(rs));
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return tasks;
     }
-
 
     public void update(Task task) {
         String sql = "UPDATE task SET title = ?, description = ?, status = ?, dueDate = ? WHERE task_id = ?";
@@ -169,7 +162,6 @@ public class TaskDao {
         task.setTitle(rs.getString("title"));
         task.setDescription(rs.getString("description"));
         task.setStatus(rs.getString("status"));
-       // task.setLanguage(rs.getString("language"));
 
         Timestamp ts = rs.getTimestamp("dueDate");
         if (ts != null) {
