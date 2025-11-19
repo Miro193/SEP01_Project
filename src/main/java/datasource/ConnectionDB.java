@@ -38,7 +38,7 @@ public class ConnectionDB {
 
             String url = "jdbc:mariadb://" + host + ":3306/StudyPlannerSimple";
             String user = "root";
-            String password = "saeidt";
+            String password = "root";
 
             System.out.println("Connecting to: " + url);
             Connection conn = DriverManager.getConnection(url, user, password);

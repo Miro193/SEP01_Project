@@ -327,6 +327,10 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('backToList', 'بازگشت به وظایف', 'fa'),
 ('lblDoneTask', 'وظایف انجام‌شده', 'fa');
 
-
+INSERT INTO translations (translation_key, translation_value, language) VALUES
+                                                                            ('btnBack', 'Back', 'en'),
+                                                                            ('btnBack', 'Takaisin', 'fi'),
+                                                                            ('btnBack', '返回', 'zh'),
+                                                                            ('btnBack', 'بازگشت', 'fa');
 
 
