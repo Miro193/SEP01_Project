@@ -3,15 +3,32 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FirstViewController">
    <children>
-      <Label fx:id="lblHeaderMyTasks" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="198.0" prefWidth="561.0" style="-fx-background-color: pink;" text="My Tasks">
+      <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="600.0">
+         <children>
+            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+              <items>
+                <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
+                <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
+                <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
+                <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+              </items>
+               <HBox.margin>
+                  <Insets right="20.0" top="5.0" />
+               </HBox.margin>
+            </MenuButton>
+         </children>
+      </HBox>
+      <Label fx:id="headerLabel" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" prefWidth="561.0" style="-fx-background-color: pink;" text="My Tasks">
          <VBox.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" />
          </VBox.margin>
          <font>
             <Font size="28.0" />
@@ -19,18 +36,17 @@
       </Label>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
-            <Button id="enter-task" fx:id="btnEnterTask" onAction="#handleEnterTask" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: MediumSeaGreen; -fx-text-fill: black;" text="Enter Task">
+            <Button id="enter-task" fx:id="enterTask" onAction="#handleEnterTask" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: MediumSeaGreen; -fx-text-fill: black;" text="Enter Task">
                <HBox.margin>
                   <Insets left="200.0" right="20.0" top="10.0" />
                </HBox.margin>
             </Button>
-            <Button id="task-lists" fx:id="btnTaskLists" onAction="#directToTaskLists" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: pink; -fx-text-fill: black;" text="Task Lists">
+            <Button id="task-lists" fx:id="taskLists" onAction="#directToTaskLists" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: pink; -fx-text-fill: black;" text="Task Lists">
                <HBox.margin>
                   <Insets top="10.0" />
                </HBox.margin>
             </Button>
          </children>
       </HBox>
-<!--      <ListView orientation="HORIZONTAL" prefHeight="103.0" prefWidth="429.0" />-->
    </children>
 </VBox>

@@ -4,42 +4,44 @@ import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.User;
-import java.io.IOException;
 import utils.LanguageManager;
-//import java.util.Locale;
-//import java.util.ResourceBundle;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class LoginController extends BaseController {
+
     @FXML private Label headerLogin;
-    @FXML private Label lblUsername;
-    @FXML private TextField usernameField;
-    @FXML private Label lblPassword;
-    @FXML private PasswordField passwordField;
+    @FXML private Label labelUsername;
+    @FXML private Label labelPassword;
     @FXML private Button btnLogin;
     @FXML private Button btnSignup;
-    @FXML private MenuButton btnLanguage;
-    @FXML private MenuItem itemPersian;
-    @FXML private MenuItem itemChinese;
-    @FXML private MenuItem itemEnglish;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
 
-
-    private UserDao userDao = new UserDao();
-
-
+    private final UserDao userDao = new UserDao();
 
     @FXML
+    @Override
     public void initialize() {
-        updateLanguage();
-        languageTexts();
-
+        super.initialize();
+        LanguageManager tm = LanguageManager.getInstance();
+        headerLogin.setText(tm.getTranslation("headerLogin"));
+        labelUsername.setText(tm.getTranslation("lblUsername"));
+        labelPassword.setText(tm.getTranslation("lblPassword"));
+        btnLogin.setText(tm.getTranslation("btnLogin"));
+        btnSignup.setText(tm.getTranslation("btnSignup"));
     }
 
     @FXML
@@ -56,28 +58,30 @@ public class LoginController extends BaseController {
 
         if (user != null && user.getPassword().equals(password)) {
             CurrentUser.set(user);
-            showAlert(rb.getString("success.title"), rb.getString("success.loginMessage") + user.getUsername());
-            Parent firstViewRoot = FXMLLoader.load(getClass().getResource("/first_view.fxml"));
-            Scene firstViewScene = new Scene(firstViewRoot);
+            showAlert("Success", "Login successful! Welcome " + user.getUsername());
 
+            URL fxmlUrl = getClass().getResource("/first_view.fxml");
+            LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+            FXMLLoader loader = new FXMLLoader(fxmlUrl);
+            Parent root = loader.load();
 
             Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            window.setScene(firstViewScene);
+            window.setScene(new Scene(root));
             window.show();
         } else {
-            showAlert(rb.getString("error.title"), rb.getString("invalid.message"));
+            showAlert("Error", "Invalid username or password");
         }
     }
+
     @FXML
     private void handleSignupRedirect(ActionEvent event) throws IOException {
-        Parent signUpRoot = FXMLLoader.load(getClass().getResource("/SignUp.fxml"));
-        Scene signUpScene = new Scene(signUpRoot);
-
+        URL fxmlUrl = getClass().getResource("/SignUp.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(signUpScene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -87,63 +91,4 @@ public class LoginController extends BaseController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-    @FXML
-    private void languageTexts() {
-        //set texts
-        headerLogin.setText(rb.getString("headerLogin.text"));
-        lblUsername.setText(rb.getString("lblUsername.text"));
-        lblPassword.setText(rb.getString("lblPassword.text"));
-        btnLogin.setText(rb.getString("btnLogin.text"));
-        btnSignup.setText(rb.getString("btnSignup.text"));
-        btnLanguage.setText(rb.getString("btnLanguage.text"));
-        itemPersian.setText(rb.getString("itemPersian.text"));
-        itemChinese.setText(rb.getString("itemChinese.text"));
-        itemEnglish.setText(rb.getString("itemEnglish.text"));
-
-        // Right-to-left for Persian  //Labels appear on the right of fields.
-        //Text flows right-to-left.
-      /*  if (language.equals("fa") || language.equalsIgnoreCase("ar")) {
-            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        } else {
-            headerLogin.getScene().getRoot().setNodeOrientation(NodeOrientation.LEFT_TO_RIGHT);
-        }
-
-        // Optionally set default locale
-        Locale.setDefault(locale);*/
-    }
-
-    @FXML
-    public void onEnglishClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("en", "US");
-        reloadScene(event);
-
-    }
-
-    @FXML
-    public void onPersianClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("fa", "IR");
-        reloadScene(event);
-
-    }
-
-    @FXML
-    public void onChineseClick(ActionEvent event) throws IOException {
-        LanguageManager.setLanguage("zh", "CN");
-        reloadScene(event);
-
-    }
-    private void reloadScene(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/Login.fxml"),
-                LanguageManager.getBundle()  // Pass current ResourceBundle here
-        );
-        Parent root = loader.load();
-
-        // use the MenuButton (btnLanguage) to find the Stage
-        Stage stage = (Stage) btnLanguage.getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-
 }

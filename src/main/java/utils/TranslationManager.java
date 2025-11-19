@@ -1,24 +1,23 @@
 package utils;
 
-import java.net.URL;
-import java.util.Map;
 import dao.TranslationDAO;
 
-public class LanguageManager {
+import java.util.Map;
 
-    private static LanguageManager instance;
+public class TranslationManager {
+
+    private static TranslationManager instance;
     private String currentLanguage;
     private Map<String, String> translations;
     private final TranslationDAO translationDAO = new TranslationDAO();
-    private URL currentFxmlUrl;
 
-    private LanguageManager() {
+    private TranslationManager() {
         setLanguage("en");
     }
 
-    public static synchronized LanguageManager getInstance() {
+    public static synchronized TranslationManager getInstance() {
         if (instance == null) {
-            instance = new LanguageManager();
+            instance = new TranslationManager();
         }
         return instance;
     }
@@ -30,13 +29,5 @@ public class LanguageManager {
 
     public String getTranslation(String key) {
         return translations.getOrDefault(key, "!" + key + "!");
-    }
-
-    public URL getCurrentFxmlUrl() {
-        return currentFxmlUrl;
-    }
-
-    public void setCurrentFxmlUrl(URL currentFxmlUrl) {
-        this.currentFxmlUrl = currentFxmlUrl;
     }
 }

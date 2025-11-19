@@ -7,7 +7,7 @@ public class ConnectionDB {
     private static final String URL = "jdbc:mariadb://host.docker.internal:3306/StudyPlanner";
     //private static final String URL = "jdbc:mariadb://localhost:3306/studyplanner";
     private static final String USER = "root";
-    private static final String PASSWORD = "admin";
+    private static final String PASSWORD = "root";
 
     public static Connection obtenerConexion() {
         try {
@@ -33,12 +33,12 @@ public class ConnectionDB {
 
             String host = System.getenv("DB_HOST");
             if (host == null || host.isEmpty()) {
-                host = "localhost"; // fallback
+                host = "localhost";
             }
 
-            String url = "jdbc:mariadb://" + host + ":3306/StudyplannerSimple";
+            String url = "jdbc:mariadb://" + host + ":3306/StudyPlannerSimple";
             String user = "root";
-            String password = "root";
+            String password = "saeidt";
 
             System.out.println("Connecting to: " + url);
             Connection conn = DriverManager.getConnection(url, user, password);

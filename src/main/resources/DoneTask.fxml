@@ -6,7 +6,20 @@
 <VBox xmlns:fx="http://javafx.com/fxml" fx:controller="controller.DoneTaskController"
       spacing="10" alignment="CENTER" prefWidth="400" prefHeight="300">
 
-    <Button id="backToList" fx:id="backTolist" onAction="#backToList" text="Back To Tasks"></Button>
-    <Label text="Done Tasks" style="-fx-font-size: 18px;"/>
+    <HBox alignment="TOP_RIGHT" prefHeight="25.0" prefWidth="400.0">
+        <children>
+            <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+                <items>
+                    <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
+                    <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
+                    <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
+                    <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                </items>
+            </MenuButton>
+        </children>
+    </HBox>
+
+    <Label fx:id="headerDoneTasks" text="Done Tasks" style="-fx-font-size: 18px;"/>
     <ListView fx:id="doneList" prefWidth="300" prefHeight="200"/>
+    <Button fx:id="backTolist" onAction="#backToList" text="Back To Tasks"/>
 </VBox>

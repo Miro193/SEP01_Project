@@ -4,14 +4,21 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controller.AddTaskController"
-            prefWidth="400" prefHeight="350">
+            prefWidth="400" prefHeight="400">
     <children>
-        <VBox spacing="12" layoutX="50" layoutY="30" prefWidth="300">
+        <MenuButton fx:id="btnLanguage" layoutX="300" layoutY="10" mnemonicParsing="false" text="Language">
+            <items>
+                <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
+                <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
+                <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
+                <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+            </items>
+        </MenuButton>
+        <VBox spacing="12" layoutX="50" layoutY="50" prefWidth="300">
             <Label fx:id="lblAddTask" text="Add New Task" style="-fx-font-size: 18px;"/>
 
             <Label fx:id="lblTitle" text="Title:"/>
             <TextField fx:id="titleField" promptText="Task title"/>
-
 
             <Label fx:id="lblDescription" text="Description:"/>
             <TextArea fx:id="descField" promptText="Task description" prefRowCount="3"/>
@@ -20,7 +27,7 @@
             <DatePicker fx:id="dueDatePicker"/>
 
             <Label fx:id="lblStatus" text="Status:"/>
-            <ChoiceBox fx:id="statusChoice"/>
+            <ChoiceBox fx:id="statusChoice" prefWidth="300"/>
 
             <HBox spacing="10" alignment="CENTER_RIGHT">
                 <Button fx:id="btnCancel" text="Cancel" onAction="#handleCancel"/>

@@ -17,8 +17,10 @@ import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
+import utils.LanguageManager;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,19 +31,24 @@ public class CalendarController extends BaseController {
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
-    @FXML private Label lblCalendarView;
-    @FXML private Button btnBackToTaskList;
+    @FXML private Label headerCalendar;
+    @FXML private Button btnBack;
 
-    private TaskDao taskDao = new TaskDao();
+    private final TaskDao taskDao = new TaskDao();
 
     @FXML
+    @Override
     public void initialize() {
-
-        updateLanguage();
-        languageTexts();
+        super.initialize();
+        LanguageManager tm = LanguageManager.getInstance();
+        headerCalendar.setText(tm.getTranslation("lblCalendarView"));
+        btnBack.setText(tm.getTranslation("btnBackToTaskList"));
+        titleColumn.setText(tm.getTranslation("titleColumn"));
+        dueDateColumn.setText(tm.getTranslation("dueDateColumn"));
+        statusColumn.setText(tm.getTranslation("statusColumn"));
 
         if (CurrentUser.get() == null) {
-            return; // Or show an error
+            return;
         }
 
         LocalDate startDate = LocalDate.now();
@@ -62,19 +69,13 @@ public class CalendarController extends BaseController {
 
     @FXML
     private void handleBack(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/TaskList.fxml"));
-        Scene scene = new Scene(root);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
+        URL fxmlUrl = getClass().getResource("/TaskList.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
 
-    @FXML
-    private void languageTexts() {
-        lblCalendarView.setText(rb.getString("lblCalendarView.text"));
-        btnBackToTaskList.setText(rb.getString("btnBackToTaskList.text"));
-        titleColumn.setText(rb.getString("titleColumn.text"));
-        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(new Scene(root));
+        window.show();
     }
 }

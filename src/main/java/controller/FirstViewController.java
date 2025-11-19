@@ -9,42 +9,48 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import utils.LanguageManager;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class FirstViewController extends BaseController {
-    @FXML private Label lblHeaderMyTasks;
-    @FXML private Button btnEnterTask;
-    @FXML private Button btnTaskLists;
+
+    @FXML private Label headerLabel;
+    @FXML private Button enterTask;
+    @FXML private Button taskLists;
 
     @FXML
+    @Override
     public void initialize() {
-        updateLanguage();
-        languageTexts();
+        super.initialize();
+        LanguageManager tm = LanguageManager.getInstance();
+        headerLabel.setText(tm.getTranslation("lblHeaderMyTasks"));
+        enterTask.setText(tm.getTranslation("btnEnterTask"));
+        taskLists.setText(tm.getTranslation("btnTaskLists"));
     }
 
     @FXML
     private void handleEnterTask(ActionEvent event) throws IOException {
-        Parent taskRoot = FXMLLoader.load(getClass().getResource("/AddTask.fxml"));
-        Scene taskScene = new Scene(taskRoot);
+        URL fxmlUrl = getClass().getResource("/AddTask.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(taskScene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
     @FXML
     private void directToTaskLists(ActionEvent event) throws IOException {
-        Parent taskListsRoot = FXMLLoader.load(getClass().getResource("/TaskList.fxml"));
-        Scene taskListsScene = new Scene(taskListsRoot);
-        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(taskListsScene);
-        window.show();
-    }
+        URL fxmlUrl = getClass().getResource("/TaskList.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
 
-    @FXML
-    private void languageTexts() {
-        lblHeaderMyTasks.setText(rb.getString("lblHeaderMyTasks.text"));
-        btnEnterTask.setText(rb.getString("btnEnterTask.text"));
-        btnTaskLists.setText(rb.getString("btnTaskLists.text"));
+        Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        window.setScene(new Scene(root));
+        window.show();
     }
 }

@@ -1,4 +1,5 @@
 package controller;
+
 import dao.UserDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -8,51 +9,41 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.User;
+import utils.LanguageManager;
+
 import java.io.IOException;
+import java.net.URL;
 
-//import utils.LanguageManager;
-
-//import java.util.Locale;
-//import java.util.ResourceBundle;
-
-import javafx.fxml.FXML;
-import javafx.scene.control.*;
 public class SignUpController extends BaseController {
 
-    @FXML
-    private Label lblSignUp;
-    @FXML
-    private Label lblUsername;
-    @FXML
-    private TextField usernameField;
-    @FXML
-    private Label lblPassword;
-    @FXML
-    private PasswordField passwordField;
-    @FXML
-    private Label lblConfirm;
-    @FXML
-    private PasswordField confirmPasswordField;
-    @FXML
-    private Button btnSignUp;
-    @FXML
-    private Button btnCreateAccount;
-    @FXML
-    private Button btnBackToLogin;
+    @FXML private Label headerSignUp;
+    @FXML private Label labelUsername;
+    @FXML private Label labelPassword;
+    @FXML private Label labelConfirm;
+    @FXML private Button btnCreateAccount;
+    @FXML private Button btnBackToLogin;
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private PasswordField confirmPasswordField;
 
-    private UserDao userDao = new UserDao();
-    //private ResourceBundle rb;
-
+    private final UserDao userDao = new UserDao();
 
     @FXML
+    @Override
     public void initialize() {
-        updateLanguage(); //from BaseController
-        languageTexts();
-
+        super.initialize();
+        LanguageManager tm = LanguageManager.getInstance();
+        headerSignUp.setText(tm.getTranslation("lblSignUp"));
+        labelUsername.setText(tm.getTranslation("lblUsername"));
+        labelPassword.setText(tm.getTranslation("lblPassword"));
+        labelConfirm.setText(tm.getTranslation("lblConfirm"));
+        btnCreateAccount.setText(tm.getTranslation("btnCreateAccount"));
+        btnBackToLogin.setText(tm.getTranslation("btnBackToLogin"));
     }
 
     @FXML
@@ -61,39 +52,44 @@ public class SignUpController extends BaseController {
         String password = passwordField.getText();
         String confirmPassword = confirmPasswordField.getText();
 
-
-        if (username.isEmpty() || password.isEmpty()) {
-            // showAlert("Error", "Please fill all fields!");
-            showAlert(rb.getString("error.title"), rb.getString("error.fillAll"));
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
+            showAlert("Error", "Please fill all fields!");
             return;
         }
 
-        User existingUser = userDao.login(username, password);
-        if (existingUser != null) {
-            //showAlert("Error", "Username already exists!");
-            showAlert(rb.getString("error.title"), rb.getString("error.usernameExists"));
-
+        if (!password.equals(confirmPassword)) {
+            showAlert("Error", "Passwords do not match!");
             return;
         }
 
-        User newUser = new User(username, password, confirmPassword);
-        userDao.register(newUser);
+        try {
+            User existingUser = userDao.login(username, password);
+            if (existingUser != null) {
+                showAlert("Error", "Username already exists!");
+                return;
+            }
 
-        //showAlert("Success", "Account created successfully!");
-        showAlert(rb.getString("success.title"), rb.getString("success.accountCreated"));
+            User newUser = new User(username, password, confirmPassword);
+            userDao.register(newUser);
 
-        handleLoginRedirect(event);
+            showAlert("Success", "Account created successfully!");
+            handleLoginRedirect(event);
+
+        } catch (Exception e) {
+            System.err.println("Signup error: " + e.getMessage());
+            showAlert("Database Error", "Cannot create account at the moment. Please try again later.\n\nError: " + e.getMessage());
+        }
     }
 
     @FXML
     private void handleLoginRedirect(ActionEvent event) throws IOException {
-        Parent loginRoot = FXMLLoader.load(getClass().getResource("/Login.fxml"));
-        Scene loginScene = new Scene(loginRoot);
-
+        URL fxmlUrl = getClass().getResource("/Login.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
 
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-        window.setScene(loginScene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -103,21 +99,4 @@ public class SignUpController extends BaseController {
         alert.setContentText(message);
         alert.showAndWait();
     }
-
-    @FXML
-    private void languageTexts() {
-        // Locale locale = new Locale(language, country);
-        //rb = ResourceBundle.getBundle("MessagesBundle", locale);
-
-        //set texts
-        lblSignUp.setText(rb.getString("lblSignUp.text"));
-        lblUsername.setText(rb.getString("lblUsername.text"));
-        lblPassword.setText(rb.getString("lblPassword.text"));
-        lblConfirm.setText(rb.getString("lblConfirm.text"));
-        btnCreateAccount.setText(rb.getString("btnCreateAccount.text"));
-        btnBackToLogin.setText(rb.getString("btnBackToLogin.text"));
-
-
-    }
-
 }

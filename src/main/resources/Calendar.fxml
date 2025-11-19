@@ -10,9 +10,17 @@
     <top>
         <HBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 10;">
             <children>
-                <Label fx:id="lblCalendarView" text="7-Day Calendar View" style="-fx-font-size: 18px;"/>
+                <Label fx:id="headerCalendar" text="7-Day Calendar View" style="-fx-font-size: 18px;"/>
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnBackToTaskList" text="Back to Task List" onAction="#handleBack"/>
+                <Button fx:id="btnBack" text="Back to Task List" onAction="#handleBack"/>
+                <MenuButton fx:id="btnLanguage" mnemonicParsing="false" text="Language">
+                    <items>
+                        <MenuItem fx:id="itemEnglish" mnemonicParsing="false" onAction="#onEnglishClick" text="English" />
+                        <MenuItem fx:id="itemPersian" mnemonicParsing="false" onAction="#onPersianClick" text="Persian" />
+                        <MenuItem fx:id="itemFinnish" mnemonicParsing="false" onAction="#onFinnishClick" text="Finnish" />
+                        <MenuItem fx:id="itemChinese" mnemonicParsing="false" onAction="#onChineseClick" text="Chinese" />
+                    </items>
+                </MenuButton>
             </children>
         </HBox>
     </top>

@@ -14,53 +14,50 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.CurrentUser;
 import model.Task;
+import utils.LanguageManager;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class TaskController extends BaseController {
 
-    // Fields for AddTask.fxml
-    @FXML private TextField titleField;
-    @FXML private TextArea descField;
-    @FXML private DatePicker dueDatePicker;
-    @FXML private ChoiceBox<String> statusChoice;
-    @FXML private Button btnAddTask;
-    @FXML private Button btnDeleteTask;
-    @FXML private Button btnEditTask;
-    @FXML private Button btnCalendarView;
-    @FXML private Button btnDoneTasks;
-    @FXML private Button btnCancel;
-    @FXML private Button btnSave;
-    @FXML private Label lblAddTask;
-    @FXML private Label lblAddTitle;
-    @FXML private Label lblAddDescription;
-    @FXML private Label lblAddDueDate;
-    @FXML private Label lblAddStatus;
-
-
-    // Fields for TaskList.fxml
     @FXML private TableView<Task> taskTable;
     @FXML private TableColumn<Task, String> titleColumn;
     @FXML private TableColumn<Task, String> descColumn;
     @FXML private TableColumn<Task, String> dueDateColumn;
     @FXML private TableColumn<Task, String> statusColumn;
+    @FXML private Button btnBack;
+    @FXML private Button btnAddTask;
+    @FXML private Button btnDeleteTask;
+    @FXML private Button btnEditTask;
+    @FXML private Button btnCalendarView;
+    @FXML private Button btnDoneTasks;
 
-    private TaskDao taskDao = new TaskDao();
+    private final TaskDao taskDao = new TaskDao();
     private ObservableList<Task> taskListObservable;
 
     @FXML
+    @Override
     public void initialize() {
-        updateLanguage();
-        languageTexts();
+        super.initialize();
+        LanguageManager tm = LanguageManager.getInstance();
+        btnBack.setText(tm.getTranslation("btnBack"));
+        btnAddTask.setText(tm.getTranslation("btnAddTask"));
+        btnDeleteTask.setText(tm.getTranslation("btnDeleteTask"));
+        btnEditTask.setText(tm.getTranslation("btnEditTask"));
+        btnCalendarView.setText(tm.getTranslation("btnCalendarView"));
+        btnDoneTasks.setText(tm.getTranslation("btnDoneTasks"));
+        titleColumn.setText(tm.getTranslation("titleColumn"));
+        descColumn.setText(tm.getTranslation("descColumn"));
+        dueDateColumn.setText(tm.getTranslation("dueDateColumn"));
+        statusColumn.setText(tm.getTranslation("statusColumn"));
 
-        // Initialization logic for TaskList.fxml
-        if (taskTable != null && CurrentUser.get() != null) {
+        if (CurrentUser.get() != null) {
             List<Task> tasks = taskDao.getTasksByUserId(CurrentUser.get().getId());
             taskListObservable = FXCollections.observableArrayList(tasks);
-
             titleColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTitle()));
             descColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
             dueDateColumn.setCellValueFactory(cellData -> {
@@ -69,18 +66,15 @@ public class TaskController extends BaseController {
                 return new SimpleStringProperty(dueDate != null ? dueDate.format(formatter) : "");
             });
             statusColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStatus()));
-
             taskTable.setItems(taskListObservable);
-        }
-
-        // Initialization logic for AddTask.fxml
-        if (statusChoice != null) {
-            statusChoice.setItems(FXCollections.observableArrayList("TODO", "IN_PROGRESS", "DONE"));
-            statusChoice.setValue("TODO");
         }
     }
 
-    // Methods for TaskList.fxml
+    @FXML
+    private void handleBackToFirstView(ActionEvent event) throws IOException {
+        navigate(event, "/first_view.fxml");
+    }
+
     @FXML
     private void handleAddTask(ActionEvent event) throws IOException {
         navigate(event, "/AddTask.fxml");
@@ -90,12 +84,13 @@ public class TaskController extends BaseController {
     private void handleEditTask(ActionEvent event) throws IOException {
         Task selectedTask = taskTable.getSelectionModel().getSelectedItem();
         if (selectedTask == null) {
-           // showAlert("No Task Selected", "Please select a task in the table to edit.");
-            showAlert(rb.getString("error.noTaskmessage"), rb.getString("error.editTskmessage"));
+            showAlert("No Task Selected", "Please select a task in the table to edit.");
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditTask.fxml"));
+        URL fxmlUrl = getClass().getResource("/EditTask.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
         Parent root = loader.load();
 
         EditTaskController controller = loader.getController();
@@ -113,7 +108,7 @@ public class TaskController extends BaseController {
             taskDao.delete(selectedTask);
             taskListObservable.remove(selectedTask);
         } else {
-            showAlert("error.deletemessage", "error.taskSelectMessage");
+            showAlert("No task selected", "Please select a task to delete.");
         }
     }
 
@@ -127,48 +122,14 @@ public class TaskController extends BaseController {
         navigate(event, "/DoneTask.fxml");
     }
 
-    // Methods for AddTask.fxml
-    @FXML
-    private void handleSaveTask(ActionEvent event) throws IOException {
-        String title = titleField.getText();
-        String description = descField.getText();
-        LocalDateTime dueDate = dueDatePicker.getValue() != null ? dueDatePicker.getValue().atStartOfDay() : null;
-        String status = statusChoice.getValue();
-
-        if (title == null || title.trim().isEmpty() || dueDate == null || status == null) {
-            showAlert("Validation Error", "Title, Due Date, and Status are required fields.");
-            return;
-        }
-
-        if (CurrentUser.get() == null) {
-            showAlert("Authentication Error", "No user is logged in. Please log in to save a task.");
-            return;
-        }
-
-        Task newTask = new Task();
-        newTask.setUserId(CurrentUser.get().getId());
-        newTask.setTitle(title);
-        newTask.setDescription(description);
-        newTask.setDueDate(dueDate);
-        newTask.setStatus(status);
-
-        taskDao.persist(newTask);
-
-        showAlert("Success", "Task has been saved successfully!");
-        navigate(event, "/TaskList.fxml");
-    }
-
-    @FXML
-    private void handleCancel(ActionEvent event) throws IOException {
-        navigate(event, "/TaskList.fxml");
-    }
-
-    // Helper methods
     private void navigate(ActionEvent event, String fxmlPath) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-        Scene scene = new Scene(root);
+        URL fxmlUrl = getClass().getResource(fxmlPath);
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -178,23 +139,5 @@ public class TaskController extends BaseController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    @FXML
-    private void languageTexts() {
-        btnAddTask.setText(rb.getString("btnAddTask.text"));
-        btnDeleteTask.setText(rb.getString("btnDeleteTask.text"));
-        btnEditTask.setText(rb.getString("btnEditTask.text"));
-        btnCalendarView.setText(rb.getString("btnCalendarView.text"));
-        btnDoneTasks.setText(rb.getString("btnDoneTasks.text"));
-        titleColumn.setText(rb.getString("titleColumn.text"));
-        descColumn.setText(rb.getString("descColumn.text"));
-        dueDateColumn.setText(rb.getString("dueDateColumn.text"));
-        statusColumn.setText(rb.getString("statusColumn.text"));
-//        lblAddTask.setText(rb.getString("lblAddTask.text"));
-//        lblAddTitle.setText(rb.getString("lblAddTitle.text"));
-//        lblAddDescription.setText(rb.getString("lblAddDescription.text"));
-//        lblAddDueDate.setText(rb.getString("lblAddDueDate.text"));
-//        lblAddStatus.setText(rb.getString("lblAddStatus.text"));
     }
 }

@@ -11,8 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import model.Task;
+import utils.LanguageManager;
 
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDateTime;
 
 public class EditTaskController extends BaseController {
@@ -21,21 +23,29 @@ public class EditTaskController extends BaseController {
     @FXML private TextArea descField;
     @FXML private DatePicker dueDatePicker;
     @FXML private ChoiceBox<String> statusChoice;
-    @FXML private Label lblEditTask;
-    @FXML private Label lblTitle;
-    @FXML private Label lblDescription;
-    @FXML private Label lblDueDate;
-    @FXML private Label lblStatus;
+    @FXML private Label headerEditTask;
+    @FXML private Label labelTitle;
+    @FXML private Label labelDescription;
+    @FXML private Label labelDueDate;
+    @FXML private Label labelStatus;
     @FXML private Button btnCancel;
     @FXML private Button btnSave;
 
-    private TaskDao taskDao = new TaskDao();
+    private final TaskDao taskDao = new TaskDao();
     private Task selectedTask;
 
     @FXML
+    @Override
     public void initialize() {
-        updateLanguage();
-        languageTexts();
+        super.initialize();
+        LanguageManager tm = LanguageManager.getInstance();
+        headerEditTask.setText(tm.getTranslation("lblEditTask"));
+        labelTitle.setText(tm.getTranslation("lblTitle"));
+        labelDescription.setText(tm.getTranslation("lblDescription"));
+        labelDueDate.setText(tm.getTranslation("lblDueDate"));
+        labelStatus.setText(tm.getTranslation("lblStatus"));
+        btnCancel.setText(tm.getTranslation("btnCancel"));
+        btnSave.setText(tm.getTranslation("btnSave"));
     }
 
     public void setTask(Task task) {
@@ -78,10 +88,13 @@ public class EditTaskController extends BaseController {
     }
 
     private void navigateBack(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/TaskList.fxml"));
-        Scene scene = new Scene(root);
+        URL fxmlUrl = getClass().getResource("/TaskList.fxml");
+        LanguageManager.getInstance().setCurrentFxmlUrl(fxmlUrl);
+        FXMLLoader loader = new FXMLLoader(fxmlUrl);
+        Parent root = loader.load();
+
         Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        window.setScene(scene);
+        window.setScene(new Scene(root));
         window.show();
     }
 
@@ -91,16 +104,5 @@ public class EditTaskController extends BaseController {
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
-    }
-
-    @FXML
-    private void languageTexts() {
-        lblEditTask.setText(rb.getString("lblEditTask.text"));
-        lblTitle.setText(rb.getString("lblTitle.text"));
-        lblDescription.setText(rb.getString("lblDescription.text"));
-        lblDueDate.setText(rb.getString("lblDueDate.text"));
-        lblStatus.setText(rb.getString("lblStatus.text"));
-        btnCancel.setText(rb.getString("btnCancel.text"));
-        btnSave.setText(rb.getString("btnSave.text"));
     }
 }
