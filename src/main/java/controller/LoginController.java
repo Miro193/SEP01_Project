@@ -129,12 +129,14 @@ public class LoginController extends BaseController {
 
         // Apply to text fields
         if (usernameField != null) {
-            usernameField.setStyle(
-                    isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+            rootAnchorPane.setNodeOrientation(
+                    isRTL ?  NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
         }
         if (passwordField != null) {
-            passwordField.setStyle(
-                    isRTL ? "-fx-text-alignment: right;" : "-fx-text-alignment: left;");
+            rootAnchorPane.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
         }
     }
 
@@ -146,6 +148,7 @@ public class LoginController extends BaseController {
         LanguageManager.setLanguage("en", "US");
         updateLanguage();
         languageTexts();
+        applyTextDirection();
     }
 
     /**
@@ -156,6 +159,7 @@ public class LoginController extends BaseController {
         LanguageManager.setLanguage("fa", "IR");
         updateLanguage();
         languageTexts();
+        applyTextDirection();
     }
 
     /**
@@ -166,5 +170,6 @@ public class LoginController extends BaseController {
         LanguageManager.setLanguage("zh", "CN");
         updateLanguage();
         languageTexts();
+        applyTextDirection();
     }
 }

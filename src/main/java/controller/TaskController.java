@@ -1,4 +1,6 @@
 package controller;
+import javafx.geometry.NodeOrientation;
+import javafx.scene.layout.BorderPane;
 import utils.LanguageManager;
 import dao.TaskDao;
 import java.io.IOException;
@@ -36,13 +38,8 @@ public class TaskController extends BaseController {
     @FXML private Button btnEditTask;
     @FXML private Button btnCalendarView;
     @FXML private Button btnDoneTasks;
-    @FXML private Button btnCancel;
-    @FXML private Button btnSave;
-    @FXML private Label lblAddTask;
-    @FXML private Label lblAddTitle;
-    @FXML private Label lblAddDescription;
-    @FXML private Label lblAddDueDate;
-    @FXML private Label lblAddStatus;
+    @FXML private BorderPane rootPane;
+
 
 
     // Fields for TaskList.fxml
@@ -65,6 +62,7 @@ public class TaskController extends BaseController {
     @FXML
     public void initialize() {
         updateLanguage();
+        applyTextDirection();
         languageTexts();
         if (languageColumn != null) {
             languageColumn.setVisible(false);
@@ -173,4 +171,27 @@ public class TaskController extends BaseController {
         dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn"));
         statusColumn.setText(LanguageManager.getTranslation("statusColumn"));
     }
+    private void applyTextDirection() {
+        String lang = LanguageManager.getCurrentLocale().getLanguage();
+        boolean isRTL = lang.equals("fa");
+
+        if (rootPane != null) {
+            rootPane.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
+        }
+
+        if (taskTable != null) {
+            taskTable.setNodeOrientation(
+                    isRTL ? NodeOrientation.RIGHT_TO_LEFT : NodeOrientation.LEFT_TO_RIGHT
+            );
+
+            String style = isRTL ? "-fx-alignment: CENTER-RIGHT;" : "-fx-alignment: CENTER-LEFT;";
+            titleColumn.setStyle(style);
+            descColumn.setStyle(style);
+            dueDateColumn.setStyle(style);
+            statusColumn.setStyle(style);
+        }
+    }
+
 }
