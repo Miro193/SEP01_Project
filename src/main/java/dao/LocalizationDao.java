@@ -27,7 +27,7 @@ public class LocalizationDao {
                 }
             }
         } catch (SQLException e) {
-            log.severe("❌ Database connection failed: " + e.getMessage());
+            log.severe(" Database connection failed: " + e.getMessage());
         }
         return strings;
     }
