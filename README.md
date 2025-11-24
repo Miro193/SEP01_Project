@@ -20,6 +20,7 @@ task management, and exam preparation.
 - **Docker** for containerization
 - **Kubernetes** for orchestration
 - **Jenkins** for continuous integration and deployment
+- **SonarQube** for code quality analysis
 
 ## Otp_2 Course:
 
