@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE_NAME = 'mirovaltonen2/sep01-project'
-        DOCKER_CREDENTIALS_ID = 'Docker_Miro_Hub'
+        DOCKER_CREDENTIALS_ID = 'Docker_Hub'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "/usr/local/bin:${env.PATH}"
     }
@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'Michael_return27_11_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
