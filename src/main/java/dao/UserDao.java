@@ -6,17 +6,20 @@ import model.User;
 public class UserDao {
     private Connection testConn;
 
-    public UserDao() {}
+    public UserDao() {
+        this.testConn = null;
+    }
 
     public UserDao(Connection conn) {
         this.testConn = conn;
     }
 
     private Connection getConnection() throws SQLException {
-        if (testConn != null) {
-            return testConn;
+        Connection conn = (testConn != null) ? testConn : ConnectionDB.obtenerConexion();
+        if (conn == null) {
+            throw new SQLException("Failed to establish database connection");
         }
-        return ConnectionDB.obtenerConexion();
+        return conn;
     }
 
     public void register(User user) {
