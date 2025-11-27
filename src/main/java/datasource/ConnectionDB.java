@@ -8,8 +8,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-public class ConnectionDB {
-    private static final Log log = LogFactory.getLog(ConnectionDB.class);
+
 
 public class ConnectionDB {
     private static final Log log = LogFactory.getLog(ConnectionDB.class);
