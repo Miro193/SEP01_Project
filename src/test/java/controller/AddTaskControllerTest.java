@@ -95,13 +95,24 @@ class AddTaskControllerTest {
 
         Platform.runLater(() -> {
             try {
-                invokePrivateMethod(addTaskController, "handleSaveTask", new ActionEvent());
+                // 🔧 CORRECCIÓN: añadir el TextField a una Scene y Stage
+                javafx.stage.Stage stage = new javafx.stage.Stage();
+                javafx.scene.Scene scene = new javafx.scene.Scene(titleField);
+                stage.setScene(scene);
+                stage.show();
+
+                // Ahora el Node tiene una Scene y no da NullPointerException
+                ActionEvent event = new ActionEvent(titleField, null);
+                invokePrivateMethod(addTaskController, "handleSaveTask", event);
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 latch.countDown();
             }
         });
+
+
+
 
         latch.await();
 
