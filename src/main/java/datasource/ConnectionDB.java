@@ -1,13 +1,12 @@
 package datasource;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Logger;
-
 
 
 public class ConnectionDB {
@@ -20,18 +19,15 @@ public class ConnectionDB {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
 
-            String host = System.getenv("DB_HOST");
-            if (host == null || host.isEmpty()) {
-                host = "localhost"; // fallback
-            }
+            // hankin tiedosto .env
+            Dotenv dotenv = Dotenv.load();
+            String host = dotenv.get("DB_HOST", " ");   // fallback
+            String user = dotenv.get("DB_USER", " ");        // fallback
+            String password = dotenv.get("DB_PASSWORD", " ");    // fallback
 
-            String url = "jdbc:mariadb://" + host + ":3306/StudyPlanner";
-            String user = "root";
-            String password = "admin";
+            String url = String.format("jdbc:mariadb://%s:3306/Studyplanner", host);
+            log.info(String.format("Connecting to %s", url));
 
-            Logger log = Logger.getLogger("ConnectionDB");
-
-            log.info("Connecting to " + url);
             Connection conn = DriverManager.getConnection(url, user, password);
             log.info("Connection established: " + (conn != null));
             return conn;
@@ -41,5 +37,8 @@ public class ConnectionDB {
             log.error("Connection error: " + e.getMessage());
         }
         return null;
+
+
+
     }
 }
