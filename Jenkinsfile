@@ -11,17 +11,7 @@ pipeline {
         maven 'Maven3'
 
     }
-    stage('Build & Package') {
-                steps {
-                    script {
-                        if (isUnix()) {
-                            sh 'mvn clean package -DskipTests'
-                        } else {
-                            bat 'mvn clean package -DskipTests'
-                        }
-                    }
-                }
-            }
+
 
     stages {
         stage('Checkout') {
@@ -29,6 +19,18 @@ pipeline {
                 git branch: 'Michael_return27_11_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
+
+    stage('Build & Package') {
+                    steps {
+                        script {
+                            if (isUnix()) {
+                                sh 'mvn clean package -DskipTests'
+                            } else {
+                                bat 'mvn clean package -DskipTests'
+                            }
+                        }
+                    }
+                }
 
         stage('Build & Test') {
             steps {
