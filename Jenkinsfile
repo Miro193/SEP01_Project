@@ -9,6 +9,17 @@ pipeline {
 
     tools {
         maven 'Maven3'
+        stage('Build & Package') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh 'mvn clean package -DskipTests'
+                    } else {
+                        bat 'mvn clean package -DskipTests'
+                    }
+                }
+            }
+        }
     }
 
     stages {
