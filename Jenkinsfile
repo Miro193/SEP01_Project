@@ -69,10 +69,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
+                    def imageTag = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                     if (isUnix()) {
-                        sh 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
+                        sh "docker build -t ${imageTag} ."
                     } else {
-                        bat 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
+                        bat "docker build -t ${imageTag} ."
                     }
                 }
             }
