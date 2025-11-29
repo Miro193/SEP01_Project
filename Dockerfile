@@ -14,7 +14,7 @@ RUN mkdir -p /javafx-sdk \
     && rm -rf /javafx-sdk/javafx-sdk-21.0.2 javafx.zip
 
 # Copy your fat JAR
-COPY target/studyplanner.jar app.jar
+COPY target/*.jar app.jar
 
 ENV DISPLAY=host.docker.internal:0.0
 ENV DB_HOST=host.docker.internal
