@@ -11,8 +11,7 @@ import java.util.logging.Logger;
 public class ConnectionDB {
     private static final Log log = LogFactory.getLog(ConnectionDB.class);
 
-public class ConnectionDB {
-    private static final Log log = LogFactory.getLog(ConnectionDB.class);
+
     //lisatu contructor private
     private ConnectionDB() {
         throw new UnsupportedOperationException("Utility class");
