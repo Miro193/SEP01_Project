@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = 'michabl/sep01-project'
+        DOCKER_IMAGE_NAME = 'michabl/sep01-project_new1'
         DOCKER_CREDENTIALS_ID = 'Docker_Hub'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "/usr/local/bin:${env.PATH}"
