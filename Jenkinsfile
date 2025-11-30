@@ -1,22 +1,36 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = 'mirovaltonen2/sep01-project'
-        DOCKER_CREDENTIALS_ID = 'Docker_Miro_Hub'
+        DOCKER_IMAGE_NAME = 'michabl/sep01-project'
+        DOCKER_CREDENTIALS_ID = 'Docker_Hub'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "/usr/local/bin:${env.PATH}"
     }
 
     tools {
-        maven 'Maven 3.9.11'
+        maven 'Maven3'
+
     }
+
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'Michael_01_12_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
+
+    stage('Build & Package') {
+                    steps {
+                        script {
+                            if (isUnix()) {
+                                sh 'mvn clean package -DskipTests'
+                            } else {
+                                bat 'mvn clean package -DskipTests'
+                            }
+                        }
+                    }
+                }
 
         stage('Build & Test') {
             steps {
@@ -62,17 +76,18 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco execPattern: 'target/jacoco.exec'
+                jacoco (path: 'target/jacoco.exec')
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
+                    def imageTag = "${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
                     if (isUnix()) {
-                        sh 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
+                        sh "docker build -t ${imageTag} ."
                     } else {
-                        bat 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
+                        bat "docker build -t ${imageTag} ."
                     }
                 }
             }
@@ -81,10 +96,20 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh """
-                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                        docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
-                    """
+                    script {
+                            if (isUnix()) {
+                                sh '''
+                                   echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                                   docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+                                '''
+                                } else {
+                                  bat """
+                                  echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                                  docker push %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG%
+                                """
+                                }
+                            }
+
                 }
             }
         }
@@ -94,7 +119,7 @@ pipeline {
     post {
         always {
             junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true)
-            jacoco(execPattern: '**/target/jacoco.exec', classPattern: '**/target/classes', sourcePattern: '**/src/main/java', inclusionPattern: '**/*.class', exclusionPattern: '')
+            jacoco(path: '**/target/jacoco.exec')
         }
     }
 }
