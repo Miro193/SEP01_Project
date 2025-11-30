@@ -8,8 +8,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 
-public class ConnectionDB {
-    private static final Log log = LogFactory.getLog(ConnectionDB.class);
+//public class ConnectionDB {
+//    private static final Log log = LogFactory.getLog(ConnectionDB.class);
 
 public class ConnectionDB {
     private static final Log log = LogFactory.getLog(ConnectionDB.class);
@@ -26,9 +26,9 @@ public class ConnectionDB {
                 host = "localhost"; // fallback
             }
 
-            String url = "jdbc:mariadb://" + host + ":3306/StudyPlanner";
+            String url = "jdbc:mariadb://" + host + ":3306/StudyPlannerSimple";
             String user = "root";
-            String password = "admin";
+            String password = "root";
 
             Logger log = Logger.getLogger("ConnectionDB");
 
