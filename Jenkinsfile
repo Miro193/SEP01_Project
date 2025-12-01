@@ -1,3 +1,13 @@
+def runCommand(command) {
+    if (isUnix()) {
+        // macOS and Linux
+        sh command
+    } else {
+        // Windows
+        bat command
+    }
+}
+
 pipeline {
     agent any
     environment {
@@ -8,7 +18,7 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3.9.11'
+        maven 'Maven 3'
     }
 
     stages {
@@ -21,11 +31,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn clean install'
-                    } else {
-                        bat 'mvn clean install'
-                    }
+                    runCommand('mvn clean install')
                 }
             }
         }
@@ -33,11 +39,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn test'
-                    } else {
-                        bat 'mvn test'
-                    }
+                    runCommand('mvn test')
                 }
             }
         }
@@ -45,11 +47,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn jacoco:report'
-                    } else {
-                        bat 'mvn jacoco:report'
-                    }
+                    runCommand('mvn jacoco:report')
                 }
             }
         }
