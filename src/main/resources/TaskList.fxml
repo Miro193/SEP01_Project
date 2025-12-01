@@ -13,6 +13,7 @@
             <Button fx:id="btnEditTask" text="Edit Task" onAction="#handleEditTask"/>
             <Button fx:id="btnCalendarView" text="Calendar View" onAction="#handleOpenCalendar"/>
             <Button fx:id="btnDoneTasks" text="Done Tasks" onAction="#handleOpenDoneTasks"/>
+            <Button fx:id="btnSignOut"  text="Sign Out" onAction="#handleSignOut"/>
         </ToolBar>
     </top>
 
