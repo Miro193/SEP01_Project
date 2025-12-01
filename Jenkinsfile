@@ -55,31 +55,36 @@ pipeline {
                 }
             }
         }
+
         stage('SonarQube Analysis') {
-                    steps {
-                        script {
-                            withSonarQubeEnv('SonarQubeServer') {
-                                if (isUnix()) {
-                                    sh """
-                                        ${tool 'SonarScanner'}/bin/sonar-scanner \
-                                        -Dsonar.projectKey=sep01-project \
-                                        -Dsonar.projectName=SEP01-Project \
-                                        -Dsonar.sources=src \
-                                        -Dsonar.java.binaries=target/classes
-                                    """
-                                } else {
-                                    bat """
-                                        ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
-                                        -Dsonar.projectKey=sep01-project ^
-                                        -Dsonar.projectName=SEP01-Project ^
-                                        -Dsonar.sources=src ^
-                                        -Dsonar.java.binaries=target/classes
-                                    """
-                                }
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQubeServer') {
+                        withCredentials([string(credentialsId: 'SonarQubeToken', variable: 'SONAR_TOKEN')]) {
+                            if (isUnix()) {
+                                sh """
+                                    ${tool 'SonarScanner'}/bin/sonar-scanner \
+                                    -Dsonar.projectKey=sep01-project \
+                                    -Dsonar.projectName=SEP01-Project \
+                                    -Dsonar.sources=src \
+                                    -Dsonar.java.binaries=target/classes \
+                                    -Dsonar.token=$SONAR_TOKEN
+                                """
+                            } else {
+                                bat """
+                                    ${tool 'SonarScanner'}\\bin\\sonar-scanner ^
+                                    -Dsonar.projectKey=sep01-project ^
+                                    -Dsonar.projectName=SEP01-Project ^
+                                    -Dsonar.sources=src ^
+                                    -Dsonar.java.binaries=target/classes ^
+                                    -Dsonar.token=%SONAR_TOKEN%
+                                """
                             }
                         }
                     }
                 }
+            }
+        }
 
         stage('Quality Gate') {
             steps {
