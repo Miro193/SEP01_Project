@@ -39,6 +39,7 @@ public class TaskController extends BaseController {
     @FXML private Button btnCalendarView;
     @FXML private Button btnDoneTasks;
     @FXML private BorderPane rootPane;
+    @FXML private Button btnSignOut;
 
 
 
@@ -137,11 +138,21 @@ public class TaskController extends BaseController {
     private void handleOpenDoneTasks(ActionEvent event) throws IOException {
         navigate(event, "/DoneTask.fxml");
     }
-
     @FXML
-    private void handleCancel(ActionEvent event) throws IOException {
-        navigate(event, "/TaskList.fxml");
+    public void handleSignOut(ActionEvent event) throws IOException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(getTranslation("confirm.title"));
+        alert.setHeaderText(null);
+        alert.setContentText(getTranslation("confirm.signOut"));
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+        if (result == ButtonType.OK) {
+            CurrentUser.set(null);
+            showAlert(getTranslation("success.title"), getTranslation("success.signOut"));
+            navigate(event, "/Login.fxml");
+        }
     }
+
+
 
     private void navigate(ActionEvent event, String fxmlPath) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
@@ -170,6 +181,7 @@ public class TaskController extends BaseController {
         descColumn.setText(LanguageManager.getTranslation("descColumn"));
         dueDateColumn.setText(LanguageManager.getTranslation("dueDateColumn"));
         statusColumn.setText(LanguageManager.getTranslation("statusColumn"));
+        btnSignOut.setText(LanguageManager.getTranslation("btnSignOut"));
     }
     private void applyTextDirection() {
         String lang = LanguageManager.getCurrentLocale().getLanguage();
@@ -193,5 +205,4 @@ public class TaskController extends BaseController {
             statusColumn.setStyle(style);
         }
     }
-
 }

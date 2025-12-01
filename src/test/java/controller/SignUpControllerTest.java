@@ -31,14 +31,20 @@ class SignUpControllerTest {
     @Start
     public void start(Stage stage) throws Exception {
         mockDao = Mockito.mock(UserDao.class);
-
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/SignUp.fxml"));
         Parent root = loader.load();
-        SignUpController controller = loader.getController();
+
+        controller = loader.getController();
+
+        Field daoField = SignUpController.class.getDeclaredField("userDao");
+        daoField.setAccessible(true);
+        daoField.set(controller, mockDao);
+
         stage.setScene(new Scene(root));
         stage.show();
         stage.toFront();
     }
+
 
     @Test
     void testCreateAccountButtonExists(FxRobot robot) {
