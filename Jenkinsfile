@@ -24,7 +24,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: ' miro-week7-1', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
