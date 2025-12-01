@@ -55,6 +55,29 @@ pipeline {
                 }
             }
         }
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    withSonarQubeEnv('SonarQube-Server') {
+                        if (isUnix()) {
+                            sh 'mvn sonar:sonar -Dsonar.projectKey=sep01-project'
+                        } else {
+                            bat 'mvn sonar:sonar -Dsonar.projectKey=sep01-project'
+                        }
+                    }
+                }
+            }
+        }
+
+        stage('Quality Gate') {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
+                }
+            }
+        }
+
+
 
         stage('Code Coverage') {
             steps {
