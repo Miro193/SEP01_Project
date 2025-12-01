@@ -1,14 +1,14 @@
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = "michabl/sep01-project"
-        DOCKER_CREDENTIALS_ID = "Docker_Hub"
+        DOCKER_IMAGE_NAME = 'mirovaltonen2/sep01-project'
+        DOCKER_CREDENTIALS_ID = 'Docker_Miro_Hub'
         DOCKER_IMAGE_TAG = 'latest'
-        PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;${env.PATH}"
+        PATH = "/usr/local/bin:${env.PATH}"
     }
 
     tools {
-        maven 'Maven3'
+        maven 'Maven 3.9.11'
     }
 
     stages {
@@ -20,19 +20,37 @@ pipeline {
 
         stage('Build & Test') {
             steps {
-                bat "mvn clean install"
+                script {
+                    if (isUnix()) {
+                        sh 'mvn clean install'
+                    } else {
+                        bat 'mvn clean install'
+                    }
+                }
             }
         }
 
         stage('Unit Tests') {
             steps {
-                bat 'mvn test'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn test'
+                    } else {
+                        bat 'mvn test'
+                    }
+                }
             }
         }
 
         stage('Code Coverage') {
             steps {
-                bat 'mvn jacoco:report'
+                script {
+                    if (isUnix()) {
+                        sh 'mvn jacoco:report'
+                    } else {
+                        bat 'mvn jacoco:report'
+                    }
+                }
             }
         }
 
@@ -51,8 +69,11 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    echo "Building Docker image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}"
-                    docker.build("${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}")
+                    if (isUnix()) {
+                        sh 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
+                    } else {
+                        bat 'docker build -t ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG} .'
+                    }
                 }
             }
         }
@@ -60,9 +81,9 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    bat """
-                        echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                        docker push %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG%
+                    sh """
+                        echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                        docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
                     """
                 }
             }

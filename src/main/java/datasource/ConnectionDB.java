@@ -11,6 +11,11 @@ import java.util.logging.Logger;
 public class ConnectionDB {
     private static final Log log = LogFactory.getLog(ConnectionDB.class);
 
+
+    //lisatu contructor private
+    private ConnectionDB() {
+        throw new UnsupportedOperationException("Utility class");
+    }
     public static Connection obtenerConexion() {
         try {
             Class.forName("org.mariadb.jdbc.Driver");
@@ -20,7 +25,7 @@ public class ConnectionDB {
                 host = "localhost"; // fallback
             }
 
-            String url = "jdbc:mariadb://" + host + ":3306/Studyplanner";
+            String url = "jdbc:mariadb://" + host + ":3306/StudyPlanner";
             String user = "root";
             String password = "admin";
 
