@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     withSonarQubeEnv('SonarQubeServer') {
-                        withCredentials([string(credentialsId: 'SonarQubeToken', variable: 'SONAR_TOKEN')]) {
+                        withCredentials([string(credentialsId: 'sonar-token-jenkins', variable: 'SONAR_TOKEN')]) {
                             if (isUnix()) {
                                 sh """
                                     ${tool 'SonarScanner'}/bin/sonar-scanner \
