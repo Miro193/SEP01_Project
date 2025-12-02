@@ -1,3 +1,13 @@
+def runCommand(command) {
+    if (isUnix()) {
+        // macOS and Linux
+        sh command
+    } else {
+        // Windows
+        bat command
+    }
+}
+
 pipeline {
     agent any
     environment {
@@ -8,15 +18,14 @@ pipeline {
     }
 
     tools {
-        maven 'Maven3'
-
+        maven 'Maven 3'
     }
 
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'Michael_01_12_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'miro-week7-1', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
@@ -35,11 +44,7 @@ pipeline {
         stage('Build & Test') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn clean install'
-                    } else {
-                        bat 'mvn clean install'
-                    }
+                    runCommand('mvn clean install')
                 }
             }
         }
@@ -47,11 +52,7 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn test'
-                    } else {
-                        bat 'mvn test'
-                    }
+                    runCommand('mvn test')
                 }
             }
         }
@@ -91,11 +92,7 @@ pipeline {
         stage('Code Coverage') {
             steps {
                 script {
-                    if (isUnix()) {
-                        sh 'mvn jacoco:report'
-                    } else {
-                        bat 'mvn jacoco:report'
-                    }
+                    runCommand('mvn jacoco:report')
                 }
             }
         }

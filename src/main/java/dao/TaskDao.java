@@ -86,7 +86,8 @@ public class TaskDao {
 
     public List<Task> getTasksByUserId(int userId) {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM task WHERE user_id = ?";
+        String sql = "SELECT task_id, user_id, title, description, status, dueDate " +
+                "FROM task WHERE user_id = ?";
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
             stmt.setInt(1, userId);
@@ -103,7 +104,8 @@ public class TaskDao {
 
     public List<Task> getTasksByDateRange(int userId, LocalDate startDate, LocalDate endDate) {
         List<Task> tasks = new ArrayList<>();
-        String sql = "SELECT * FROM task WHERE user_id = ? AND dueDate BETWEEN ? AND ?";
+        String sql = "SELECT task_id, user_id, title, description, status, dueDate " +
+                "FROM task WHERE user_id = ? AND dueDate BETWEEN ? AND ?";
 
         try (PreparedStatement stmt = getConnection().prepareStatement(sql)) {
 
