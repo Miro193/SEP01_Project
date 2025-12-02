@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConnectionDB {
@@ -25,15 +26,22 @@ public class ConnectionDB {
                 host = "localhost"; // fallback
             }
 
-            String url = "jdbc:mariadb://" + host + ":3306/StudyPlanner";
+            String url = "jdbc:mariadb://" + host + ":3306/StudyPlannerSimple";
             String user = "root";
-            String password = "admin";
+            String password = "root";
 
             Logger log = Logger.getLogger("ConnectionDB");
 
-            log.info("Connecting to " + url);
+            if (log.isLoggable(Level.INFO)) {
+                log.info("Connecting to " + url);
+            }
+
             Connection conn = DriverManager.getConnection(url, user, password);
-            log.info("Connection established: " + (conn != null));
+
+            if (log.isLoggable(Level.INFO)) {
+                log.info("Connection established: " + (conn != null));
+            }
+
             return conn;
         } catch (ClassNotFoundException e) {
             log.error("Driver not found: " + e.getMessage());

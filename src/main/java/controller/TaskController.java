@@ -125,7 +125,8 @@ public class TaskController extends BaseController {
             taskDao.delete(selectedTask);
             taskListObservable.remove(selectedTask);
         } else {
-            showAlert("error.deleteMessage", "error.taskSelectMessage");
+            showAlert(LanguageManager.getTranslation("error.taskSelectMessage"),
+                    LanguageManager.getTranslation("error.deleteMessage"));
         }
     }
 
