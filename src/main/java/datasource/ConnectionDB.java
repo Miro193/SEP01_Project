@@ -28,7 +28,7 @@ public class ConnectionDB {
 
             String url = "jdbc:mariadb://" + host + ":3306/StudyPlannerSimple";
             String user = "root";
-            String password = "root";
+            String password = "saeidt";
 
             Logger log = Logger.getLogger("ConnectionDB");
 
