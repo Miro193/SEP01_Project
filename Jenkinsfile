@@ -92,7 +92,7 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco path: 'target/jacoco.exec'
+                jacoco execPattern: 'target/jacoco.exec'
             }
         }
 
@@ -133,7 +133,7 @@ pipeline {
             perfReport sourceDataFiles: 'result.jtl'
 
             junit testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true
-            jacoco path: '**/target/jacoco.exec'
+            jacoco execPattern: '**/target/jacoco.exec'
         }
     }
 }
