@@ -21,28 +21,23 @@ import model.User;
 
 @ExtendWith(ApplicationExtension.class)
 class LoginControllerTest {
-    private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD = "admin";
-    private static final String DIALOG_PANE_SELECTOR = ".dialog-pane";
-    private static final String BUTTON_LOGIN = "#btnLogin";
-    private static final String USERNAME = "#usernameField";
-    private static final String PASSWORD = "#passwordField";
-
+    private UserDao mockDao;
+    private LoginController controller;
     @Start
     public void start(Stage stage) throws Exception {
-        UserDao mockDao = Mockito.mock(UserDao.class);
+        mockDao = Mockito.mock(UserDao.class);
         //Load FXML manually
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
         Parent root = loader.load();
 
-        LoginController controller = loader.getController();
+        //Get controller
         controller = loader.getController();
         Field userDaoField = controller.getClass().getDeclaredField("userDao");
         userDaoField.setAccessible(true);
         userDaoField.set(controller, mockDao);
 
-        User fakeUser = new User(ADMIN_USERNAME, ADMIN_PASSWORD);
-        when(mockDao.login(ADMIN_USERNAME, ADMIN_PASSWORD)).thenReturn(fakeUser);
+        User fakeUser = new User("admin", "admin");
+        when(mockDao.login("admin", "admin")).thenReturn(fakeUser);
 
         stage.setScene(new Scene(root));
         stage.show();
@@ -50,26 +45,26 @@ class LoginControllerTest {
     }
     @Test
     void testLoginButtonExists(FxRobot robot) {
-        Button btnLogin = robot.lookup(BUTTON_LOGIN).queryAs(Button.class);
+        Button btnLogin = robot.lookup("#btnLogin").queryAs(Button.class);
         assertNotNull(btnLogin);
     }
 
     @Test
     void testEmptyFieldsShowAlert(FxRobot robot) {
-        robot.clickOn(BUTTON_LOGIN);
-        robot.lookup(DIALOG_PANE_SELECTOR);
-        assertTrue(robot.lookup(DIALOG_PANE_SELECTOR).tryQuery().isPresent());
+        robot.clickOn("#btnLogin");
+        robot.lookup(".dialog-pane");
+        assertTrue(robot.lookup(".dialog-pane").tryQuery().isPresent());
     }
 
     @Test
     void testWritingUsernameAndPassword(FxRobot robot) {
-        TextField username = robot.lookup(USERNAME).queryAs(TextField.class);
-        TextField password = robot.lookup(PASSWORD).queryAs(TextField.class);
+        TextField username = robot.lookup("#usernameField").queryAs(TextField.class);
+        TextField password = robot.lookup("#passwordField").queryAs(TextField.class);
 
-        robot.clickOn(USERNAME);
+        robot.clickOn("#usernameField");
         robot.write("testuser");
 
-        robot.clickOn(PASSWORD);
+        robot.clickOn("#passwordField");
         robot.write("12345");
 
         assertEquals("testuser", username.getText());
@@ -79,15 +74,17 @@ class LoginControllerTest {
     @Test
     void testValidLoginClick(FxRobot robot) {
         // Fill fields
-        robot.clickOn(USERNAME);
-        robot.write(ADMIN_USERNAME);
+        robot.clickOn("#usernameField");
+        robot.write("admin");
 
-        robot.clickOn(PASSWORD);
-        robot.write(ADMIN_PASSWORD);
+        robot.clickOn("#passwordField");
+        robot.write("admin");
 
-        robot.clickOn(BUTTON_LOGIN);
+        // Click
+        robot.clickOn("#btnLogin");
 
-        assertTrue(robot.lookup(DIALOG_PANE_SELECTOR).tryQuery().isPresent());
+        // Expect success alert
+        assertTrue(robot.lookup(".dialog-pane").tryQuery().isPresent());
     }
   
 }

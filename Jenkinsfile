@@ -18,14 +18,14 @@ pipeline {
     }
 
     tools {
-        maven 'Maven 3'
+        maven 'Maven3'
     }
 
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'miro-week7-1', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'Michael_03_12_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
