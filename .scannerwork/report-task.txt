@@ -2,5 +2,5 @@ projectKey=SEP02_Project
 serverUrl=http://localhost:9000
 serverVersion=25.11.0.114957
 dashboardUrl=http://localhost:9000/dashboard?id=SEP02_Project
-ceTaskId=8ab7bcc8-70a3-4445-8cf3-7d74dc7ca1b6
-ceTaskUrl=http://localhost:9000/api/ce/task?id=8ab7bcc8-70a3-4445-8cf3-7d74dc7ca1b6
+ceTaskId=413f0ab4-cf35-4032-adfa-78140c66570d
+ceTaskUrl=http://localhost:9000/api/ce/task?id=413f0ab4-cf35-4032-adfa-78140c66570d
