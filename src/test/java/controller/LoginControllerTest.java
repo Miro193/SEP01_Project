@@ -23,9 +23,9 @@ class LoginControllerTest {
 
     // Constants to avoid duplicated literals
     private static final String ADMIN_USERNAME = "admin";
-    private static final String ADMIN_PASSWORD = "admin";
+    private static final String ADMIN_PWD = "admin";
     private static final String TEST_USERNAME = "testuser";
-    private static final String TEST_PASSWORD = "12345";
+    private static final String TEST_PWDT = "12345";
 
     // FXML element IDs
     private static final String BTN_LOGIN_ID = "#btnLogin";
@@ -49,8 +49,8 @@ class LoginControllerTest {
         controller.setUserDao(mockDao); // minimal change: use setter instead of reflection
 
         // Use constants instead of duplicated literals
-        User fakeUser = new User(ADMIN_USERNAME, ADMIN_PASSWORD);
-        when(mockDao.login(ADMIN_USERNAME, ADMIN_PASSWORD)).thenReturn(fakeUser);
+        User fakeUser = new User(ADMIN_USERNAME, ADMIN_PWD);
+        when(mockDao.login(ADMIN_USERNAME, ADMIN_PWD)).thenReturn(fakeUser);
 
         stage.setScene(new Scene(root));
         stage.show();
@@ -82,11 +82,11 @@ class LoginControllerTest {
         robot.write(TEST_USERNAME);
 
         robot.clickOn(PASSWORD_FIELD_ID);
-        robot.write(TEST_PASSWORD);
+        robot.write(TEST_PWDT);
 
         // Verify values
         assertEquals(TEST_USERNAME, username.getText());
-        assertEquals(TEST_PASSWORD, password.getText());
+        assertEquals(TEST_PWDT, password.getText());
     }
 
     @Test
@@ -96,7 +96,7 @@ class LoginControllerTest {
         robot.write(ADMIN_USERNAME);
 
         robot.clickOn(PASSWORD_FIELD_ID);
-        robot.write(ADMIN_PASSWORD);
+        robot.write(ADMIN_PWD);
 
         // Click login button
         robot.clickOn(BTN_LOGIN_ID);

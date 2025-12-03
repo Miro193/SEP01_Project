@@ -24,7 +24,7 @@ class SignUpControllerTest {
 
     // CONSTANTS to avoid duplicated literals
     private static final String EXISTING_USER = "existingUser";
-    private static final String PASSWORD = "pass";
+    private static final String PWD = "pass";
     private static final String NEW_USER = "newuser";
     private static final String NEW_PASS = "newpass";
 
@@ -83,12 +83,12 @@ class SignUpControllerTest {
     @Test
     void testUsernameAlreadyExistsShowsAlert(FxRobot robot) {
         // simulate existing user: login(...) returns a User
-        User existing = new User(EXISTING_USER, PASSWORD, PASSWORD);
-        when(mockDao.login(EXISTING_USER, PASSWORD)).thenReturn(existing);
+        User existing = new User(EXISTING_USER, PWD, PWD);
+        when(mockDao.login(EXISTING_USER, PWD)).thenReturn(existing);
 
         robot.clickOn(USERNAME_FIELD).write(EXISTING_USER);
-        robot.clickOn(PASSWORD_FIELD).write(PASSWORD);
-        robot.clickOn(CONFIRM_PASSWORD_FIELD).write(PASSWORD);
+        robot.clickOn(PASSWORD_FIELD).write(PWD);
+        robot.clickOn(CONFIRM_PASSWORD_FIELD).write(PWD);
         robot.clickOn(BTN_CREATE_ACCOUNT);
 
         // expect alert
