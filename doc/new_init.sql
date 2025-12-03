@@ -346,23 +346,7 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 
 ('backToList', 'بازگشت به وظایف', 'fa'),
 ('lblDoneTask', 'وظایف انجام‌شده', 'fa');
-INSERT INTO translations (translation_key, translation_value, language)
-VALUES
-    ('btnSignOut', 'Sign Out', 'en'),
-    ('btnSignOut', 'خروج', 'fa'),
-    ('btnSignOut', '退出', 'zh'),
-    ('confirm.title', 'Confirmation', 'en'),
-    ('confirm.title', 'تأیید', 'fa'),
-    ('confirm.title', '确认', 'zh'),
-    ('confirm.signout', 'Are you sure you want to sign out?', 'en'),
-    ('confirm.signout', 'آیا از خروج خود اطمینان دارید؟', 'fa'),
-    ('confirm.signout', '您确定要退出吗？', 'zh'),
-    ('success.signedOut', 'You have been signed out.', 'en'),
-    ('success.signedOut', 'خروج با موفقیت انجام شد.', 'fa'),
-    ('success.signedOut', '您已成功退出。', 'zh');
 
 
-
--
 
 

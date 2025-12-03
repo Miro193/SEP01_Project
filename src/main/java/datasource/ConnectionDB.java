@@ -1,45 +1,52 @@
 package datasource;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ConnectionDB {
     private static final Log log = LogFactory.getLog(ConnectionDB.class);
 
+
+    //lisatu contructor private
     private ConnectionDB() {
         throw new UnsupportedOperationException("Utility class");
     }
-
     public static Connection obtenerConexion() {
         try {
-            Dotenv dotenv = Dotenv.load();
-            String host = dotenv.get("DB_HOST");
-            String user = dotenv.get("DB_USER");
-            String password = dotenv.get("DB_PASSWORD");
+            Class.forName("org.mariadb.jdbc.Driver");
 
-            if (host == null || user == null || password == null) {
-                throw new IllegalStateException("Missing DB credentials in .env");
+            String host = System.getenv("DB_HOST");
+            if (host == null || host.isEmpty()) {
+                host = "localhost"; // fallback
             }
 
-            String url = String.format("jdbc:mariadb://%s:3306/Studyplanner", host);
+            String url = "jdbc:mariadb://" + host + ":3306/StudyPlannerSimple";
+            String user = "root";
+            String password = "root";
 
-            if (log.isInfoEnabled()) {
+            Logger log = Logger.getLogger("ConnectionDB");
+
+            if (log.isLoggable(Level.INFO)) {
                 log.info("Connecting to " + url);
             }
 
             Connection conn = DriverManager.getConnection(url, user, password);
 
-            if (log.isInfoEnabled()) {
+            if (log.isLoggable(Level.INFO)) {
                 log.info("Connection established: " + (conn != null));
             }
+
             return conn;
+        } catch (ClassNotFoundException e) {
+            log.error("Driver not found: " + e.getMessage());
         } catch (SQLException e) {
-            log.error("Connection error: " + e.getMessage(), e);
+            log.error("Connection error: " + e.getMessage());
         }
         return null;
     }
