@@ -345,8 +345,20 @@ INSERT INTO translations (translation_key, translation_value, language) VALUES
 ('window.taskList.title', 'وظایف', 'fa'),
 
 ('backToList', 'بازگشت به وظایف', 'fa'),
-('lblDoneTask', 'وظایف انجام‌شده', 'fa');
+('lblDoneTask', 'وظایف انجام‌شده', 'fa'),
 
-
+-- sign out translat:
+(btnSignOut,خروج,fa),
+(btnSignOut,退出,zh),
+(confirm.title,Confirmation,en),
+(confirm.title,تأیید,fa),
+(confirm.title,确认,zh),
+(confirm.signOut,Are you sure you want to sign out?,en),
+(confirm.signOut,آیا از خروج خود اطمینان دارید؟,fa),
+(confirm.signOut,您确定要退出吗？,zh),
+(success.signOut,You have been signed out.,en),
+(success.signOut,خروج با موفقیت انجام شد.,fa),
+(success.signOut,您已成功退出。,zh),
+(btnSignOut,Sign Out,en);
 
 
