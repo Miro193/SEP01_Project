@@ -85,10 +85,8 @@ class LoginControllerTest {
         robot.clickOn(PASSWORD);
         robot.write(ADMIN_PASSWORD);
 
-        // Click
         robot.clickOn(BUTTON_LOGIN);
 
-        // Expect success alert
         assertTrue(robot.lookup(DIALOG_PANE_SELECTOR).tryQuery().isPresent());
     }
   
