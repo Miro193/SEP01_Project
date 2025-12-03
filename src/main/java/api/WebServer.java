@@ -1,11 +1,11 @@
 package api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import controller.LoginController;
 import dao.UserDao;
 import io.javalin.Javalin;
 import model.User;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class WebServer {
@@ -16,28 +16,36 @@ public class WebServer {
 
         Javalin app = Javalin.create().start(7070);
 
-        // Define the /login endpoint
+
         app.post("/login", ctx -> {
             try {
-                // Get the username and password from the JSON request body
+
                 Map<String, String> loginRequest = objectMapper.readValue(ctx.body(), Map.class);
                 String username = loginRequest.get("username");
                 String password = loginRequest.get("password");
 
-                // Use the existing UserDao to authenticate the user
+
                 User user = userDao.login(username, password);
 
                 if (user != null && user.getPassword().equals(password)) {
-                    // User authenticated successfully
-                    ctx.json(Map.of("status", "success", "message", "Login successful for user: " + username));
+                    Map<String, String> successResponse = new HashMap<>();
+                    successResponse.put("status", "success");
+                    successResponse.put("message", "Login successful for user: " + username);
+                    ctx.json(successResponse);
                 } else {
-                    // Authentication failed
-                    ctx.status(401); // Unauthorized
-                    ctx.json(Map.of("status", "error", "message", "Invalid username or password"));
+
+                    ctx.status(401);
+                    Map<String, String> errorResponse = new HashMap<>();
+                    errorResponse.put("status", "error");
+                    errorResponse.put("message", "Invalid username or password");
+                    ctx.json(errorResponse);
                 }
             } catch (Exception e) {
-                ctx.status(500); // Internal Server Error
-                ctx.json(Map.of("status", "error", "message", "An unexpected error occurred: " + e.getMessage()));
+                ctx.status(500);
+                Map<String, String> errorResponse = new HashMap<>();
+                errorResponse.put("status", "error");
+                errorResponse.put("message", "An unexpected error occurred: " + e.getMessage());
+                ctx.json(errorResponse);
             }
         });
     }
