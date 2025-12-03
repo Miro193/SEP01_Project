@@ -11,21 +11,27 @@ def runCommand(command) {
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = 'michabl/sep01-project_new1'
+        DOCKER_IMAGE_NAME = 'saeid1993/otp2_project'
         DOCKER_CREDENTIALS_ID = 'Docker_Hub'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "/usr/local/bin:${env.PATH}"
+
+        JAVA_HOME = 'C:\\Program Files\\Java\\jdk-17'
+        MAVEN_HOME = tool 'MAVEN_HOME'
+        JMETER_HOME = 'C:\\Tools\\apache-jmeter-5.6.3\\apache-jmeter-5.6.3'
+        PATH = "${JAVA_HOME}\\bin;${MAVEN_HOME}\\bin;${JMETER_HOME}\\bin;${env.PATH}"
+
     }
 
     tools {
-        maven 'Maven 3'
+        maven 'MAVEN_HOME'
     }
 
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'miro-week7-1', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'Saeid-with-jmeter', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
@@ -142,6 +148,26 @@ pipeline {
                 }
             }
         }
+        stages {
+                stage('Build') {
+                    steps {
+                        bat 'mvn clean install'
+                    }
+                }
+                stage('Non-Functional Test') {
+                    steps {
+                        bat 'jmeter -n -t tests/performance/demo.jmx -l result.jtl'
+                    }
+                }
+            }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'result.jtl', allowEmptyArchive: true
+            perfReport sourceDataFiles: 'result.jtl'
+        }
+    }
+}
 
     }
 
@@ -152,3 +178,15 @@ pipeline {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
