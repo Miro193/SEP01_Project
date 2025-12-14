@@ -25,7 +25,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'Michael_03_12_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'Michael_09_12_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
