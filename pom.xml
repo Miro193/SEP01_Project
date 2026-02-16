@@ -187,6 +187,19 @@
             <version>5.2.0</version>
             <scope>test</scope>
         </dependency>
+        <!-- bytebuddy -->
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+            <version>1.15.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy-agent</artifactId>
+            <version>1.15.10</version>
+            <scope>test</scope>
+        </dependency>
         <!-- In-memory database for testing -->
         <dependency>
             <groupId>com.h2database</groupId>
