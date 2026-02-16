@@ -1,6 +1,7 @@
 package controller;
 import dao.TaskDao;
 import model.Task;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -28,6 +30,8 @@ import static org.mockito.Mockito.*;
 
 @ExtendWith({MockitoExtension.class, ApplicationExtension.class})
 class EditTaskControllerTest extends BaseTest {
+
+    private MockedStatic<LanguageManager> languageMock;
 
     @Mock
     private TaskDao taskDao;
@@ -58,8 +62,9 @@ class EditTaskControllerTest extends BaseTest {
 
     @BeforeEach
     void setUp() throws Exception {
-        mockStatic(LanguageManager.class);
-        when(LanguageManager.getTranslation(anyString())).thenReturn("test string");
+        languageMock = mockStatic(LanguageManager.class);
+        languageMock.when(() -> LanguageManager.getTranslation(anyString()))
+                .thenReturn("test string");
 
         existingTask = new Task();
         existingTask.setTaskId(101);
@@ -81,6 +86,13 @@ class EditTaskControllerTest extends BaseTest {
         setPrivateField(editTaskController, "statusChoice", statusChoice);
 
         editTaskController.setTask(existingTask);
+    }
+
+    @AfterEach
+    void tearDown() {
+        if (languageMock != null) {
+            languageMock.close();
+        }
     }
 
     @Test
