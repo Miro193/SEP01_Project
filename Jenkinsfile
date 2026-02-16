@@ -103,7 +103,7 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco (execPattern: 'target/jacoco.exec')
+                jacoco 'target/jacoco.exec'
             }
         }
 
