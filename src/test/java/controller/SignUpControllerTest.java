@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import model.User;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -22,6 +23,7 @@ import static org.mockito.Mockito.*;
 @ExtendWith(ApplicationExtension.class)
 class SignUpControllerTest {
 
+    @Mock
     private UserDao mockDao;
     private SignUpController controller;
 

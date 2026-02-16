@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
@@ -21,8 +22,11 @@ import model.User;
 
 @ExtendWith(ApplicationExtension.class)
 class LoginControllerTest {
+
+    @Mock
     private UserDao mockDao;
     private LoginController controller;
+
     @Start
     public void start(Stage stage) throws Exception {
         mockDao = Mockito.mock(UserDao.class);
