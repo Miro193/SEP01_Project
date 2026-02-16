@@ -18,7 +18,7 @@ pipeline {
     }
 
     tools {
-        maven 'Maven3'
+        maven 'Maven 3'
     }
 
 
@@ -103,7 +103,7 @@ pipeline {
 
         stage('Publish Coverage Report') {
             steps {
-                jacoco (path: 'target/jacoco.exec')
+                jacoco (execPattern: '**target/jacoco.exec')
             }
         }
 
@@ -144,7 +144,7 @@ pipeline {
     post {
         always {
             junit(testResults: '**/target/surefire-reports/*.xml', allowEmptyResults: true)
-            jacoco(path: '**/target/jacoco.exec')
+            jacoco(execPattern: '**/target/jacoco.exec')
         }
     }
 }
