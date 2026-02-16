@@ -15,7 +15,7 @@ public class UserDao {
     }
 
     private Connection getConnection() throws SQLException {
-        Connection conn = (testConn != null) ? testConn : ConnectionDB.obtenerConexion();
+        Connection conn = (testConn != null) ? testConn : ConnectionDB.obtenerConnexion();
         if (conn == null) {
             throw new SQLException("Failed to establish database connection");
         }
@@ -86,7 +86,7 @@ public class UserDao {
     }
 
     private Connection getConnection() throws SQLException {
-        Connection conn = (testConn != null) ? testConn : ConnectionDB.obtenerConexion();
+        Connection conn = (testConn != null) ? testConn : ConnectionDB.obtenerConnexion();
         if (conn == null) {
             throw new SQLException("Failed to establish database connection");
         }

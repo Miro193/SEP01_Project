@@ -17,7 +17,7 @@ public class LocalizationDao {
         Map<String, String> strings = new HashMap<>();
         String lang = locale.getLanguage();
 
-        try (Connection conn = ConnectionDB.obtenerConexion()) {
+        try (Connection conn = ConnectionDB.obtenerConnexion()) {
             String query = "SELECT translation_key, translation_value FROM translations WHERE language = ?";
             try (PreparedStatement stmt = conn.prepareStatement(query)) {
                 stmt.setString(1, lang);

@@ -11,8 +11,8 @@ def runCommand(command) {
 pipeline {
     agent any
     environment {
-        DOCKER_IMAGE_NAME = 'michabl/sep01-project_new1'
-        DOCKER_CREDENTIALS_ID = 'Docker_Hub'
+        DOCKER_IMAGE_NAME = 'mirovaltonen2/sep01-project'
+        DOCKER_CREDENTIALS_ID = 'Docker_Miro_Hub'
         DOCKER_IMAGE_TAG = 'latest'
         PATH = "/usr/local/bin:${env.PATH}"
     }
@@ -25,21 +25,21 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'Michael_03_12_2025', url: 'https://github.com/Miro193/SEP01_Project.git'
+                git branch: 'miro-main3', url: 'https://github.com/Miro193/SEP01_Project.git'
             }
         }
 
     stage('Build & Package') {
-                    steps {
-                        script {
-                            if (isUnix()) {
-                                sh 'mvn clean package -DskipTests'
-                            } else {
-                                bat 'mvn clean package -DskipTests'
-                            }
-                        }
-                    }
+        steps {
+            script {
+                if (isUnix()) {
+                    sh 'mvn clean package -DskipTests'
+                } else {
+                    bat 'mvn clean package -DskipTests'
                 }
+            }
+        }
+    }
 
         stage('Build & Test') {
             steps {
@@ -87,8 +87,6 @@ pipeline {
             }
         }
 
-
-
         stage('Code Coverage') {
             steps {
                 script {
@@ -126,23 +124,22 @@ pipeline {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     script {
-                            if (isUnix()) {
-                                sh '''
-                                   echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
-                                   docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
-                                '''
-                                } else {
-                                  bat """
-                                  echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
-                                  docker push %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG%
-                                """
-                                }
+                        if (isUnix()) {
+                            sh '''
+                               echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
+                               docker push $DOCKER_IMAGE_NAME:$DOCKER_IMAGE_TAG
+                            '''
+                            } else {
+                              bat """
+                              echo %DOCKER_PASS% | docker login -u %DOCKER_USER% --password-stdin
+                              docker push %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_TAG%
+                            """
                             }
-
+                        }
+                    }
                 }
             }
         }
-
     }
 
     post {

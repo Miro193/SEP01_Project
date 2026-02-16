@@ -15,7 +15,7 @@ public class ConnectionDB {
         throw new UnsupportedOperationException("Utility class");
     }
 
-    public static Connection obtenerConexion() {
+    public static Connection obtenerConnexion() {
         try {
             Dotenv dotenv = Dotenv.load();
             String host = dotenv.get("DB_HOST");
@@ -26,7 +26,7 @@ public class ConnectionDB {
                 throw new IllegalStateException("Missing DB credentials in .env");
             }
 
-            String url = String.format("jdbc:mariadb://%s:3306/Studyplanner", host);
+            String url = String.format("jdbc:mariadb://%s:3306/StudyPlanner", host);
 
             if (log.isInfoEnabled()) {
                 log.info("Connecting to " + url);
