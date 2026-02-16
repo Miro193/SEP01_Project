@@ -32,11 +32,10 @@ import static org.mockito.Mockito.*;
 
 
 @ExtendWith({MockitoExtension.class, ApplicationExtension.class})
-class AddTaskControllerTest {
+class AddTaskControllerTest extends BaseTest {
 
     @Mock
     private TaskDao taskDao;
-
 
     @Mock
     private LanguageManager languageManager;

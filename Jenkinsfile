@@ -53,7 +53,8 @@ pipeline {
         stage('Unit Tests') {
             steps {
                 script {
-                    runCommand('mvn test')
+                    // runCommand('mvn test')
+                    runCommand('mvn test -Djava.awt.headless=true -Dtestfx.robot=glass -Dtestfx.headless=true -Dprism.order=sw')
                 }
             }
         }

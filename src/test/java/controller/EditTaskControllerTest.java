@@ -27,7 +27,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith({MockitoExtension.class, ApplicationExtension.class})
-class EditTaskControllerTest {
+class EditTaskControllerTest extends BaseTest {
 
     @Mock
     private TaskDao taskDao;
@@ -47,6 +47,7 @@ class EditTaskControllerTest {
 
     @BeforeAll
     static void setupSpec() {
+
         try {
             Field instanceField = LanguageManager.class.getDeclaredField("instance");
             instanceField.setAccessible(true);

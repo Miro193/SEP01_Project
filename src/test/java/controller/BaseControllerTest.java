@@ -13,7 +13,7 @@ import java.util.Map;
 import static org.mockito.Mockito.*;
 
 @ExtendWith({MockitoExtension.class, ApplicationExtension.class})
-class BaseControllerTest {
+class BaseControllerTest extends BaseTest {
 
     @Test
     void testUpdateLanguage_CallsGetLocalizedStrings() {
